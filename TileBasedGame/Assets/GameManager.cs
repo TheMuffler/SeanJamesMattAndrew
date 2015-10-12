@@ -165,11 +165,17 @@ public class GameManager : MonoBehaviour {
             if(current.tile == end)
             {
                 List<Tile> list = new List<Tile>();
+                Stack<Tile> stack = new Stack<Tile>();
                 while(current != null)
                 {
-                    list.Add(current.tile);
+                    stack.Push(current.tile);
                     current = current.prev;
                 }
+                while(stack.Count != 0)
+                {
+                    list.Add(stack.Pop());
+                }
+
                 return list;
             }
 
@@ -204,6 +210,6 @@ public class GameManager : MonoBehaviour {
 
 
 
-
+    public Tile selected;
 
 }

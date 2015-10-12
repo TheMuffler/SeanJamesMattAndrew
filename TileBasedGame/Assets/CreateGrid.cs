@@ -135,7 +135,7 @@ public class CreateGrid : MonoBehaviour {
         {
             //hit.collider.gameObject.GetComponent<MeshRenderer>().material = redmat;
             cursor.transform.position = hit.collider.gameObject.transform.position + Vector3.up * 0.1f*hit.collider.gameObject.transform.localScale.y;
-
+            GameManager.instance.selected = hit.collider.gameObject.GetComponent<Tile>();
         }
 	}
 
