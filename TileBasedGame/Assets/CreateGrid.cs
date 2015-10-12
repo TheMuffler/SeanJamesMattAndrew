@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CreateGrid : MonoBehaviour {
 
@@ -7,16 +8,22 @@ public class CreateGrid : MonoBehaviour {
 
     private float tileH = 0.1039212f;
     private float HexMaxCirc = 2 / Mathf.Sqrt(3);
-    private Vector3 NE,NW;
+    private Vector3 NE,NW,SE,SW,E,W;
 
     public Material redmat;
 
     public GameObject cursor;
 
+    public int width=10, height=20;
+
 	// Use this for initialization
 	void Start () {
         NE = new Vector3(1f/2f, 0, 1.5f/Mathf.Sqrt(3));
         NW = new Vector3(-1f / 2f, 0, 1.5f / Mathf.Sqrt(3));
+        SE = new Vector3(1f / 2f, 0, -1.5f / Mathf.Sqrt(3));
+        SW = new Vector3(-1f / 2f, 0, -1.5f / Mathf.Sqrt(3));
+        E = new Vector3(1f, 0, 0);
+        W = new Vector3(-1f, 0, 0);
         //NE.Normalize();
 
         /*
@@ -33,10 +40,12 @@ public class CreateGrid : MonoBehaviour {
             Instantiate(tile, Vector3.right * i + NE+NW, Quaternion.identity);
         }
         */
+        GameManager.instance.SetupList(width+1, height);
+
         Vector3 row = new Vector3();
-        for(int i = 0; i < 10; ++i)
+        for(int i = 0; i < height;)
         {
-            for(int j = 0; j < 10; ++j)
+            for(int j = 0; j < width; ++j)
             {
                 if (Random.value <= 0.2f)
                     continue;
@@ -45,6 +54,17 @@ public class CreateGrid : MonoBehaviour {
                 {
                     go.GetComponent<MeshRenderer>().material = redmat;
                 }
+                //Debug.Log("I: " + i + " J: " + j);
+                Tile t = go.GetComponent<Tile>();
+                t.gridPos = new Tile.TilePos(j, i);
+                GameManager.instance.RegisterTile(t);
+                
+                if(Random.value <= 0.1f)
+                {
+                    go.transform.localScale = new Vector3(1, 2, 1);
+                    go.transform.position += Vector3.up*tileH/2;
+                }
+                /*
                 if(Random.value <= 0.1f)
                 {
                     GameObject g = (GameObject)Instantiate(tile, row + Vector3.right * j + Vector3.up * tileH, Quaternion.identity);
@@ -53,9 +73,12 @@ public class CreateGrid : MonoBehaviour {
                         g.GetComponent<MeshRenderer>().material = redmat;
                     }
                 }
+                */
             }
             row += NE;
-            for (int j = 0; j < 10; ++j)
+            if (++i >= height)
+                break;
+            for (int j = 0; j < width; ++j)
             {
                 if (Random.value <= 0.2f)
                     continue;
@@ -64,6 +87,16 @@ public class CreateGrid : MonoBehaviour {
                 {
                     go.GetComponent<MeshRenderer>().material = redmat;
                 }
+                //Debug.Log("I: " + i + " J: " + j);
+                Tile t = go.GetComponent<Tile>();
+                t.gridPos = new Tile.TilePos(j, i);
+                GameManager.instance.RegisterTile(t);
+                if (Random.value <= 0.1f)
+                {
+                    go.transform.localScale = new Vector3(1, 2, 1);
+                    go.transform.position += Vector3.up * tileH/2;
+                }
+                /*
                 if (Random.value <= 0.1f)
                 {
                     GameObject g = (GameObject)Instantiate(tile, row + Vector3.right * j + Vector3.up * tileH, Quaternion.identity);
@@ -72,10 +105,26 @@ public class CreateGrid : MonoBehaviour {
                         g.GetComponent<MeshRenderer>().material = redmat;
                     }
                 }
+                */
+                
             }
             row += NW;
+            ++i;
         }
 
+        /*
+        List<Tile> list = GameManager.instance.FindPath(GameManager.instance.tiles[4][4], GameManager.instance.tiles[7][18]);
+        if(list != null)
+        {
+            int i = 0;
+            foreach(Tile t in list)
+            {
+                t.gameObject.GetComponent<MeshRenderer>().material = redmat;
+                //t.text.text = (i++).ToString();
+            }
+        }
+        */
+        
     }
 	
 	// Update is called once per frame
@@ -85,7 +134,9 @@ public class CreateGrid : MonoBehaviour {
         if(Physics.Raycast(ray,out hit,11001111))
         {
             //hit.collider.gameObject.GetComponent<MeshRenderer>().material = redmat;
-            cursor.transform.position = hit.collider.gameObject.transform.position + Vector3.up * 0.1f;
+            cursor.transform.position = hit.collider.gameObject.transform.position + Vector3.up * 0.1f*hit.collider.gameObject.transform.localScale.y;
+
         }
 	}
+
 }

@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3369512}
   - 23: {fileID: 2303250}
   - 64: {fileID: 6455564}
+  - 114: {fileID: 11445692}
   m_Layer: 0
   m_Name: Hexagon
   m_TagString: Untagged
@@ -73,6 +74,17 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: d4a1db5a97427084fbe978259666dd3a, type: 3}
+--- !u!114 &11445692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7906b61f06ad44ea9071ad0759cdf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
