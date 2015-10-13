@@ -187,6 +187,7 @@ public class GameManager : MonoBehaviour {
                 {
                     if (nodeMap[tile].isImprovement(current)) {
                         nodeMap[tile].setPrev(current);
+                        //Might be needed since I did not chech heuristic for constancy.
                         if (closedset.Contains(tile)) {
                             closedset.Remove(tile);
                             openset.Add(nodeMap[tile]);
