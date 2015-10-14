@@ -209,6 +209,38 @@ public class GameManager : MonoBehaviour {
         return null;
     }
 
+    public HashSet<Tile> TilesInRange(Tile t, int range)
+    {
+        HashSet<Tile> set = new HashSet<Tile>();
+        DLS(t, set, range);
+
+        foreach(List<Tile> row in tiles)
+        {
+            foreach(Tile tile in row)
+            {
+                if(tile != null)
+                    tile.GetComponent<Renderer>().material = set.Contains(tile) ? redmat : whitemat;
+            }
+        }
+
+        return set;
+    }
+
+    public Material redmat;
+    public Material whitemat;
+
+    private void DLS(Tile t, HashSet<Tile> set, int depth)
+    {
+        if (depth < 0)
+            return;
+        set.Add(t);
+        foreach(Tile tile in getNeighbors(t))
+        {
+            //if (set.Contains(tile))
+            //    continue;
+            DLS(tile, set, depth-1);
+        }
+    }
 
 
     public Tile selected;

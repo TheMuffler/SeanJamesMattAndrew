@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 public class Unit : MonoBehaviour {
 
+    public int MoveRange = 3;
+
     Tile tile;
     List<Tile> list = new List<Tile>();
 
+    HashSet<Tile> reachableTiles = new HashSet<Tile>();
 
     // Use this for initialization
     void Start () {
@@ -22,11 +25,13 @@ public class Unit : MonoBehaviour {
             while (tile == null)
                 tile = GameManager.instance.tiles[i++][0];
             transform.position = tile.gameObject.transform.position + Vector3.up;
+            reachableTiles = GameManager.instance.TilesInRange(tile, MoveRange);
         }
 
         if (Input.GetMouseButtonDown(0) && GameManager.instance.selected != null)
-        {           
-            move(GameManager.instance.selected);
+        {
+            if(reachableTiles.Contains(GameManager.instance.selected))           
+              move(GameManager.instance.selected);
         }
         if(list != null && list.Count > 0)
         {
@@ -34,6 +39,15 @@ public class Unit : MonoBehaviour {
             {
                 tile = list[0];
                 list.RemoveAt(0);
+                if(list.Count == 0)
+                {
+                    /*
+                    foreach(Tile t in GameManager.instance.TilesInRange(tile, 3))
+                    {
+                        t.transform.position += Vector3.up * 3;
+                    }*/
+                    reachableTiles = GameManager.instance.TilesInRange(tile, MoveRange);
+                }
             }
             else
             {
