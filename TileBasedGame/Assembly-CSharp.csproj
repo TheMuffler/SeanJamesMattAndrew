@@ -47,6 +47,8 @@
   <ItemGroup>
      <Compile Include="Assets\CreateGrid.cs" />
      <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\Tasks\Task.cs" />
+     <Compile Include="Assets\Tasks\Task_MoveToTile.cs" />
      <Compile Include="Assets\Tile.cs" />
      <Compile Include="Assets\Unit.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />

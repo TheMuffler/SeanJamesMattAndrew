@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class GameManager : MonoBehaviour {
+public partial class GameManager : MonoBehaviour {
 
     private static GameManager _instance;
     public static GameManager instance
@@ -18,9 +18,98 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    void Awake()
+    {
+        instance = this;
+        CreateGrid();
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    [HideInInspector]
+    public List<Task> tasks = new List<Task>();
+    public bool HasTask
+    {
+        get
+        {
+            return tasks.Count > 0;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        AnotherUpdate();
+        if (HasTask)
+        {
+            if (tasks[0].update())
+            {
+                tasks[0].OnExit();
+                tasks.RemoveAt(0);
+            }
+        }
+        else if (activeUnit == null)
+        {
+            GetNextActiveUnit();
+            activeUnit.CalculateReachableTiles();
+            SelectionParticle.GetComponent<ParticleSystem>().enableEmission = true;
+            SelectionParticle.transform.position = activeUnit.transform.position;
+            activeUnit.RequestCommand();
+        }
+    }
+
+    public void ProcessCommand(Action action)
+    {
+        if (activeUnit == null)
+            return;
+        activeUnit.processingCommand = false;
+        action();
+        foreach (List<Tile> row in tiles)
+        {
+            foreach (Tile tile in row)
+            {
+                if (tile != null)
+                    tile.GetComponent<Renderer>().material = whitemat;
+            }
+        }
+        activeUnit.nextTurnTime += activeUnit.timeForActions;
+        SelectionParticle.GetComponent<ParticleSystem>().enableEmission = false;
+        activeUnit = null;
+    }
+
+    float TurnTime = 0f;
+    Unit activeUnit = null;
+    public List<Unit> units;
+
+    public GameObject SelectionParticle;
+
+    private void GetNextActiveUnit()
+    {
+        if (units.Count == 0)
+            return;
+        units.Sort((a, b) => Unit.turnOrderComp(a, b));
+        while(units[0].nextTurnTime > TurnTime)
+        {
+            TurnTime += 1f;
+            foreach (Unit u in units)
+                u.TurnTick();
+        }
+        activeUnit = units[0];
+    }
+
+
+
+
+    //Tile Stuff Below Here
+    [HideInInspector]
     public int MapH, MapW;
     public Dictionary<GameObject, Tile> tileMap = new Dictionary<GameObject, Tile>();
     public List<List<Tile>> tiles = new List<List<Tile>>();
+
     public void SetupList(int w, int h)
     {
         MapH = h;
@@ -85,21 +174,7 @@ public class GameManager : MonoBehaviour {
         tiles[tile.gridX][tile.gridY] = tile;
     }
 
-    void Awake()
-    {
-        instance = this;
-    }
-
-	// Use this for initialization
-	void Start () {
-	    
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+    
 
     private class PathNode
     {
@@ -171,7 +246,7 @@ public class GameManager : MonoBehaviour {
                     stack.Push(current.tile);
                     current = current.prev;
                 }
-                while(stack.Count != 0)
+                while(stack.Count > 0)
                 {
                     list.Add(stack.Pop());
                 }
@@ -183,6 +258,10 @@ public class GameManager : MonoBehaviour {
             {
                 //if (closedset.Contains(tile))
                 //    continue;
+                if (tile.unit != null)
+                    continue;
+
+
                 if (nodeMap.ContainsKey(tile))
                 {
                     if (nodeMap[tile].isImprovement(current)) {
@@ -236,6 +315,8 @@ public class GameManager : MonoBehaviour {
         set.Add(t);
         foreach(Tile tile in getNeighbors(t))
         {
+            if (tile.unit != null)
+                continue;
             //if (set.Contains(tile))
             //    continue;
             DLS(tile, set, depth-1);

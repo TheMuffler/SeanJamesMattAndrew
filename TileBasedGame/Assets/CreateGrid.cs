@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CreateGrid : MonoBehaviour {
+public partial class GameManager : MonoBehaviour {
 
     public GameObject tile;
 
@@ -10,14 +10,14 @@ public class CreateGrid : MonoBehaviour {
     private float HexMaxCirc = 2 / Mathf.Sqrt(3);
     private Vector3 NE,NW,SE,SW,E,W;
 
-    public Material redmat;
+    //public Material redmat;
 
     public GameObject cursor;
 
     public int width=10, height=20;
 
 	// Use this for initialization
-	void Start () {
+	void CreateGrid () {
         NE = new Vector3(1f/2f, 0, 1.5f/Mathf.Sqrt(3));
         NW = new Vector3(-1f / 2f, 0, 1.5f / Mathf.Sqrt(3));
         SE = new Vector3(1f / 2f, 0, -1.5f / Mathf.Sqrt(3));
@@ -126,17 +126,21 @@ public class CreateGrid : MonoBehaviour {
         */
         
     }
-	
+
+    int tileLayer = 1 << 8;
 	// Update is called once per frame
-	void Update () {
+	void AnotherUpdate () {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if(Physics.Raycast(ray,out hit,11001111))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, tileLayer))
         {
+            cursor.SetActive(true);
             //hit.collider.gameObject.GetComponent<MeshRenderer>().material = redmat;
-            cursor.transform.position = hit.collider.gameObject.transform.position + Vector3.up * 0.1f*hit.collider.gameObject.transform.localScale.y;
+            cursor.transform.position = hit.collider.gameObject.transform.position + Vector3.up * 0.1f * hit.collider.gameObject.transform.localScale.y;
             GameManager.instance.selected = hit.collider.gameObject.GetComponent<Tile>();
         }
+        else
+            cursor.SetActive(false);
 	}
 
 }

@@ -46,6 +46,16 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    private Unit _unit = null;
+    public Unit unit
+    {
+        get
+        {
+            return _unit;
+        }
+    }
+
+
     /*
     public Vector2 gridPos = new Vector2();
     public int gridX
@@ -86,4 +96,14 @@ public class Tile : MonoBehaviour {
 	void Update () {
         
 	}
+
+    public void SetUnit(Unit unit)
+    {
+        //if (unit.tile == this)
+        //    return;
+        if (unit.tile != null)
+            unit.tile._unit = null;
+        unit.tile = this;
+        this._unit = unit;
+    }
 }
