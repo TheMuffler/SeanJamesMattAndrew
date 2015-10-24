@@ -27,6 +27,16 @@ public class Tile : MonoBehaviour {
         }
     }
 
+    private const float tileH = 0.1039212f;
+
+    public Vector3 TopPosition
+    {
+        get
+        {
+            return transform.position + Vector3.up * tileH * transform.localScale.y;
+        }
+    }
+
     public TilePos gridPos = new TilePos();
 
     public int gridX

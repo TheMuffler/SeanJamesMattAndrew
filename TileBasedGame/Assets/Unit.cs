@@ -22,6 +22,8 @@ public class Unit : MonoBehaviour {
     [HideInInspector]
     public bool processingCommand = false;
 
+    public Animator anim;
+
     public static int turnOrderComp(Unit a, Unit b)
     {
         if (a.nextTurnTime < b.nextTurnTime)
@@ -68,9 +70,12 @@ public class Unit : MonoBehaviour {
             while (tile == null)
                 tile = GameManager.instance.tiles[i++][(int)ID];
             tile.SetUnit(this);
-            transform.position = tile.gameObject.transform.position + Vector3.up;
+            transform.position = tile.TopPosition;
             //reachableTiles = GameManager.instance.TilesInRange(tile, MoveRange);
         }
+        if (anim == null)
+            if (transform.childCount > 0)
+                anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     void OnDisable()

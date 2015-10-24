@@ -19,20 +19,30 @@ public class Task_MoveToTile : Task
     public override void OnEnter()
     {
         path = GameManager.instance.FindPath(unit.tile, tile);
+        if(path != null && path.Count > 0)
+            unit.transform.position = new Vector3(unit.transform.position.x, path[0].TopPosition.y, unit.transform.position.z);
+        if (unit.anim)
+            unit.anim.SetBool("Walking",true);
     }
     public override bool OnUpdate()
     {
         if (path == null || path.Count == 0)
             return true;
-        Vector3 delta = path[0].transform.position - unit.transform.position + Vector3.up;
+        Vector3 delta = path[0].TopPosition - unit.transform.position + Vector3.up;
+        delta.y = 0;
+        unit.transform.rotation = Quaternion.Slerp(unit.transform.rotation,Quaternion.LookRotation(delta),Time.deltaTime*10);
         if (delta.magnitude < 0.01)
         {
+            unit.transform.position = path[0].TopPosition;
             path.RemoveAt(0);
             if (path.Count == 0)
             {
                 tile.SetUnit(unit);
-                unit.transform.position = tile.transform.position + Vector3.up;
                 return true;
+            }
+            else
+            {
+                unit.transform.position = new Vector3(unit.transform.position.x, path[0].TopPosition.y, unit.transform.position.z);
             }
         }
         else
@@ -42,5 +52,9 @@ public class Task_MoveToTile : Task
 
         return false;
     }
-    public override void OnExit() { }
+    public override void OnExit()
+    {
+        if (unit.anim)
+            unit.anim.SetBool("Walking", false);
+    }
 }
