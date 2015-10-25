@@ -59,6 +59,7 @@ public class Unit : MonoBehaviour {
             _idNum = idCtr++;
 	}
 
+    AnimatorIKProxie ik;
     bool initialized = false;
     void Start()
     {
@@ -75,7 +76,10 @@ public class Unit : MonoBehaviour {
         }
         if (anim == null)
             if (transform.childCount > 0)
+            {
                 anim = transform.GetChild(0).GetComponent<Animator>();
+                ik = transform.GetChild(0).GetComponent<AnimatorIKProxie>();
+            }
     }
 
     void OnDisable()
@@ -109,7 +113,7 @@ public class Unit : MonoBehaviour {
 
     public void CalculateReachableTiles()
     {
-        reachableTiles = GameManager.instance.TilesInRange(tile, MoveRange);
+        reachableTiles = GameManager.instance.TilesInRange(tile, MoveRange,this);
     }
 	
 	// Update is called once per frame
@@ -118,21 +122,42 @@ public class Unit : MonoBehaviour {
         
         if (!processingCommand)
             return;
-      
+
+        if (GameManager.instance.selected)
+            ik.LookAt(GameManager.instance.selected.gameObject);
+        else
+            ik.StopLooking();
 
         if (Input.GetMouseButtonDown(0) && GameManager.instance.selected != null)
         {
             if (reachableTiles.Contains(GameManager.instance.selected))
-                move(GameManager.instance.selected);
+            {
+                if (GameManager.instance.selected.unit && GameManager.instance.selected.unit != this)
+                    attack(GameManager.instance.selected);
+                else
+                    move(GameManager.instance.selected);
+            }
         }
 	}
 
     void move(Tile t)
     {
         //list = GameManager.instance.FindPath(tile, t);
+        ik.StopLooking();
         GameManager.instance.ProcessCommand(() =>
         {
             GameManager.instance.tasks.Add(new Task_MoveToTile(this, t));
+        });
+    }
+
+    void attack(Tile t)
+    {
+        List<Tile> list = GameManager.instance.FindPath(tile, t);
+        GameManager.instance.ProcessCommand(() =>
+        {
+            if(list.Count >= 2)
+                GameManager.instance.tasks.Add(new Task_MoveToTile(this, list[list.Count - 2]));
+            GameManager.instance.tasks.Add(new Task_ShowAttack(this, t.unit, "Punch"));
         });
     }
 }

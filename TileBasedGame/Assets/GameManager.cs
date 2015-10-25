@@ -258,7 +258,7 @@ public partial class GameManager : MonoBehaviour {
             {
                 //if (closedset.Contains(tile))
                 //    continue;
-                if (tile.unit != null)
+                if (tile.unit != null && tile != end)
                     continue;
 
 
@@ -288,10 +288,10 @@ public partial class GameManager : MonoBehaviour {
         return null;
     }
 
-    public HashSet<Tile> TilesInRange(Tile t, int range)
+    public HashSet<Tile> TilesInRange(Tile t, int range, Unit agent)
     {
         HashSet<Tile> set = new HashSet<Tile>();
-        DLS(t, set, range);
+        DLS(t, set, range, agent);
 
         foreach(List<Tile> row in tiles)
         {
@@ -308,18 +308,20 @@ public partial class GameManager : MonoBehaviour {
     public Material redmat;
     public Material whitemat;
 
-    private void DLS(Tile t, HashSet<Tile> set, int depth)
+    private void DLS(Tile t, HashSet<Tile> set, int depth, Unit agent)
     {
         if (depth < 0)
             return;
         set.Add(t);
-        foreach(Tile tile in getNeighbors(t))
+        if (t.unit && agent && t.unit != agent)
+            return;
+        
+        
+        foreach (Tile tile in getNeighbors(t))
         {
-            if (tile.unit != null)
-                continue;
             //if (set.Contains(tile))
             //    continue;
-            DLS(tile, set, depth-1);
+            DLS(tile, set, depth-1,agent);
         }
     }
 
