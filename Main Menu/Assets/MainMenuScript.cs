@@ -4,6 +4,13 @@ using System.Collections;
 
 public class MainMenuScript : MonoBehaviour {
 
+	enum Menu{
+		main,
+		characterSelect,
+		options
+	}
+
+
 	public CanvasGroup mainMenu;
 	public CanvasGroup optionsMenu;
 	public Button optionsButton;
@@ -11,6 +18,8 @@ public class MainMenuScript : MonoBehaviour {
 	public Button quitButton;
 	public Button startButton;
 	public CanvasGroup charSelect;
+	public Camera UICamera;
+	Menu menuPosition;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,6 +31,9 @@ public class MainMenuScript : MonoBehaviour {
 		startButton = startButton.GetComponent<Button> ();
 		optionsButton = optionsButton.GetComponent<Button> ();
 		quitButton = quitButton.GetComponent<Button> ();
+		UICamera = UICamera.GetComponent<Camera> ();
+
+		menuPosition = Menu.main;
 
 	}
 
@@ -33,15 +45,20 @@ public class MainMenuScript : MonoBehaviour {
 		optionsButton.enabled = false;
 		quitButton.enabled = false;
 
+		menuPosition = Menu.characterSelect;
+
+
 	}
 
 	public void ReturnToMainMenu() {
 	
 		mainMenu.alpha = 1;
-		charSelect.alpha = 0;
+		charSelect.alpha = 1;
 		startButton.enabled = true;
 		optionsButton.enabled = true;
 		quitButton.enabled = true;
+
+		menuPosition = Menu.main;
 	}
 
 
@@ -58,15 +75,19 @@ public class MainMenuScript : MonoBehaviour {
 		startButton.enabled = false;
 		optionsButton.enabled = false;
 		quitButton.enabled = false;
+
+		menuPosition = Menu.options;
 	
 	}
 
 	public void OptionsExit () {
 
-		optionsMenu.alpha = 0;
+		optionsMenu.alpha = 1;
 		startButton.enabled = true;
 		optionsButton.enabled = true;
 		quitButton.enabled = true;
+
+		menuPosition = Menu.main;
 
 	}
 
@@ -95,6 +116,30 @@ public class MainMenuScript : MonoBehaviour {
 	
 	}
 
+	void FixedUpdate() {
+
+		if (menuPosition == Menu.main) {
+			Vector3 relativePos = (mainMenu.transform.position - UICamera.transform.position);
+			Quaternion rotation = Quaternion.LookRotation(relativePos);
+			
+			Quaternion current = UICamera.transform.localRotation;
+			
+			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
+
+
+		}
+
+		if (menuPosition == Menu.characterSelect) {
+			Vector3 relativePos = (charSelect.transform.position - UICamera.transform.position);
+			Quaternion rotation = Quaternion.LookRotation(relativePos);
+
+			Quaternion current = UICamera.transform.localRotation;
+			
+			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
+		}
+
+
+	}
 
 
 	// Update is called once per frame
