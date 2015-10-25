@@ -297,8 +297,13 @@ public partial class GameManager : MonoBehaviour {
         {
             foreach(Tile tile in row)
             {
-                if(tile != null)
-                    tile.GetComponent<Renderer>().material = set.Contains(tile) ? redmat : whitemat;
+                if (tile != null)
+                {
+                    Material mat = whitemat;
+                    if (set.Contains(tile))
+                        mat = tile.unit && tile.unit != agent ? attackMat : redmat;
+                    tile.GetComponent<Renderer>().material = mat;
+                }
             }
         }
 
@@ -307,6 +312,7 @@ public partial class GameManager : MonoBehaviour {
 
     public Material redmat;
     public Material whitemat;
+    public Material attackMat;
 
     private void DLS(Tile t, HashSet<Tile> set, int depth, Unit agent)
     {

@@ -152,6 +152,7 @@ public class Unit : MonoBehaviour {
 
     void attack(Tile t)
     {
+        ik.StopLooking();
         List<Tile> list = GameManager.instance.FindPath(tile, t);
         GameManager.instance.ProcessCommand(() =>
         {
