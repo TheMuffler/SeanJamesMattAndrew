@@ -20,6 +20,7 @@ public class MainMenuScript : MonoBehaviour {
 	public CanvasGroup charSelect;
 	public Camera UICamera;
 	Menu menuPosition;
+	public float menuTransitionSpeed = 4.0f;
 	
 	// Use this for initialization
 	void Start () {
@@ -124,7 +125,7 @@ public class MainMenuScript : MonoBehaviour {
 			
 			Quaternion current = UICamera.transform.localRotation;
 			
-			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
+			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime * menuTransitionSpeed);
 
 
 		}
@@ -135,7 +136,7 @@ public class MainMenuScript : MonoBehaviour {
 
 			Quaternion current = UICamera.transform.localRotation;
 			
-			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime);
+			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime * menuTransitionSpeed);
 		}
 
 
