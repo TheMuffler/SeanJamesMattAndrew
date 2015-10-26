@@ -31791,7 +31791,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967263
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -45807,6 +45807,7 @@ MonoBehaviour:
   startButton: {fileID: 889013363}
   charSelect: {fileID: 805266600}
   UICamera: {fileID: 1555558374}
+  menuTransitionSpeed: 4
 --- !u!225 &2146594934
 CanvasGroup:
   m_ObjectHideFlags: 0

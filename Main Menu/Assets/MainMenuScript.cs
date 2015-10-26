@@ -40,7 +40,7 @@ public class MainMenuScript : MonoBehaviour {
 
 	public void StartPress() {
 
-		mainMenu.alpha = 0;
+		mainMenu.alpha = 1;
 		charSelect.alpha = 1;
 		startButton.enabled = false;
 		optionsButton.enabled = false;
