@@ -49,8 +49,8 @@
      <Compile Include="Assets\AnimatorIKProxie.cs" />
      <Compile Include="Assets\CreateGrid.cs" />
      <Compile Include="Assets\GameManager.cs" />
-     <Compile Include="Assets\MainMenuScript.cs" />
-     <Compile Include="Assets\RotateSkybox.cs" />
+     <Compile Include="Assets\Main Menu Assets\MainMenuScript.cs" />
+     <Compile Include="Assets\Main Menu Assets\RotateSkybox.cs" />
      <Compile Include="Assets\Tasks\Task.cs" />
      <Compile Include="Assets\Tasks\Task_MoveToTile.cs" />
      <Compile Include="Assets\Tasks\Task_ShowAttack.cs" />

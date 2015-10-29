@@ -19,6 +19,7 @@ public class MainMenuScript : MonoBehaviour {
 	public Button startButton;
 	public CanvasGroup charSelect;
 	public Camera UICamera;
+	public Button beginGameButton;
 	Menu menuPosition;
 	public float menuTransitionSpeed = 4.0f;
 	
@@ -33,6 +34,7 @@ public class MainMenuScript : MonoBehaviour {
 		optionsButton = optionsButton.GetComponent<Button> ();
 		quitButton = quitButton.GetComponent<Button> ();
 		UICamera = UICamera.GetComponent<Camera> ();
+		beginGameButton = beginGameButton.GetComponent<Button> ();
 
 		menuPosition = Menu.main;
 
@@ -138,6 +140,18 @@ public class MainMenuScript : MonoBehaviour {
 			
 			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime * menuTransitionSpeed);
 		}
+
+		if (menuPosition == Menu.options) {
+			Vector3 relativePos = (optionsMenu.transform.position - UICamera.transform.position);
+			Quaternion rotation = Quaternion.LookRotation(relativePos);
+			
+			Quaternion current = UICamera.transform.localRotation;
+			
+			UICamera.transform.rotation = Quaternion.Slerp(current, rotation, Time.deltaTime * menuTransitionSpeed);		
+		
+		
+		}
+
 
 
 	}
