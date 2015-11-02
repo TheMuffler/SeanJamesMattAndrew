@@ -1,0 +1,16 @@
+diff a/TileBasedGame/Assembly-CSharp-Editor.csproj b/TileBasedGame/Assembly-CSharp-Editor.csproj	(rejected hunks)
+@@ -90,12 +90,14 @@
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
+       <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Simple.shader" />
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
++      <None Include="Assets\ActionBar\Shaders\StaticTextShader.shader" />
+       <None Include="Assets\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />
+ +     <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\DepthOfField34.shader" />
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
++      <None Include="Assets\ActionBar\Resources\ActionBarShaderPickup.shader" />
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\SSAOShader.shader" />
+ +     <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ConvertDepth.shader" />
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\ColorCorrectionCurvesSimple.shader" />
+       <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderYUV.shader" />
