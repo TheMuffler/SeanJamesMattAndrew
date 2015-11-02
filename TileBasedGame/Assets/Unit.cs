@@ -50,8 +50,59 @@ public class Unit : MonoBehaviour {
     public int MoveRange = 3;
     public float timeForActions = 1f;
 
+    [HideInInspector]
+    public bool HasMoved = false;
 
-    
+    //stats
+    public float maxHP, maxMP;
+    [HideInInspector]
+    public float curHP, curMP;
+
+    public float baseDamageMultiplier=1;
+    public float baseArmor = 0;
+
+
+    //sum bonsuses from effects here
+    public float DamageMultiplier
+    {
+        get
+        {
+            return baseDamageMultiplier;
+        }
+    }
+
+    //sum bonuses from effects here
+    public float Armor
+    {
+        get
+        {
+            return baseArmor;
+        }
+    }
+
+    public delegate float FloatCalculation();
+
+    //amt is a stub
+    public void TakeDamage(float amt)
+    {
+        curHP = Mathf.Clamp(curHP - amt, 0, maxHP);
+        //assuming you can't die during your turn;
+        if (curHP <= 0)
+        {
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(gameObject);
+            live = false;
+        }
+    }
+
+    [HideInInspector]
+    public bool live = true;
+
+    public void Death()
+    {
+
+    }
+
 
     // Use this for initialization
     void Awake () {
@@ -80,7 +131,13 @@ public class Unit : MonoBehaviour {
                 anim = transform.GetChild(0).GetComponent<Animator>();
                 ik = transform.GetChild(0).GetComponent<AnimatorIKProxie>();
             }
+
+        curHP = maxHP;
+        curMP = maxHP;
+        explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
     }
+
+    GameObject explosion;
 
     void OnDisable()
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Task_ShowAttack : Task
 {
-    float timer = 2.0f;
+    float timer = 0.6f;
     Unit user, target;
     string trigger;
 
@@ -30,6 +30,11 @@ public class Task_ShowAttack : Task
     {
         timer -= Time.deltaTime;
         return timer <= 0;
+    }
+
+    public override void OnExit()
+    {
+        target.TakeDamage(3);
     }
 
 

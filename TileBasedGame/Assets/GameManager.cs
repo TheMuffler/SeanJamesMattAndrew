@@ -62,6 +62,21 @@ public partial class GameManager : MonoBehaviour {
         }
     }
 
+    public void ProcessMoveCommand(Action action)
+    {
+        if (activeUnit == null)
+            return;
+        action();
+        foreach (List<Tile> row in tiles)
+        {
+            foreach (Tile tile in row)
+            {
+                if (tile != null)
+                    tile.GetComponent<Renderer>().material = whitemat;
+            }
+        }
+    }
+
     public void ProcessCommand(Action action)
     {
         if (activeUnit == null)
@@ -87,6 +102,8 @@ public partial class GameManager : MonoBehaviour {
 
     public GameObject SelectionParticle;
 
+
+    private long turnTakenCtr = 0;
     private void GetNextActiveUnit()
     {
         if (units.Count == 0)
@@ -99,10 +116,14 @@ public partial class GameManager : MonoBehaviour {
                 u.TurnTick();
         }
         activeUnit = units[0];
+        activeUnit.turnTieBreaker = turnTakenCtr++;
     }
 
 
+    public void RemoveUnit()
+    {
 
+    }
 
     //Tile Stuff Below Here
     [HideInInspector]
