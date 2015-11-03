@@ -24,6 +24,16 @@ public class Unit : MonoBehaviour {
 
     public Animator anim;
 
+    public int faction = 0;
+    public bool IsEnemy(Unit other)
+    {
+        return faction != other.faction;
+    }
+    public bool IsAlly(Unit other)
+    {
+        return faction == other.faction;
+    }
+
     public static int turnOrderComp(Unit a, Unit b)
     {
         if (a.nextTurnTime < b.nextTurnTime)

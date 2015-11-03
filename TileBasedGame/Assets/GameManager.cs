@@ -325,6 +325,7 @@ public partial class GameManager : MonoBehaviour {
         HashSet<Tile> set = new HashSet<Tile>();
         DLS(t, set, range, agent);
 
+        //this isn't the actual place to put them
         foreach(List<Tile> row in tiles)
         {
             foreach(Tile tile in row)
