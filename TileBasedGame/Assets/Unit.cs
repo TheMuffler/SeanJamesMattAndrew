@@ -195,16 +195,18 @@ public class Unit : MonoBehaviour {
         else
             ik.StopLooking();
 
-        if (Input.GetMouseButtonDown(0) && GameManager.instance.selected != null)
-        {
-            if (reachableTiles.Contains(GameManager.instance.selected))
-            {
-                if (GameManager.instance.selected.unit && GameManager.instance.selected.unit != this)
-                    attack(GameManager.instance.selected);
-                else
-                    move(GameManager.instance.selected);
-            }
-        }
+        if (Input.GetMouseButtonDown (0) && GameManager.instance.selected != null) {
+			if (reachableTiles.Contains (GameManager.instance.selected)) {
+				if (GameManager.instance.selected.unit && GameManager.instance.selected.unit != this)
+					attack (GameManager.instance.selected);
+				else
+					move (GameManager.instance.selected);
+			}
+		} else if (Input.GetKeyDown (KeyCode.Z) && GameManager.instance.selected != null) {
+			Skill s = SkillFactory.GetBloodDonor();
+			if(s.IsInRange(this,GameManager.instance.selected))
+				GameManager.instance.ProcessCommand(()=>s.Perform(this,GameManager.instance.selected));
+		}
 	}
 
     void move(Tile t)

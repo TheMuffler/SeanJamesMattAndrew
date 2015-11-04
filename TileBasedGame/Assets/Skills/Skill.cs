@@ -35,6 +35,9 @@ public class Skill
     public delegate void SkillEffectDelegate(Unit user, Unit target, object[] args);
     public SkillEffectDelegate OnTarget;
 
+	public delegate void TaskGenDelegate(Unit user, Tile epicenter, object[] args);
+	public TaskGenDelegate GenerateTasks;
+
     public void DefaultOnTarget(Unit user, Unit target)
     {
         DamageType dt = damageType == DamageType.CONDITIONAL ? damageTypeFunction(user) : damageType;
@@ -73,12 +76,13 @@ public class Skill
         return list;
     }
 
-    public void Perform(Unit user, Tile t)
+
+    public void Execute(Unit user, Tile t)
     {
-        Perform(user, t, null);
+        Execute(user, t, null);
     }
 
-    public void Perform(Unit user, Tile t, object[] args)
+    public void Execute(Unit user, Tile t, object[] args)
     {
         if (!IsInRange(user,t))
             return;
@@ -89,12 +93,29 @@ public class Skill
         }
     }
 
+	public void Perform(Unit user, Tile t){
+		Perform (user, t, null);
+	}
+
+	public void Perform(Unit user, Tile t, object[] args){
+		GenerateTasks (user, t, args);
+	}
+
     public HashSet<string> triggers = new HashSet<string>(); //triggers will be used to see if certain talents are active
 
     public Skill()
     {
         OnTarget = (user, target, args) => DefaultOnTarget(user, target);
+		GenerateTasks = (user,epicenter,args) => EnqueueExecuteTask(user,epicenter,args);
     }
+
+	public void EnqueueExecuteTask(Unit user, Tile epicenter, object[] args){
+		GameManager.instance.tasks.Add (new Task_Execute_Skill (this, user, epicenter, args));
+	}
+
+	public void EnqueueWait(float t){
+		GameManager.instance.tasks.Add (new Task_Wait (t));
+	}
 
     public bool IsInRange(Unit user, Tile t)
     {

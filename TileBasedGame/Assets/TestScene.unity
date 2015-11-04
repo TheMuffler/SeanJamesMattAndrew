@@ -65,7 +65,6 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 112000000, guid: 15f9bde5d050f744f9c0d14a4f99d211,
     type: 2}
   m_RuntimeCPUUsage: 25
@@ -86,6 +85,9 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!127 &5
+LevelGameManager:
+  m_ObjectHideFlags: 0
 --- !u!1 &88742037 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100096, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
@@ -1247,6 +1249,7 @@ MonoBehaviour:
   turnTieBreaker: 0
   processingCommand: 0
   anim: {fileID: 0}
+  faction: 3
   MoveRange: 3
   timeForActions: 1
   HasMoved: 0
@@ -1388,7 +1391,6 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1506,7 +1508,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 1
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1766,6 +1767,7 @@ MonoBehaviour:
   turnTieBreaker: 0
   processingCommand: 0
   anim: {fileID: 0}
+  faction: 0
   MoveRange: 3
   timeForActions: 1
   HasMoved: 0
@@ -1811,6 +1813,7 @@ MonoBehaviour:
   turnTieBreaker: 0
   processingCommand: 0
   anim: {fileID: 0}
+  faction: 0
   MoveRange: 3
   timeForActions: 1
   HasMoved: 0
@@ -1969,6 +1972,7 @@ MonoBehaviour:
   turnTieBreaker: 0
   processingCommand: 0
   anim: {fileID: 0}
+  faction: 0
   MoveRange: 3
   timeForActions: 1
   HasMoved: 0
@@ -2069,6 +2073,7 @@ MonoBehaviour:
   turnTieBreaker: 0
   processingCommand: 0
   anim: {fileID: 0}
+  faction: 0
   MoveRange: 3
   timeForActions: 1
   HasMoved: 0
@@ -2375,7 +2380,7 @@ Camera:
   far clip plane: 500
   field of view: 60
   orthographic: 1
-  orthographic size: 135
+  orthographic size: 148
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -2383,7 +2388,6 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -2457,6 +2461,7 @@ MonoBehaviour:
   turnTieBreaker: 0
   processingCommand: 0
   anim: {fileID: 0}
+  faction: 1
   MoveRange: 3
   timeForActions: 1
   HasMoved: 0
@@ -2512,6 +2517,7 @@ MonoBehaviour:
   turnTieBreaker: 0
   processingCommand: 0
   anim: {fileID: 0}
+  faction: 2
   MoveRange: 3
   timeForActions: 1
   HasMoved: 0
