@@ -105,6 +105,11 @@ public class Unit : MonoBehaviour {
     {
         get
         {
+            float total = baseDamageMultiplier;
+            foreach (EffectContainer e in effectContainers)
+            {
+                int x = 3;
+            }
             return baseDamageMultiplier;
         }
     }

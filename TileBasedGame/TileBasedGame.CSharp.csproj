@@ -113,6 +113,7 @@
     <Compile Include="Assets\Skills\Skill.cs" />
     <Compile Include="Assets\Skills\SkillContainer.cs" />
     <Compile Include="Assets\Skills\SkillFactory.cs" />
+    <Compile Include="Assets\Talent.cs" />
     <Compile Include="Assets\Tasks\BunchOfTasks.cs" />
     <Compile Include="Assets\Tasks\Task.cs" />
     <Compile Include="Assets\Tasks\Task_MoveToTile.cs" />
