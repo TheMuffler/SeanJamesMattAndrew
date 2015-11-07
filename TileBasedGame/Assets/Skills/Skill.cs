@@ -106,6 +106,7 @@ public class Skill
 
 	public void Perform(Unit user, Tile t, object[] args){
 		GenerateTasks (user, t, args);
+        user.curMP -= manaCost(user);
 	}
 
     public HashSet<string> triggers = new HashSet<string>(); //triggers will be used to see if certain talents are active

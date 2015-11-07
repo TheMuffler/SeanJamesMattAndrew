@@ -11,7 +11,7 @@ public class SkillFactory
         {
             bloodDonor = new Skill();
             bloodDonor.basePower = 3;
-            bloodDonor.aoe = 3;
+            bloodDonor.aoe = 0;
             bloodDonor.range = 4;
 			bloodDonor.manaCost = user => 3;
 			bloodDonor.damageType = Skill.DamageType.DAMAGE;

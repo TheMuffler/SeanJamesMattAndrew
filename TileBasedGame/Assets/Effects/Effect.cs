@@ -9,6 +9,8 @@ public class Effect
 
     public float damageBonus = 0;
     public float armorBonus = 0;
+    public int moveRangeBonus = 0;
+
 	public string animBool = "";
 	//public float dot = 0;
 	public GameObject particlePrefab;

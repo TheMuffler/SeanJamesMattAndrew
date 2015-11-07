@@ -90,7 +90,21 @@ public class Unit : MonoBehaviour {
     }
 
 
-    public int MoveRange = 3;
+    public int baseMoveRange = 3;
+    public int MoveRange
+    {
+        get
+        {
+            int total = baseMoveRange;
+            foreach(EffectContainer e in effectContainers)
+            {
+                total += e.effect.moveRangeBonus;
+            }
+            return System.Math.Max(0, total);
+        }
+    }
+
+
     public float timeForActions = 1f;
 
     [HideInInspector]
