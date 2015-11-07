@@ -19,6 +19,12 @@ public class Unit : MonoBehaviour {
         }
     }
 
+    public HashSet<string> talentTags = new HashSet<string>();
+    public bool TalentSelected(string str)
+    {
+        return talentTags.Contains(str);
+    }
+
 
     public List<SkillContainer> skillContainers = new List<SkillContainer>();
     public void AddSkill(Skill skill)

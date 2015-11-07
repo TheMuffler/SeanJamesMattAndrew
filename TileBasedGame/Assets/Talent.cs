@@ -79,11 +79,11 @@ public class TankFactory : ClassFactory
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Another Talent";
-        t.description = "Doesn't really do anything";
+        t.name = "Improve Skill X";
+        t.description = "Makes Skill X better. Skill X is scripted to check if the performing agent has the string 'SkillXImprove' in its talentTags";
         t.IfChosen = unit =>
         {
-            //do something else
+            unit.talentTags.Add("SkillXImprove");
         };
         talentOptions.Add(t);
     }
