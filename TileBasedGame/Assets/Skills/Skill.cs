@@ -22,7 +22,9 @@ public class Skill
     public delegate TargetType TargetTypeDelegate(Unit user);
     public delegate DamageType DamageTypeDelegate(Unit user);
 
-    public float manaCost;
+	public delegate float CostDelegate(Unit user);
+    public CostDelegate manaCost = (user) => 0;
+
     public int cooldown;
 
     public float basePower = 1; //base healing/damage
@@ -76,6 +78,10 @@ public class Skill
         return list;
     }
 
+	public bool CanCast(Unit user){
+		return user.curMP >= manaCost(user);
+	}
+
 
     public void Execute(Unit user, Tile t)
     {
@@ -84,6 +90,7 @@ public class Skill
 
     public void Execute(Unit user, Tile t, object[] args)
     {
+		user.curMP -= manaCost(user);
         if (!IsInRange(user,t))
             return;
         List<Unit> targets = gatherTargets(user, t);

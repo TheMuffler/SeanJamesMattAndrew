@@ -13,6 +13,7 @@ public class SkillFactory
             bloodDonor.basePower = 3;
             bloodDonor.aoe = 0;
             bloodDonor.range = 2;
+			bloodDonor.manaCost = user => 3;
 			bloodDonor.damageType = Skill.DamageType.DAMAGE;
 			bloodDonor.targetType = Skill.TargetType.ENEMY;
             bloodDonor.OnTarget = (user, target, args) =>

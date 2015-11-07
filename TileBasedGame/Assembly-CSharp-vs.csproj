@@ -67,7 +67,9 @@
      <Compile Include="Assets\ActionBarCreator.cs" />
      <Compile Include="Assets\AnimatorIKProxie.cs" />
      <Compile Include="Assets\CreateGrid.cs" />
+     <Compile Include="Assets\Effects\Aura.cs" />
      <Compile Include="Assets\Effects\Effect.cs" />
+     <Compile Include="Assets\Effects\EffectFactory.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\Main Menu Assets\MainMenuScript.cs" />
      <Compile Include="Assets\Main Menu Assets\RotateSkybox.cs" />

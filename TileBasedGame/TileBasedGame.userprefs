@@ -1,19 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Skills\SkillFactory.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Effects\Effect.cs">
     <Files>
-      <File FileName="Assets\Skills\SkillFactory.cs" Line="20" Column="88" />
-      <File FileName="Assets\Unit.cs" Line="1" Column="1" />
-      <File FileName="Assets\ActionBar\Demo\Scripts\TurnOrderUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Standard Assets\Utility\EventSystemChecker.cs" Line="1" Column="1" />
-      <File FileName="Assets\Main Menu Assets\MainMenuScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\Skills\Skill.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tasks\BunchOfTasks.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tasks\Task_MoveToTile.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tasks\Task.cs" Line="1" Column="1" />
-      <File FileName="Assets\ActionBar\Scripts\ActionBarButton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tasks\Task_ShowAttack.cs" Line="1" Column="1" />
-      <File FileName="Assets\Tasks\Task_UnitDeath.cs" Line="1" Column="1" />
+      <File FileName="Assets\ActionBar\Demo\Scripts\TurnOrderUI.cs" Line="40" Column="3" />
+      <File FileName="Assets\Skills\SkillFactory.cs" Line="14" Column="32" />
+      <File FileName="Assets\Effects\Effect.cs" Line="28" Column="24" />
+      <File FileName="Assets\Effects\Aura.cs" Line="11" Column="3" />
+      <File FileName="Assets\Tile.cs" Line="128" Column="20" />
+      <File FileName="Assets\GameManager.cs" Line="270" Column="31" />
+      <File FileName="Assets\Skills\Skill.cs" Line="93" Column="31" />
+      <File FileName="Assets\ActionBar\Scripts\ActionBarDescriptor.cs" Line="1" Column="1" />
+      <File FileName="Assets\Effects\EffectFactory.cs" Line="8" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
