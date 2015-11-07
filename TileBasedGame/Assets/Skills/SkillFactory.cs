@@ -19,8 +19,8 @@ public class SkillFactory
             bloodDonor.OnTarget = (user, target, args) =>
             {
                 float amt = user.DamageMultiplier * bloodDonor.basePower * (1f - target.Armor);
-                target.TakeDamage(amt);
-                user.TakeDamage(-amt);
+                target.TakeDamage(amt,user);
+                user.TakeDamage(-amt,user);
             };
 			bloodDonor.GenerateTasks = (user,tile,args)=>
 			{

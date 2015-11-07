@@ -45,7 +45,7 @@ public class Skill
         DamageType dt = damageType == DamageType.CONDITIONAL ? damageTypeFunction(user) : damageType;
 
         if (dt == DamageType.DAMAGE)
-            target.TakeDamage(basePower * user.DamageMultiplier * (1f - target.Armor));
+            target.TakeDamage(basePower * user.DamageMultiplier * (1f - target.Armor),user);
     }
 
     public List<Unit> gatherTargets(Unit user, Tile t)//gather targets from center of tile extending out aoe tiles. The targettype affects it.

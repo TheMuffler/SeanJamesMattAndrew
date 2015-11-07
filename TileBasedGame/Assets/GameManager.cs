@@ -104,6 +104,8 @@ public partial class GameManager : MonoBehaviour {
         }
         activeUnit.nextTurnTime += activeUnit.timeForActions;
         SelectionParticle.GetComponent<ParticleSystem>().enableEmission = false;
+        foreach (EffectContainer e in activeUnit.effectContainers)
+            e.effect.onTurnEnd(activeUnit);
         activeUnit = null;
     }
 

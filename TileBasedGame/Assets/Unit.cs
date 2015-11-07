@@ -19,6 +19,21 @@ public class Unit : MonoBehaviour {
         }
     }
 
+
+    public List<SkillContainer> skillContainers = new List<SkillContainer>();
+    public void AddSkill(Skill skill)
+    {
+        skillContainers.Add(new SkillContainer(this, skill));
+    }
+
+    public List<EffectContainer> effectContainers = new List<EffectContainer>();
+    //negative time for permanent effects.
+    public void AddEffect(Effect effect, int time)
+    {
+        effectContainers.Add(new EffectContainer(this, effect, time));
+    }
+
+
     [HideInInspector]
     public bool processingCommand = false;
 
@@ -53,7 +68,19 @@ public class Unit : MonoBehaviour {
 
     public void TurnTick()
     {
-
+        curMP = Mathf.Clamp(curMP + maxMP / 10f, 0, maxMP);
+        for(int i = 0; i < effectContainers.Count;)
+        {
+            if (effectContainers[i].Tick())
+            { //cooldown ran out
+                effectContainers[i].effect.Remove(this);
+                effectContainers.RemoveAt(i);
+            }
+            else
+                ++i;
+        }
+        foreach (SkillContainer s in skillContainers)
+            s.Tick();
     }
 
 
@@ -67,6 +94,7 @@ public class Unit : MonoBehaviour {
     public float maxHP, maxMP;
     [HideInInspector]
     public float curHP, curMP;
+    public float shield = 0;
 
     public float baseDamageMultiplier=1;
     public float baseArmor = 0;
@@ -93,8 +121,18 @@ public class Unit : MonoBehaviour {
     public delegate float FloatCalculation();
 
     //amt is a stub
-    public void TakeDamage(float amt)
+    public void TakeDamage(float amt, Unit attacker)
     {
+        attacker.OnAttackAnother(this, amt);
+
+        if (shield >= amt)
+        {
+            shield -= amt;
+            return;
+        }
+        amt -= shield;
+        shield = 0;
+
         curHP = Mathf.Clamp(curHP - amt, 0, maxHP);
         //assuming you can't die during your turn;
         if (curHP <= 0)
@@ -167,6 +205,10 @@ public class Unit : MonoBehaviour {
         if (processingCommand)
             return;
         processingCommand = true;
+
+        foreach (EffectContainer e in effectContainers)
+            e.effect.onTurnBegin(this);
+
         //AI controlled units will use a coroutine to decide their moves
 
     }
@@ -181,6 +223,22 @@ public class Unit : MonoBehaviour {
     public void CalculateReachableTiles()
     {
         reachableTiles = GameManager.instance.TilesInRange(tile, MoveRange,this);
+    }
+
+    void OnGetHit(Unit attacker, float amt)
+    {
+        foreach(EffectContainer e in effectContainers)
+        {
+            e.effect.OnHitDefending(attacker, this, amt);
+        }
+    }
+
+    void OnAttackAnother(Unit defender, float amt)
+    {
+        foreach(EffectContainer e in effectContainers)
+        {
+            e.effect.OnHitAttacking(this, defender, amt);
+        }
     }
 	
 	// Update is called once per frame

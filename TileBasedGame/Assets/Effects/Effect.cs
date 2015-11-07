@@ -3,8 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-[Serializable]
-class Effect
+public class Effect
 {
 	public HashSet<string> TriggerTags = new HashSet<string> ();
 
@@ -17,9 +16,9 @@ class Effect
 
 
 
-	public delegate void OnHitDelegate(Unit attacker, Unit defender);
-	public OnHitDelegate OnHitDefending = (attacker,defender) => {};
-	public OnHitDelegate OnHitAttacking = (attacker,defender) => {};
+	public delegate void OnHitDelegate(Unit attacker, Unit defender, float amt);
+	public OnHitDelegate OnHitDefending = (attacker,defender,amt) => {};
+	public OnHitDelegate OnHitAttacking = (attacker,defender,amt) => {};
 
 	public delegate void SingleUnitDelegate(Unit user);
 	public SingleUnitDelegate OnEnter = user => {};
