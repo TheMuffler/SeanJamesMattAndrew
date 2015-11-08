@@ -268,7 +268,30 @@ public class Unit : MonoBehaviour {
             e.effect.OnHitAttacking(this, defender, amt);
         }
     }
-	
+
+    SkillContainer aimingSkill = null;
+    bool IsAimingSkill
+    {
+        get
+        {
+            return aimingSkill != null;
+        }
+    }
+    void CommitSkillTarget()
+    {
+        if(!IsAimingSkill)
+            return;
+        if (GameManager.instance.selected == null ||
+            !aimingSkill.skill.IsInRange(this, GameManager.instance.selected))
+            return;
+        GameManager.instance.ProcessCommand(() =>
+        {
+            aimingSkill.skill.Perform(this, GameManager.instance.selected);
+            aimingSkill.cooldown = aimingSkill.skill.cooldown;
+            aimingSkill = null;
+        });
+    }
+
 	// Update is called once per frame
 	void Update () {
      
