@@ -217,7 +217,7 @@ public class Unit : MonoBehaviour {
 
         AddSkill(SkillFactory.GetBloodDonor());
         AddSkill(SkillFactory.GetBloodDonor());
-        AddSkill(SkillFactory.GetBloodDonor());
+        AddSkill(SkillFactory.GetSlam());
     }
 
     GameObject explosion;
