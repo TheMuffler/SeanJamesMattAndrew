@@ -1,16 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Effects\Effect.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Main Menu Assets\CharacterSelectMenu.cs">
     <Files>
-      <File FileName="Assets\ActionBar\Demo\Scripts\TurnOrderUI.cs" Line="40" Column="3" />
-      <File FileName="Assets\Skills\SkillFactory.cs" Line="14" Column="32" />
-      <File FileName="Assets\Effects\Effect.cs" Line="28" Column="24" />
-      <File FileName="Assets\Effects\Aura.cs" Line="11" Column="3" />
-      <File FileName="Assets\Tile.cs" Line="128" Column="20" />
-      <File FileName="Assets\GameManager.cs" Line="270" Column="31" />
-      <File FileName="Assets\Skills\Skill.cs" Line="93" Column="31" />
-      <File FileName="Assets\ActionBar\Scripts\ActionBarDescriptor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Effects\EffectFactory.cs" Line="8" Column="2" />
+      <File FileName="Assets\Main Menu Assets\CharacterSelectMenu.cs" Line="106" Column="2" />
+      <File FileName="Assets\Main Menu Assets\MainMenuScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
