@@ -41,4 +41,42 @@ public class SkillFactory
         }
         return bloodDonor;
     }
+
+    private static Skill slam = null;
+    public static Skill GetSlam()
+    {
+        if(slam == null)
+        {
+            slam = new Skill();
+            slam.name = "Slam";
+            slam.icon = Resources.Load<Sprite>("SpellIcons/llama");
+
+            slam.basePower = 4;
+            slam.manaCost = user => 4;
+            slam.aoe = 1;
+            slam.range = 0;
+            slam.cooldown = 4;
+            slam.damageType = Skill.DamageType.DAMAGE;
+            slam.targetType = Skill.TargetType.ENEMY;
+            slam.OnTarget = (user, target, args) => {
+                bool flag = user.talentTags.Contains("Slam Upgrade");
+
+                float amt = user.DamageMultiplier * bloodDonor.basePower * (1f - target.Armor);
+                target.TakeDamage(amt*(flag?2:1), user);
+                target.AddEffect(EffectFactory.getStunEffect(), flag?1:2);
+            };
+            slam.GenerateTasks = (user, tile, args) =>
+             {
+                 GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                 GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                 foreach(Unit target in slam.gatherTargets(user, tile))
+                 {
+                     GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
+                 }
+                 slam.EnqueueExecuteTask(user, tile, args);
+             };
+        }
+        return slam;
+    }
+
 }
