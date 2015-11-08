@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -184,18 +178,6 @@
     <Compile Include="Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\ActionBar\Demo\Resources\43598__freqman__garbage-bag-3_Agreement.txt" />
-    <None Include="Assets\ActionBar\Fonts\Diavlo.txt" />
-    <None Include="Assets\ActionBar\Resources\ActionBarShader.shader" />
-    <None Include="Assets\ActionBar\Resources\ActionBarShaderPickup.shader" />
-    <None Include="Assets\ActionBar\Shaders\StaticTextShader.shader" />
-    <None Include="Assets\ActionBar\Sounds\Buttons\Sounds_Buttons_Agreement.txt" />
-    <None Include="Assets\ActionBar\Sounds\Cooldown\44162__stickinthemud__chimes-2-sec-gliss-up_Agreement.txt" />
-    <None Include="Assets\ActionBar\Textures\atlas0_Attribution.txt" />
-    <None Include="Assets\ActionBar\Textures\atlas1_Agreement.txt" />
-    <None Include="Assets\ActionBar\Textures\atlas2_Attribution.txt" />
-    <None Include="Assets\ActionBar\Textures\atlas3_Attribution.txt" />
-    <None Include="Assets\ActionBar\Textures\cooldown_done_Agreement.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />

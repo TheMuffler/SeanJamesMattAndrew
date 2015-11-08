@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System;
 
 public partial class GameManager : MonoBehaviour {
-	private TurnOrderUI turnOrderUI;
 	private static GameManager _instance;
     public static GameManager instance
     {
@@ -22,8 +21,6 @@ public partial class GameManager : MonoBehaviour {
     {
         instance = this;
         CreateGrid();
-		GameObject go = new GameObject("TurnOrderUI");
-		turnOrderUI = go.AddComponent<TurnOrderUI>();
     }
 
     // Use this for initialization
@@ -59,7 +56,6 @@ public partial class GameManager : MonoBehaviour {
         else if (activeUnit == null)
         {
             GetNextActiveUnit();
-			StartCoroutine(UIRoutine());
             activeUnit.CalculateReachableTiles();
             SelectionParticle.GetComponent<ParticleSystem>().enableEmission = true;
             SelectionParticle.transform.position = activeUnit.transform.position;
@@ -83,12 +79,6 @@ public partial class GameManager : MonoBehaviour {
             }
         }
     }
-
-	private int taskCounter = 0;
-	IEnumerator UIRoutine() {
-		turnOrderUI.TurnOrderUpdate(taskCounter++);
-		yield break;
-	}
 
     public void ProcessCommand(Action action)
     {
