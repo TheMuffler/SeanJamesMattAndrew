@@ -109,8 +109,6 @@ public class Unit : MonoBehaviour {
 
     public float timeForActions = 1f;
 
-    [HideInInspector]
-    public bool HasMoved = false;
 
     //stats
     public float maxHP, maxMP;
@@ -210,6 +208,8 @@ public class Unit : MonoBehaviour {
         curHP = maxHP;
         curMP = maxHP;
         explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
+
+        AddSkill(SkillFactory.GetBloodDonor());
     }
 
     GameObject explosion;
@@ -291,6 +291,19 @@ public class Unit : MonoBehaviour {
             aimingSkill = null;
         });
     }
+    void SelectSkill(int index)
+    {
+        if (IsAimingSkill)
+            return;
+        if (index < 0 || index >= skillContainers.Count)
+            return;
+        SkillContainer s = skillContainers[index];
+        if (!s.IsCastable)
+            return;
+        aimingSkill = s;
+        GameManager.instance.TilesInRange(tile, s.skill.range, null); 
+    }
+
 
 	// Update is called once per frame
 	void Update () {
@@ -306,19 +319,45 @@ public class Unit : MonoBehaviour {
         else
             ik.StopLooking();
 
-        if (!hasMoved && Input.GetMouseButtonDown (0) && GameManager.instance.selected != null) {
-			if (reachableTiles.Contains (GameManager.instance.selected)) {
+        if (Input.GetMouseButtonDown (0) && GameManager.instance.selected != null) {
+
+            if (IsAimingSkill)
+                CommitSkillTarget();
+
+            else if (!hasMoved && reachableTiles.Contains(GameManager.instance.selected))
+            {
                 //if (GameManager.instance.selected.unit && GameManager.instance.selected.unit != this)
                 //	attack (GameManager.instance.selected);
                 //else
                 //	move (GameManager.instance.selected);
                 GameManager.instance.ProcessMoveCommand(GameManager.instance.selected);
-			}
-		} else if (Input.GetKeyDown (KeyCode.Z) && GameManager.instance.selected != null) {
+            }
+		}
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectSkill(0);
+        }
+        else if(Input.GetKeyDown(KeyCode.Escape) && IsAimingSkill)
+        {
+            aimingSkill = null;
+            if (!hasMoved)
+                CalculateReachableTiles();
+            else
+                GameManager.instance.TilesInRange(tile, 0, this);
+        }
+        else if(Input.GetKeyDown(KeyCode.P)) //can pass turn
+        {
+            GameManager.instance.ProcessCommand(() => { });
+        }
+
+
+        /*
+        else if (Input.GetKeyDown (KeyCode.Z) && GameManager.instance.selected != null) {
 			Skill s = SkillFactory.GetBloodDonor();
 			if(s.IsInRange(this,GameManager.instance.selected))
 				GameManager.instance.ProcessCommand(()=>s.Perform(this,GameManager.instance.selected));
 		}
+        */
 	}
 
     void move(Tile t)

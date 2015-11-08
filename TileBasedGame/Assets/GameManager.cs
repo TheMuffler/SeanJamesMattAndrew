@@ -338,7 +338,7 @@ public partial class GameManager : MonoBehaviour {
                 {
                     Material mat = whitemat;
                     if (set.Contains(tile))
-                        mat = tile.unit && tile.unit != agent ? attackMat : redmat;
+                        mat = tile.unit && tile.unit != activeUnit ? attackMat : redmat;
                     tile.GetComponent<Renderer>().material = mat;
                 }
             }
