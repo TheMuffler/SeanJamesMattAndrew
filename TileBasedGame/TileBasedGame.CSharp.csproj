@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Assets\AnimatorIKProxie.cs" />
     <Compile Include="Assets\BillBoard.cs" />
+    <Compile Include="Assets\ButtonMorpher.cs" />
     <Compile Include="Assets\CreateGrid.cs" />
     <Compile Include="Assets\Effects\Aura.cs" />
     <Compile Include="Assets\Effects\Effect.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Tasks\Task_ShowAttack.cs" />
     <Compile Include="Assets\Tasks\Task_UnitDeath.cs" />
     <Compile Include="Assets\TempActionBarUI.cs" />
+    <Compile Include="Assets\TempTurnQueueUI.cs" />
     <Compile Include="Assets\Tile.cs" />
     <Compile Include="Assets\Unit.cs" />
   </ItemGroup>

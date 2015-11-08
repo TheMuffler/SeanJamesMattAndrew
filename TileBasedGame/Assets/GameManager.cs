@@ -40,12 +40,15 @@ public partial class GameManager : MonoBehaviour {
         }
     }
 
-    public TempActionBarUI tempActionbar;
-	
+    public TempActionBarUI tempActionBar;
+    public TempTurnQueueUI tempTurnQueueBar;
 
     // Update is called once per frame
     void Update()
     {
+        if (tempTurnQueueBar.buttons.Count == 0)
+            tempTurnQueueBar.Initialize(units);
+
         AnotherUpdate();
         if (HasTask)
         {
@@ -58,7 +61,8 @@ public partial class GameManager : MonoBehaviour {
         else if (activeUnit == null)
         {
             GetNextActiveUnit();
-            tempActionbar.LoadUnit(activeUnit);
+            tempActionBar.LoadUnit(activeUnit);
+            tempTurnQueueBar.NewTurn(units);
             activeUnit.CalculateReachableTiles();
             SelectionParticle.GetComponent<ParticleSystem>().enableEmission = true;
             SelectionParticle.transform.position = activeUnit.transform.position;

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Unit : MonoBehaviour {
 
+    public Sprite icon;
+
     private static long idCtr = 0;
 
     [HideInInspector]
@@ -358,6 +360,14 @@ public class Unit : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SelectSkill(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectSkill(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SelectSkill(3);
         }
         else if(Input.GetKeyDown(KeyCode.Escape) && IsAimingSkill)
         {
