@@ -42,6 +42,8 @@ public class Unit : MonoBehaviour {
 
     [HideInInspector]
     public bool processingCommand = false;
+    [HideInInspector]
+    public bool hasMoved = false;
 
     public Animator anim;
 
@@ -230,6 +232,7 @@ public class Unit : MonoBehaviour {
         if (processingCommand)
             return;
         processingCommand = true;
+        hasMoved = false;
 
         foreach (EffectContainer e in effectContainers)
             e.effect.onTurnBegin(this);
@@ -270,20 +273,23 @@ public class Unit : MonoBehaviour {
 	void Update () {
      
         
-        if (!processingCommand)
+        if (!processingCommand) {
+            ik.StopLooking();
             return;
+        }
 
         if (GameManager.instance.selected)
             ik.LookAt(GameManager.instance.selected.gameObject);
         else
             ik.StopLooking();
 
-        if (Input.GetMouseButtonDown (0) && GameManager.instance.selected != null) {
+        if (!hasMoved && Input.GetMouseButtonDown (0) && GameManager.instance.selected != null) {
 			if (reachableTiles.Contains (GameManager.instance.selected)) {
-				if (GameManager.instance.selected.unit && GameManager.instance.selected.unit != this)
-					attack (GameManager.instance.selected);
-				else
-					move (GameManager.instance.selected);
+                //if (GameManager.instance.selected.unit && GameManager.instance.selected.unit != this)
+                //	attack (GameManager.instance.selected);
+                //else
+                //	move (GameManager.instance.selected);
+                GameManager.instance.ProcessMoveCommand(GameManager.instance.selected);
 			}
 		} else if (Input.GetKeyDown (KeyCode.Z) && GameManager.instance.selected != null) {
 			Skill s = SkillFactory.GetBloodDonor();

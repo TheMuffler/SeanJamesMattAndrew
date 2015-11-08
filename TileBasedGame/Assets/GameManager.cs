@@ -67,11 +67,13 @@ public partial class GameManager : MonoBehaviour {
         }
     }
 
-    public void ProcessMoveCommand(Action action)
+    public void ProcessMoveCommand(Tile t)
     {
-        if (activeUnit == null)
+        if (activeUnit == null || activeUnit.hasMoved)
             return;
-        action();
+        tasks.Add(new Task_MoveToTile(activeUnit, t));
+        activeUnit.hasMoved = true;
+        //action();
         foreach (List<Tile> row in tiles)
         {
             foreach (Tile tile in row)
@@ -353,11 +355,10 @@ public partial class GameManager : MonoBehaviour {
     {
         if (depth < 0)
             return;
-        set.Add(t);
         if (t.unit && agent && t.unit != agent)
             return;
-        
-        
+        set.Add(t);
+
         foreach (Tile tile in getNeighbors(t))
         {
             //if (set.Contains(tile))
