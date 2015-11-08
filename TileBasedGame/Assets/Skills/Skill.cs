@@ -90,7 +90,7 @@ public class Skill
 
     public void Execute(Unit user, Tile t, object[] args)
     {
-		user.curMP -= manaCost(user);
+		//user.curMP -= manaCost(user);
         if (!IsInRange(user,t))
             return;
         List<Unit> targets = gatherTargets(user, t);
@@ -105,8 +105,8 @@ public class Skill
 	}
 
 	public void Perform(Unit user, Tile t, object[] args){
-		GenerateTasks (user, t, args);
         user.curMP -= manaCost(user);
+        GenerateTasks (user, t, args);
 	}
 
     public HashSet<string> triggers = new HashSet<string>(); //triggers will be used to see if certain talents are active

@@ -10,10 +10,14 @@ public class SkillFactory
         if (bloodDonor == null)
         {
             bloodDonor = new Skill();
+            bloodDonor.name = "Blood\nDonor";
+            bloodDonor.icon = Resources.Load<Sprite>("SpellIcons/owl");
+
             bloodDonor.basePower = 3;
             bloodDonor.aoe = 0;
             bloodDonor.range = 4;
 			bloodDonor.manaCost = user => 3;
+            bloodDonor.cooldown = 3;
 			bloodDonor.damageType = Skill.DamageType.DAMAGE;
 			bloodDonor.targetType = Skill.TargetType.ENEMY;
             bloodDonor.OnTarget = (user, target, args) =>

@@ -140,7 +140,10 @@ public partial class GameManager : MonoBehaviour {
             GameManager.instance.selected = hit.collider.gameObject.GetComponent<Tile>();
         }
         else
+        {
             cursor.SetActive(false);
+            GameManager.instance.selected = null;
+        }
 	}
 
 }

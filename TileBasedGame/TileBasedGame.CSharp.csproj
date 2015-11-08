@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AnimatorIKProxie.cs" />
+    <Compile Include="Assets\BillBoard.cs" />
     <Compile Include="Assets\CreateGrid.cs" />
     <Compile Include="Assets\Effects\Aura.cs" />
     <Compile Include="Assets\Effects\Effect.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Main Menu Assets\MainMenuScript.cs" />
     <Compile Include="Assets\Main Menu Assets\RotateSkybox.cs" />
+    <Compile Include="Assets\PersonalStatusBar.cs" />
     <Compile Include="Assets\Skills\Skill.cs" />
     <Compile Include="Assets\Skills\SkillContainer.cs" />
     <Compile Include="Assets\Skills\SkillFactory.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Assets\Tasks\Task_MoveToTile.cs" />
     <Compile Include="Assets\Tasks\Task_ShowAttack.cs" />
     <Compile Include="Assets\Tasks\Task_UnitDeath.cs" />
+    <Compile Include="Assets\TempActionBarUI.cs" />
     <Compile Include="Assets\Tile.cs" />
     <Compile Include="Assets\Unit.cs" />
   </ItemGroup>

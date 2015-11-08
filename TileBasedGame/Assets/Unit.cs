@@ -149,14 +149,18 @@ public class Unit : MonoBehaviour {
     public void TakeDamage(float amt, Unit attacker)
     {
         attacker.OnAttackAnother(this, amt);
+        OnGetHit(attacker, amt);
 
-        if (shield >= amt)
+        if (amt > 0)
         {
-            shield -= amt;
-            return;
+            if (shield >= amt)
+            {
+                shield -= amt;
+                return;
+            }
+            amt -= shield;
+            shield = 0;
         }
-        amt -= shield;
-        shield = 0;
 
         curHP = Mathf.Clamp(curHP - amt, 0, maxHP);
         //assuming you can't die during your turn;
@@ -201,14 +205,16 @@ public class Unit : MonoBehaviour {
         if (anim == null)
             if (transform.childCount > 0)
             {
-                anim = transform.GetChild(0).GetComponent<Animator>();
-                ik = transform.GetChild(0).GetComponent<AnimatorIKProxie>();
+                anim = transform.FindChild("Model").GetComponent<Animator>();
+                ik = transform.FindChild("Model").GetComponent<AnimatorIKProxie>();
             }
 
         curHP = maxHP;
-        curMP = maxHP;
+        curMP = maxMP;
         explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
 
+        AddSkill(SkillFactory.GetBloodDonor());
+        AddSkill(SkillFactory.GetBloodDonor());
         AddSkill(SkillFactory.GetBloodDonor());
     }
 
@@ -270,13 +276,25 @@ public class Unit : MonoBehaviour {
     }
 
     SkillContainer aimingSkill = null;
-    bool IsAimingSkill
+    public bool IsAimingSkill
     {
         get
         {
             return aimingSkill != null;
         }
     }
+    public void StopAimingSkill()
+    {
+        if (!IsAimingSkill)
+            return;
+        aimingSkill = null;
+        if (!hasMoved)
+            CalculateReachableTiles();
+        else
+            GameManager.instance.TilesInRange(tile, 0, this);
+    }
+
+
     void CommitSkillTarget()
     {
         if(!IsAimingSkill)
@@ -291,8 +309,12 @@ public class Unit : MonoBehaviour {
             aimingSkill = null;
         });
     }
-    void SelectSkill(int index)
+    public void SelectSkill(int index)
     {
+        if (!processingCommand)
+            return;
+        if (GameManager.instance.tasks.Count > 0)
+            return;
         if (IsAimingSkill)
             return;
         if (index < 0 || index >= skillContainers.Count)
@@ -309,7 +331,7 @@ public class Unit : MonoBehaviour {
 	void Update () {
      
         
-        if (!processingCommand) {
+        if (!processingCommand || GameManager.instance.tasks.Count > 0) {
             ik.StopLooking();
             return;
         }
@@ -339,11 +361,7 @@ public class Unit : MonoBehaviour {
         }
         else if(Input.GetKeyDown(KeyCode.Escape) && IsAimingSkill)
         {
-            aimingSkill = null;
-            if (!hasMoved)
-                CalculateReachableTiles();
-            else
-                GameManager.instance.TilesInRange(tile, 0, this);
+            StopAimingSkill();
         }
         else if(Input.GetKeyDown(KeyCode.P)) //can pass turn
         {

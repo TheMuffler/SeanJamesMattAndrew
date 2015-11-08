@@ -39,6 +39,8 @@ public partial class GameManager : MonoBehaviour {
             return tasks.Count > 0;
         }
     }
+
+    public TempActionBarUI tempActionbar;
 	
 
     // Update is called once per frame
@@ -56,6 +58,7 @@ public partial class GameManager : MonoBehaviour {
         else if (activeUnit == null)
         {
             GetNextActiveUnit();
+            tempActionbar.LoadUnit(activeUnit);
             activeUnit.CalculateReachableTiles();
             SelectionParticle.GetComponent<ParticleSystem>().enableEmission = true;
             SelectionParticle.transform.position = activeUnit.transform.position;
