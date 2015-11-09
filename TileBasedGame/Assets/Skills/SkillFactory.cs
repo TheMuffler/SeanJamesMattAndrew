@@ -137,7 +137,7 @@ public class SkillFactory
 			fade.range = 0;
 			fade.cooldown = 6;
 			fade.damageType = Skill.DamageType.HEAL;
-			fade.targetType = Skill.TargetType.ALLY;
+			fade.targetType = Skill.TargetType.SELF;
 			fade.OnTarget = (user, target, args) => {
 				//bool flag = user.talentTags.Contains("Fade Upgrade");
 				target.AddEffect(EffectFactory.getInvincibleEffect(),3);
