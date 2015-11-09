@@ -64,12 +64,12 @@ public class Skill
                 if (tile.unit != null && user.IsEnemy(tile.unit))
                     list.Add(tile.unit);
             }
-            else if (tt == TargetType.ENEMY)
+            else if (tt == TargetType.ALLY)
             {
                 if (tile.unit != null && user.IsAlly(tile.unit))
                     list.Add(tile.unit);
             }
-            else if (tt == TargetType.ALLY)
+            else if (tt == TargetType.SELF)
             {
                 if (tile.unit != null && user == tile.unit)
                     list.Add(tile.unit);
