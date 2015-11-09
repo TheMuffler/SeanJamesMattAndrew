@@ -130,9 +130,9 @@ public class Unit : MonoBehaviour {
             float total = baseDamageMultiplier;
             foreach (EffectContainer e in effectContainers)
             {
-                int x = 3;
+                total += e.effect.damageBonus;
             }
-            return baseDamageMultiplier;
+            return total;
         }
     }
 
@@ -141,7 +141,12 @@ public class Unit : MonoBehaviour {
     {
         get
         {
-            return baseArmor;
+            float total = baseArmor;
+            foreach (EffectContainer e in effectContainers)
+            {
+                total += e.effect.armorBonus;
+            }
+            return total;
         }
     }
 
@@ -216,8 +221,10 @@ public class Unit : MonoBehaviour {
         explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
 
         AddSkill(SkillFactory.GetBloodDonor());
-        AddSkill(SkillFactory.GetBloodDonor());
+        AddSkill(SkillFactory.GetSnipe());
         AddSkill(SkillFactory.GetSlam());
+		AddSkill(SkillFactory.GetRepair());
+
     }
 
     GameObject explosion;
@@ -311,6 +318,7 @@ public class Unit : MonoBehaviour {
             aimingSkill = null;
         });
     }
+
     public void SelectSkill(int index)
     {
         if (!processingCommand)

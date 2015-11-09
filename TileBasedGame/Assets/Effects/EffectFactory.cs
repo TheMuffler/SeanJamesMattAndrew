@@ -49,4 +49,47 @@ public class EffectFactory{
         }
         return vampiricEffect;
     }
+
+	private static Effect invincibleEffect;
+	public static Effect getInvincibleEffect(){
+		
+		if (invincibleEffect == null)
+		{
+			invincibleEffect = new Effect();
+
+		
+			invincibleEffect.armorBonus=999;
+		}
+		return invincibleEffect;
+	}
+
+	private static Effect crippleEffect;
+	public static Effect getCrippleEffect(){
+		
+		if (crippleEffect == null)
+		{
+			crippleEffect = new Effect();
+			crippleEffect.moveRangeBonus= -2;
+			
+			//stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
+			//stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
+		}
+		return crippleEffect;
+	}
+
+
+
+	private static Effect damageMultiplierEffect;
+	public static Effect getDamageMultiplierEffect(){
+		
+		if (damageMultiplierEffect == null)
+		{
+			damageMultiplierEffect = new Effect();
+			damageMultiplierEffect.damageBonus= 2;
+			
+			//stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
+			//stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
+		}
+		return damageMultiplierEffect;
+	}
 }
