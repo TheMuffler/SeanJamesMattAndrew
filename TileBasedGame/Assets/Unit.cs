@@ -221,8 +221,10 @@ public class Unit : MonoBehaviour {
         explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
 
         AddSkill(SkillFactory.GetBloodDonor());
-        AddSkill(SkillFactory.GetBloodDonor());
+        AddSkill(SkillFactory.GetSnipe());
         AddSkill(SkillFactory.GetSlam());
+		AddSkill(SkillFactory.GetRepair());
+
     }
 
     GameObject explosion;
