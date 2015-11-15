@@ -2021,8 +2021,8 @@ MonoBehaviour:
   SelectionParticle: {fileID: 197399915}
   MapH: 0
   MapW: 0
-  redmat: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  whitemat: {fileID: 2100000, guid: 90d38791f0961324a898e1c9a13cfde6, type: 2}
+  walkSelectMat: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  defaultMat: {fileID: 2100000, guid: 90d38791f0961324a898e1c9a13cfde6, type: 2}
   attackMat: {fileID: 2100000, guid: 1b121914856cda648b513091cf9c77fc, type: 2}
   selected: {fileID: 0}
 --- !u!1 &615559472

@@ -247,7 +247,7 @@ public class Unit : MonoBehaviour {
 		AddSkill(SkillFactory.GetBloodDonor());
 		AddSkill (SkillFactory.GetAoEHeal ());
         //AddSkill(SkillFactory.GetSnipe());
-        //AddSkill(SkillFactory.GetSlam());
+        AddSkill(SkillFactory.GetSlam());
 		//AddSkill(SkillFactory.GetRepair());
 
     }
