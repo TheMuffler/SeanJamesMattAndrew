@@ -201,6 +201,8 @@ public partial class GameManager : MonoBehaviour {
         return list;
     }
 
+
+
     public void RegisterTile(Tile tile)
     {
         tileMap[tile.gameObject] = tile;
@@ -344,9 +346,33 @@ public partial class GameManager : MonoBehaviour {
         return set;
     }
 
+    public HashSet<Tile> TilesInRangeSkill(Tile t, int range, Unit agent, Skill skill)
+    {
+        HashSet<Tile> set = new HashSet<Tile>();
+        DLS(t, set, range, null);
+
+        //this isn't the actual place to put them
+        foreach (List<Tile> row in tiles)
+        {
+            foreach (Tile tile in row)
+            {
+                if (tile != null)
+                {
+                    Material mat = defaultMat;
+                    if (set.Contains(tile))
+                        mat = skill.ValidTile(agent, tile) ? (tile.unit != null && agent.IsAlly(tile.unit) ? allySelectMat : attackMat) : walkSelectMat;
+                    tile.GetComponent<Renderer>().material = mat;
+                }
+            }
+        }
+
+        return set;
+    }
+
     public Material walkSelectMat;
     public Material defaultMat;
     public Material attackMat;
+    public Material allySelectMat;
 
     private void DLS(Tile t, HashSet<Tile> set, int depth, Unit agent)
     {
@@ -385,7 +411,7 @@ public partial class GameManager : MonoBehaviour {
     {
         if (activeUnit == null)
             return;
-
+        //activeUnit.tile
     }
 
 }

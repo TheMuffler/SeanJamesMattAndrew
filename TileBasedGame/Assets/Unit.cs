@@ -319,6 +319,7 @@ public class Unit : MonoBehaviour {
     }
     public void StopAimingSkill()
     {
+        GameManager.instance.cursor.transform.localScale = Vector3.one;
         if (!IsAimingSkill)
             return;
         aimingSkill = null;
@@ -331,10 +332,13 @@ public class Unit : MonoBehaviour {
 
     void CommitSkillTarget()
     {
-        if(!IsAimingSkill)
+        GameManager.instance.cursor.transform.localScale = Vector3.one;
+        if (!IsAimingSkill)
             return;
         if (GameManager.instance.selected == null ||
             !aimingSkill.skill.IsInRange(this, GameManager.instance.selected))
+            return;
+        if (aimingSkill.skill.aoe <= 0 && !aimingSkill.skill.ValidTile(this, GameManager.instance.selected))
             return;
         GameManager.instance.ProcessCommand(() =>
         {
@@ -358,7 +362,8 @@ public class Unit : MonoBehaviour {
         if (!s.IsCastable)
             return;
         aimingSkill = s;
-        GameManager.instance.TilesInRange(tile, s.skill.range, null); 
+        GameManager.instance.TilesInRangeSkill(tile, s.skill.range,this, s.skill);
+        GameManager.instance.cursor.transform.localScale = new Vector3((1 + s.skill.aoe), 1, (1 + s.skill.aoe));
     }
 
 
@@ -398,7 +403,7 @@ public class Unit : MonoBehaviour {
         {
             SelectSkill(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             SelectSkill(3);
         }
@@ -406,7 +411,7 @@ public class Unit : MonoBehaviour {
         {
             StopAimingSkill();
         }
-        else if(Input.GetKeyDown(KeyCode.P)) //can pass turn
+        else if(!IsAimingSkill && Input.GetKeyDown(KeyCode.P)) //can pass turn
         {
             GameManager.instance.ProcessCommand(() => { });
         }
