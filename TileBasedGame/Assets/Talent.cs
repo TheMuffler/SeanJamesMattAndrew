@@ -90,6 +90,7 @@ public class TankFactory : ClassFactory
         {
             unit.AddSkill(SkillFactory.GetRepair());
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Improve Skill X";
@@ -98,6 +99,7 @@ public class TankFactory : ClassFactory
         {
             unit.talentTags.Add("SkillXImprove");
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Vampiric Attacks";
@@ -106,6 +108,7 @@ public class TankFactory : ClassFactory
         {
             unit.AddEffect(EffectFactory.getVampiricEffect(),-1); //-1 is permanent
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Useless 1";
@@ -121,6 +124,7 @@ public class TankFactory : ClassFactory
         {
 
         };
+		talentOptions.Add(t);
 
         name = "Tank";
         description = "A tank. Deals and takes little damage. Hinders enemies to protect his team.";
@@ -159,6 +163,7 @@ public class AssassinFactory : ClassFactory
         {
             unit.AddSkill(SkillFactory.GetRepair());
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Improve Skill X";
@@ -167,6 +172,7 @@ public class AssassinFactory : ClassFactory
         {
             unit.talentTags.Add("SkillXImprove");
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Vampiric Attacks";
@@ -175,6 +181,7 @@ public class AssassinFactory : ClassFactory
         {
             unit.AddEffect(EffectFactory.getVampiricEffect(), -1); //-1 is permanent
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Useless 1";
@@ -190,6 +197,7 @@ public class AssassinFactory : ClassFactory
         {
 
         };
+		talentOptions.Add(t);
 
         name = "Assassin";
         description = "A spooky dangerous assassin, who deals a lot of damage";
@@ -228,6 +236,7 @@ public class MedicFactory : ClassFactory
         {
             unit.AddSkill(SkillFactory.GetRepair());
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Improve Skill X";
@@ -236,6 +245,7 @@ public class MedicFactory : ClassFactory
         {
             unit.talentTags.Add("SkillXImprove");
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Vampiric Attacks";
@@ -244,6 +254,7 @@ public class MedicFactory : ClassFactory
         {
             unit.AddEffect(EffectFactory.getVampiricEffect(), -1); //-1 is permanent
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Useless 1";
@@ -259,6 +270,7 @@ public class MedicFactory : ClassFactory
         {
 
         };
+		talentOptions.Add(t);
 
         name = "Medic";
         description = "A doctor who supports his team with his healing powers.";
@@ -297,6 +309,7 @@ public class TechFactory : ClassFactory
         {
             unit.AddSkill(SkillFactory.GetRepair());
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Improve Skill X";
@@ -305,6 +318,7 @@ public class TechFactory : ClassFactory
         {
             unit.talentTags.Add("SkillXImprove");
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Vampiric Attacks";
@@ -313,6 +327,7 @@ public class TechFactory : ClassFactory
         {
             unit.AddEffect(EffectFactory.getVampiricEffect(), -1); //-1 is permanent
         };
+		talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Useless 1";
@@ -328,6 +343,7 @@ public class TechFactory : ClassFactory
         {
 
         };
+		talentOptions.Add(t);
 
         name = "Technician";
         description = "A repairman who can build robots";
