@@ -27,6 +27,28 @@ public class Unit : MonoBehaviour {
         return talentTags.Contains(str);
     }
 
+    private Dictionary<string, int> hardTags = new Dictionary<string, int>();
+    public bool HasHardTag(string tag)
+    {
+        if (!hardTags.ContainsKey(tag))
+            return false;
+        return hardTags[tag] > 0;
+    }
+    public void addHardTag(string tag)
+    {
+        if (!hardTags.ContainsKey(tag))
+            hardTags[tag] = 1;
+        else
+            ++hardTags[tag];
+    }
+    public void removeHardTag(string tag)
+    {
+        if (!hardTags.ContainsKey(tag))
+            return;
+        else if(hardTags[tag] > 0)
+            --hardTags[tag];
+    }
+
 
     public List<SkillContainer> skillContainers = new List<SkillContainer>();
     public void AddSkill(Skill skill)
@@ -146,7 +168,7 @@ public class Unit : MonoBehaviour {
             {
                 total += e.effect.armorBonus;
             }
-            return total;
+            return Mathf.Min(0.7f,total);
         }
     }
 
