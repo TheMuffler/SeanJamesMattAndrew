@@ -252,10 +252,6 @@ public class CharacterSelectMenu : MonoBehaviour {
 		teamMembers.RemoveAt(teamMembers.Count - 1);
 	}
 
-	public void displayTeamMembers(){
-
-	}
-
 	public void removeTeamMember(){
 		//the buttons for this dont exist yet
 
