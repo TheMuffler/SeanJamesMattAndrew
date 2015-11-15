@@ -8,6 +8,8 @@ public class Unit : MonoBehaviour {
 
     private static long idCtr = 0;
 
+    public bool aiControlled = false;
+
     [HideInInspector]
     public float nextTurnTime = 0;
     [HideInInspector]
@@ -277,9 +279,54 @@ public class Unit : MonoBehaviour {
         foreach (EffectContainer e in effectContainers)
             e.effect.onTurnBegin(this);
 
+       // if (aiControlled)
+       //     calculateMove();
+
         //AI controlled units will use a coroutine to decide their moves
 
     }
+
+    //AI ONLY
+    public void calculateMovement()
+    {
+        Unit enemy = GameManager.instance.GetNearestEnemy(this);
+        if (enemy == null)
+        {
+            GameManager.instance.ProcessCommand(() => { });
+            return;
+        }
+        List<Tile> path = GameManager.instance.FindPath(this.tile, enemy.tile);
+        if(path == null)
+        {
+            hasMoved = true;
+            return;
+        }
+
+
+        int i = Mathf.Min(MoveRange, path.Count - 1);
+        while (i > 0 && path[i].unit != this && path[i].unit != null)
+            --i;
+        Tile t = path[i];
+        GameManager.instance.ProcessMoveCommand(t);
+    }
+    public void calculateAttack()
+    {
+        Unit enemy = GameManager.instance.GetNearestEnemy(this);
+        if(enemy == null)
+        {
+            GameManager.instance.ProcessCommand(() => { });
+            return;
+        }
+
+        if (SkillFactory.GetSnipe().IsInRange(this, enemy.tile))
+            GameManager.instance.ProcessCommand(() =>
+            {
+                SkillFactory.GetSnipe().Perform(this, enemy.tile);
+            });
+        else
+            GameManager.instance.ProcessCommand(() => { });
+    }
+
 
 
     [HideInInspector]
@@ -376,6 +423,16 @@ public class Unit : MonoBehaviour {
             return;
         }
 
+        if (aiControlled)
+        {
+            if (!hasMoved)
+                calculateMovement();
+            else
+                calculateAttack();
+            return;
+        }
+
+
         if (GameManager.instance.selected)
             ik.LookAt(GameManager.instance.selected.gameObject);
         else
@@ -405,7 +462,7 @@ public class Unit : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SelectSkill(3);
+            SelectSkill(2);
         }
         else if(Input.GetKeyDown(KeyCode.Escape) && IsAimingSkill)
         {
