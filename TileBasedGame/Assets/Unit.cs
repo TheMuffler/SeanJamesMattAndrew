@@ -244,11 +244,11 @@ public class Unit : MonoBehaviour {
         curMP = maxMP;
         explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
 
-		AddSkill (SkillFactory.GetWeakenOffense ());
-		AddSkill (SkillFactory.GetWeakenDefense());
+		//AddSkill (SkillFactory.GetWeakenOffense ());
+		//AddSkill (SkillFactory.GetWeakenDefense());
 		AddSkill(SkillFactory.GetBloodDonor());
-		AddSkill (SkillFactory.GetAoEHeal ());
-        //AddSkill(SkillFactory.GetSnipe());
+		//AddSkill (SkillFactory.GetAoEHeal ());
+        AddSkill(SkillFactory.GetSnipe());
         AddSkill(SkillFactory.GetSlam());
 		//AddSkill(SkillFactory.GetRepair());
 
@@ -318,6 +318,25 @@ public class Unit : MonoBehaviour {
             return;
         }
 
+        List<SkillContainer> castableMoves = new List<SkillContainer>();
+        foreach(SkillContainer sc in skillContainers)
+            if (sc.IsCastable && sc.skill.targetType == Skill.TargetType.ENEMY && sc.skill.IsInRange(this, enemy.tile))
+                castableMoves.Add(sc);
+
+        if(castableMoves.Count <= 0)
+        {
+            GameManager.instance.ProcessCommand(() => { });
+            return;
+        }
+
+        SkillContainer move = castableMoves[Random.Range(0, castableMoves.Count)];
+        GameManager.instance.ProcessCommand(() => {
+            move.skill.Perform(this, enemy.tile);
+            move.cooldown = move.skill.cooldown;
+        });
+
+
+        /*
         if (SkillFactory.GetSnipe().IsInRange(this, enemy.tile))
             GameManager.instance.ProcessCommand(() =>
             {
@@ -325,6 +344,7 @@ public class Unit : MonoBehaviour {
             });
         else
             GameManager.instance.ProcessCommand(() => { });
+        */
     }
 
 
