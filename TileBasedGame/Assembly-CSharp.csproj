@@ -63,6 +63,9 @@
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\SkillContainer.cs" />
      <Compile Include="Assets\Skills\SkillFactory.cs" />
+     <Compile Include="Assets\StageSelect\Stage assets\LevelBtns.cs" />
+     <Compile Include="Assets\StageSelect\Stage assets\LevelMenuScript.cs" />
+     <Compile Include="Assets\StageSelect\Stage assets\RotationBehavior.cs" />
      <Compile Include="Assets\Talent.cs" />
      <Compile Include="Assets\Tasks\BunchOfTasks.cs" />
      <Compile Include="Assets\Tasks\Task.cs" />
