@@ -26,7 +26,11 @@ public partial class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        foreach (ClassFactory cf in GlobalManager.instance.PartyFactories)
+        {
+            Unit u = cf.Generate();
+            //unitShell.AddComponent<>
+        }
     }
 
     [HideInInspector]

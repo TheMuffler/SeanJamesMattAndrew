@@ -224,6 +224,7 @@ public class Unit : MonoBehaviour {
     {
         initialized = true;
         GameManager.instance.units.Add(this);
+        /*
         if (tile == null)
         {
             int i = 0;
@@ -233,6 +234,29 @@ public class Unit : MonoBehaviour {
             transform.position = tile.TopPosition;
             //reachableTiles = GameManager.instance.TilesInRange(tile, MoveRange);
         }
+        */
+
+        int startI = faction == 0 ? 0 : GameManager.instance.height-1;
+        int endI = GameManager.instance.height - 1 - startI;
+        int dirI = faction == 0 ? 1 : -1;
+
+        for(int i = startI; i != endI; i += dirI)
+        {
+            for(int j = 0; j < GameManager.instance.width; ++j)
+            {
+                Tile t = GameManager.instance.tiles[j][i];
+                if(t != null && t.unit == null)
+                {
+                    t.SetUnit(this);
+                    transform.position = tile.TopPosition;
+                    break;
+                }
+            }
+            if (this.tile != null)
+                break;
+        }
+
+
         if (anim == null)
             if (transform.childCount > 0)
             {

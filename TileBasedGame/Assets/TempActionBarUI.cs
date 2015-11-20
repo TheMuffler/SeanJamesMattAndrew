@@ -37,7 +37,8 @@ public class TempActionBarUI : MonoBehaviour {
 
     void SetButton(int index, SkillContainer sc)
     {
-
+        if (index >= buttons.Length)
+            return;
         buttons[index].enabled = sc.IsCastable;
         buttons[index].image.color = sc.IsCastable ? Color.white : Color.grey;
         buttons[index].image.sprite = sc.skill.icon;
@@ -54,6 +55,8 @@ public class TempActionBarUI : MonoBehaviour {
 
     void BlackOut(int index)
     {
+        if (index >= buttons.Length)
+            return;
         buttons[index].enabled = false;
         buttons[index].image.color = Color.black;
         buttons[index].image.sprite = null;

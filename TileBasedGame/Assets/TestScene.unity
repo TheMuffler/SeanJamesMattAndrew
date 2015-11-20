@@ -2659,14 +2659,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab08e4bbc71b92047b2a6d287cb05a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e345a1febdc122d41a8b0e4867a042f4, type: 3}
-  aiControlled: 0
+  icon: {fileID: 21300000, guid: 6b5e328c7b4d54849a462d277f8dd03f, type: 3}
+  aiControlled: 1
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
   hasMoved: 0
   anim: {fileID: 0}
-  faction: 0
+  faction: 1
   baseMoveRange: 3
   timeForActions: 1
   maxHP: 10
@@ -3566,7 +3566,7 @@ Transform:
   - {fileID: 1433235388}
   - {fileID: 44354001}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &1168234169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3579,7 +3579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6b5e328c7b4d54849a462d277f8dd03f, type: 3}
-  aiControlled: 0
+  aiControlled: 1
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -4752,14 +4752,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab08e4bbc71b92047b2a6d287cb05a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: e345a1febdc122d41a8b0e4867a042f4, type: 3}
+  icon: {fileID: 21300000, guid: 6b5e328c7b4d54849a462d277f8dd03f, type: 3}
   aiControlled: 1
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
   hasMoved: 0
   anim: {fileID: 0}
-  faction: 0
+  faction: 1
   baseMoveRange: 3
   timeForActions: 1
   maxHP: 10

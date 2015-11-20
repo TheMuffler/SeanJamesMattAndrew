@@ -35,7 +35,7 @@ public abstract class ClassFactory
 
     public ClassFactory()
     {
-
+        baseModel = Resources.Load <GameObject> ("basemodel");
     }
 
     public Unit Generate()
@@ -46,6 +46,7 @@ public abstract class ClassFactory
         u.curMP = u.maxMP = maxMP;
         u.baseDamageMultiplier = attackPower;
         u.baseArmor = armor;
+        u.icon = image;
 
         foreach (Skill s in baseSkills)
             u.AddSkill(s);
