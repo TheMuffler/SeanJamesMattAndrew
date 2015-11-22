@@ -131,7 +131,7 @@ public class TankFactory : ClassFactory
 
         name = "Tank";
         description = "A tank. Deals and takes little damage. Hinders enemies to protect his team.";
-        image = Resources.Load<Sprite>("SpellIcons/shield");
+        image = Resources.Load<Sprite>("CharacterIcons/TankIcon");
     }
 
 }
@@ -206,7 +206,7 @@ public class AssassinFactory : ClassFactory
 
         name = "Assassin";
         description = "A spooky dangerous assassin, who deals a lot of damage";
-        image = Resources.Load<Sprite>("SpellIcons/fade");
+        image = Resources.Load<Sprite>("CharacterIcons/AssassinIcon");
     }
 
 }
@@ -354,7 +354,7 @@ public class TechFactory : ClassFactory
 
         name = "Technician";
         description = "A repairman who can build robots";
-        image = Resources.Load<Sprite>("SpellIcons/snipe");
+        image = Resources.Load<Sprite>("CharacterIcons/TechIcon");
     }
 
 }
