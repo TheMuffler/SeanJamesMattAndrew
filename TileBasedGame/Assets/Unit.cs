@@ -428,9 +428,14 @@ public class Unit : MonoBehaviour {
             return;
         if (GameManager.instance.selected == null ||
             !aimingSkill.skill.IsInRange(this, GameManager.instance.selected))
+        {
+            GameManager.instance.TilesInRangeSkill(tile, aimingSkill.skill.range, this, aimingSkill.skill);
             return;
-        if (aimingSkill.skill.aoe <= 0 && !aimingSkill.skill.ValidTile(this, GameManager.instance.selected))
+        }
+        if (aimingSkill.skill.aoe <= 0 && !aimingSkill.skill.ValidTile(this, GameManager.instance.selected)) {
+            GameManager.instance.TilesInRangeSkill(tile, aimingSkill.skill.range, this, aimingSkill.skill);
             return;
+        }
         GameManager.instance.ProcessCommand(() =>
         {
             aimingSkill.skill.Perform(this, GameManager.instance.selected);
