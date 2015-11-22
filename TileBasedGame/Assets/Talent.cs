@@ -66,6 +66,8 @@ public class TankFactory : ClassFactory
 
     public TankFactory()
     {
+        baseModel = Resources.Load<GameObject>("TankModel");
+
         attackPower = 0.9f;
         armor = 0.4f;
         maxHP = 7;
@@ -139,6 +141,8 @@ public class AssassinFactory : ClassFactory
 
     public AssassinFactory()
     {
+        baseModel = Resources.Load<GameObject>("AssassinModel");
+
         attackPower = 1.2f;
         armor = 0.1f;
         maxHP = 6;
@@ -285,6 +289,8 @@ public class TechFactory : ClassFactory
 
     public TechFactory()
     {
+        baseModel = Resources.Load<GameObject>("TechModel");
+
         attackPower = 0.9f;
         armor = 0.4f;
         maxHP = 4;
