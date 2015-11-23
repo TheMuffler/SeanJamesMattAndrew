@@ -218,6 +218,9 @@ public class Unit : MonoBehaviour {
             _idNum = idCtr++;
 	}
 
+    [HideInInspector]
+    public bool dontPlace = false;
+
     AnimatorIKProxie ik;
     bool initialized = false;
     void Start()
@@ -236,24 +239,30 @@ public class Unit : MonoBehaviour {
         }
         */
 
-        int startI = faction == 0 ? 0 : GameManager.instance.height-1;
-        int endI = GameManager.instance.height - 1 - startI;
-        int dirI = faction == 0 ? 1 : -1;
+        if (!dontPlace) {
+            int startI = faction == 0 ? 0 : GameManager.instance.height - 1;
+            int endI = GameManager.instance.height - 1 - startI;
+            int dirI = faction == 0 ? 1 : -1;
 
-        for(int i = startI; i != endI; i += dirI)
-        {
-            for(int j = 0; j < GameManager.instance.width; ++j)
+            for (int i = startI; i != endI; i += dirI)
             {
-                Tile t = GameManager.instance.tiles[j][i];
-                if(t != null && t.unit == null)
+                for (int j = 0; j < GameManager.instance.width; ++j)
                 {
-                    t.SetUnit(this);
-                    transform.position = tile.TopPosition;
-                    break;
+                    Tile t = GameManager.instance.tiles[j][i];
+                    if (t != null && t.unit == null)
+                    {
+                        t.SetUnit(this);
+                        transform.position = tile.TopPosition;
+                        break;
+                    }
                 }
+                if (this.tile != null)
+                    break;
             }
-            if (this.tile != null)
-                break;
+        }
+        else
+        {
+            GameManager.instance.tempTurnQueueBar.ChangeFuture(GameManager.instance.units);
         }
 
 
@@ -268,14 +277,16 @@ public class Unit : MonoBehaviour {
         curMP = maxMP;
         explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
 
-		//AddSkill (SkillFactory.GetWeakenOffense ());
-		//AddSkill (SkillFactory.GetWeakenDefense());
-		AddSkill(SkillFactory.GetBloodDonor());
-		//AddSkill (SkillFactory.GetAoEHeal ());
-        AddSkill(SkillFactory.GetSnipe());
-        AddSkill(SkillFactory.GetSlam());
-		//AddSkill(SkillFactory.GetRepair());
-
+        if (faction != 0)
+        {
+            //AddSkill (SkillFactory.GetWeakenOffense ());
+            //AddSkill (SkillFactory.GetWeakenDefense());
+            AddSkill(SkillFactory.GetBloodDonor());
+            //AddSkill (SkillFactory.GetAoEHeal ());
+            AddSkill(SkillFactory.GetSnipe());
+            AddSkill(SkillFactory.GetSlam());
+            //AddSkill(SkillFactory.GetRepair());
+        }
     }
 
     GameObject explosion;

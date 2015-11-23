@@ -75,8 +75,8 @@ public class TankFactory : ClassFactory
 
 
         baseSkills.Add(SkillFactory.GetSlam());
-        baseSkills.Add(SkillFactory.GetCripple());
-        baseSkills.Add(SkillFactory.GetRepair());
+        baseSkills.Add(SkillFactory.GetWeakenDefense());
+        baseSkills.Add(SkillFactory.GetTaunt());
 
         Talent t = new Talent();
         t.name = "Add Blood Donor";
@@ -149,9 +149,9 @@ public class AssassinFactory : ClassFactory
         maxMP = 6;
 
 
-        baseSkills.Add(SkillFactory.GetSlam());
+        baseSkills.Add(SkillFactory.GetShiv());
+        baseSkills.Add(SkillFactory.GetFade());
         baseSkills.Add(SkillFactory.GetCripple());
-        baseSkills.Add(SkillFactory.GetRepair());
 
         Talent t = new Talent();
         t.name = "Add Blood Donor";
@@ -216,15 +216,17 @@ public class MedicFactory : ClassFactory
 
     public MedicFactory()
     {
+        baseModel = Resources.Load<GameObject>("MedicModel");
+
         attackPower = 0.9f;
         armor = 0.4f;
         maxHP = 4;
         maxMP = 6;
 
 
-        baseSkills.Add(SkillFactory.GetSlam());
-        baseSkills.Add(SkillFactory.GetCripple());
-        baseSkills.Add(SkillFactory.GetRepair());
+        baseSkills.Add(SkillFactory.GetHeal());
+        baseSkills.Add(SkillFactory.GetAoEHeal());
+        baseSkills.Add(SkillFactory.GetWeakenOffense());
 
         Talent t = new Talent();
         t.name = "Add Blood Donor";
@@ -279,7 +281,7 @@ public class MedicFactory : ClassFactory
 
         name = "Medic";
         description = "A doctor who supports his team with his healing powers.";
-        image = Resources.Load<Sprite>("SpellIcons/heal");
+        image = Resources.Load<Sprite>("CharacterIcons/MedicIcon");
     }
 
 }
@@ -297,9 +299,9 @@ public class TechFactory : ClassFactory
         maxMP = 6;
 
 
-        baseSkills.Add(SkillFactory.GetSlam());
-        baseSkills.Add(SkillFactory.GetCripple());
+        baseSkills.Add(SkillFactory.GetSnipe());
         baseSkills.Add(SkillFactory.GetRepair());
+        baseSkills.Add(SkillFactory.GetMakeSentry());
 
         Talent t = new Talent();
         t.name = "Add Blood Donor";

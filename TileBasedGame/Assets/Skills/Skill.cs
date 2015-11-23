@@ -22,7 +22,7 @@ public class Skill
     public delegate TargetType TargetTypeDelegate(Unit user);
     public delegate DamageType DamageTypeDelegate(Unit user);
 
-	public delegate float CostDelegate(Unit user);
+    public delegate float CostDelegate(Unit user);
     public CostDelegate manaCost = (user) => 0;
 
     public int cooldown;
@@ -37,8 +37,11 @@ public class Skill
     public delegate void SkillEffectDelegate(Unit user, Unit target, object[] args);
     public SkillEffectDelegate OnTarget;
 
-	public delegate void TaskGenDelegate(Unit user, Tile epicenter, object[] args);
-	public TaskGenDelegate GenerateTasks;
+    public delegate void TaskGenDelegate(Unit user, Tile epicenter, object[] args);
+    public TaskGenDelegate GenerateTasks;
+
+    public delegate void EpicenterDelegate(Unit user, Tile epicenter, object[] args);
+    public EpicenterDelegate OnTilePostEffects = (user, epicenter, args) => {};
 
     public void DefaultOnTarget(Unit user, Unit target)
     {
@@ -126,6 +129,7 @@ public class Skill
         {
             OnTarget(user, target, args);
         }
+        OnTilePostEffects(user,t,args);
     }
 
 	public void Perform(Unit user, Tile t){
