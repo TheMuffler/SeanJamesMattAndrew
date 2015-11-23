@@ -159,7 +159,7 @@ public class Skill
 
     public bool IsInRange(Unit user, Tile t)
     {
-        return GameManager.instance.TilesInRange(user.tile, range, null).Contains(t);
+        return GameManager.instance.TilesInRangeSkill(user.tile, range, user,this).Contains(t);
     }
 
 
