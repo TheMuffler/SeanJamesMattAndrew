@@ -60,7 +60,7 @@ public class Skill
     public List<Unit> gatherTargets(Unit user, Tile t, TargetType tt)//gather targets from center of tile extending out aoe tiles. The targettype affects it.
     {
         List<Unit> list = new List<Unit>();
-        foreach (Tile tile in GameManager.instance.TilesInRange(t, aoe, null))
+        foreach (Tile tile in GameManager.instance.TilesInRangeSkill(t, aoe, user,this))
         {
             if(tt == TargetType.ENEMY)
             {
