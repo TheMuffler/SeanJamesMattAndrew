@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/StageSelect/Stage assets/TalkingScript.cs">
     <Files>
       <File FileName="Assets/ChangeImage.cs" Line="4" Column="33" />
-      <File FileName="Assets/StageSelect/Stage assets/TalkingScript.cs" Line="54" Column="14" />
+      <File FileName="Assets/StageSelect/Stage assets/TalkingScript.cs" Line="65" Column="46" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
