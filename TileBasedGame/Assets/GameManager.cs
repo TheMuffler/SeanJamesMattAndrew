@@ -52,6 +52,7 @@ public partial class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        
         if (tempTurnQueueBar.buttons.Count == 0)
             tempTurnQueueBar.Initialize(units);
 
@@ -66,6 +67,7 @@ public partial class GameManager : MonoBehaviour {
         }
         else if (activeUnit == null)
         {
+            LossCheck();
             GetNextActiveUnit();
             PassTurnButton.onClick.RemoveAllListeners();
             PassTurnButton.onClick.AddListener(() => {
@@ -104,6 +106,14 @@ public partial class GameManager : MonoBehaviour {
                     tile.GetComponent<Renderer>().material = defaultMat;
             }
         }
+    }
+
+    public void LossCheck()
+    {
+        foreach (Unit u in units)
+            if (u.faction == 0)
+                return;
+        Application.LoadLevel(2);
     }
 
     public void ProcessCommand(Action action)
