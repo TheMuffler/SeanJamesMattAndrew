@@ -296,7 +296,7 @@ public class SkillFactory
 			fade.OnTarget = (user, target, args) => {
 				//bool flag = user.talentTags.Contains("Fade Upgrade");
 				target.AddEffect(EffectFactory.getInvincibleEffect(),3);
-
+				target.AddEffect(EffectFactory.getSmokeEffect(),3);
 			};
 			fade.GenerateTasks = (user, tile, args) =>
 			{
@@ -339,7 +339,7 @@ public class SkillFactory
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
 					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube")));
+					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube"),1.2f));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
 				cripple.EnqueueExecuteTask(user,tile,args);
@@ -379,7 +379,7 @@ public class SkillFactory
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
 					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube")));
+					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletSniper"),9));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
 				snipe.EnqueueExecuteTask(user,tile,args);
@@ -409,6 +409,8 @@ public class SkillFactory
 				float amt = -user.DamageMultiplier * repair.basePower ;
 				target.TakeDamage(amt,user);
 				target.AddEffect(EffectFactory.getDamageMultiplierEffect(),3);
+				target.AddEffect(EffectFactory.getWrenchExplosionEffect(),3);
+				target.AddEffect(EffectFactory.getWrenchBuffEffect(),3);
 			};
 			repair.GenerateTasks = (user,tile,args)=>
 			{
@@ -416,15 +418,51 @@ public class SkillFactory
 				foreach(Unit target in list){
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
-					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube")));
-					GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
+					//GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/Wrench/Wrench"),2.0f));
+					//GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
 				repair.EnqueueExecuteTask(user,tile,args);
 			};
 		}
 		return repair;
 	}
+
+    private static Skill makeSentry = null;
+    public static Skill GetMakeSentry()
+    {
+
+        if(makeSentry == null)
+        {
+            makeSentry = new Skill();
+            makeSentry.name = "Sentry";
+            makeSentry.manaCost = user=>3;
+            makeSentry.targetType = Skill.TargetType.NONE;
+            makeSentry.tileRestriction = Skill.TargetTileRestriction.EMPTY;
+            makeSentry.cooldown = 5;
+            makeSentry.range = 2;
+            makeSentry.OnTilePostEffects += (user, tile, args) =>
+            {
+                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("AssassinModel"), tile.transform.position,user.transform.rotation);
+                Unit u = go.AddComponent<Unit>();
+                u.dontPlace = true;
+                tile.SetUnit(u);
+                u.faction = user.faction;
+                u.aiControlled = true;
+                u.baseMoveRange = 0;
+                u.maxMP = 10;
+                u.maxHP = 10;
+            };
+            makeSentry.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube")));
+                makeSentry.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return makeSentry;
+    }
 
 
 	
