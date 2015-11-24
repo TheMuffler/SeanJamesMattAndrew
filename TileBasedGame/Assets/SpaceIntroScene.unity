@@ -200,18 +200,26 @@ MonoBehaviour:
   - {fileID: 365066355}
   - {fileID: 1500694385}
   - {fileID: 1119352912}
-  person: 02000000030000000100000002000000030000000000000001000000000000000100000003000000
+  person: 0200000001000000020000000300000002000000030000000200000000000000030000000200000001000000020000000300000001000000
   speech:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - '"Great. Ham and Bananas Hollandaise..."'
+  - '"It is all we have left until we get paid for another bounty."'
+  - '"What happened to the 2 billion spaceos we got from our last bounty?"'
+  - '"That robot..."'
+  - '"What about it?"'
+  - '"The repair bill for the landspeeder it crashed cost us everything we have!"'
+  - '"..."'
+  - '"Got eem"'
+  - '"Ughh... That is all it ever says! Why did you buy a defective protocol droid?!"'
+  - '"Hey, it was a once in a lifetime purchase! It is not often that you find a droid
+    that has a sense of humor. I heard back in the 21st century this would have been
+    VERY funny."'
+  - '"We could use it to ''taunt'' our enemies.."'
+  - '"Whatever. We got three really big contracts; if we complete these then we will
+    have enough spaceos to live like kings."'
+  - '"They are all convinently located in the same star system as well; this seems
+    a little too convinent."'
+  - '"So what planet should we visit first..."'
 --- !u!1 &83318329
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,10 +338,6 @@ Prefab:
     - target: {fileID: 400000, guid: d0a5b37274c7d4d1cb4d2e0f27621299, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400022, guid: d0a5b37274c7d4d1cb4d2e0f27621299, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.27999997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0a5b37274c7d4d1cb4d2e0f27621299, type: 3}
@@ -1288,7 +1292,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: eb5e452f8206b5a418b77c5eb4349258, type: 3}
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -1529,7 +1533,7 @@ GameObject:
   - 198: {fileID: 1835239757}
   - 199: {fileID: 1835239756}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: JetFuel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1542,7 +1546,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1835239754}
   m_LocalRotation: {x: 0, y: .705994546, z: 0, w: .708217382}
-  m_LocalPosition: {x: 1.20000005, y: -.253232986, z: .255452782}
+  m_LocalPosition: {x: 1.20000005, y: -.259650469, z: .251648217}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1033615529}
@@ -1600,7 +1604,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 2
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1757,10 +1761,10 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294967295
+        rgba: 4291743476
       minMaxState: 0
     startSize:
-      scalar: 5
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
