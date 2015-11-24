@@ -15,7 +15,6 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public CanvasGroup charMenu, talentMenu; //character selection screen, talent selection screen: grouped for easy enable/disable
 	public Text charDescription;			 //character description shown to player before they choose to add to team/select talents
 	string tankDescription, medicDescription, assassinDescription, techDescription; //individual class descriptions, pull from class factories instead?
-	public Image charImage;					//current character description image
 	public Button tankIcon, medicIcon, assassinIcon, techIcon, selectCharacter, beginGame;
 	public Image tankImage, medicImage, assassinImage, techImage;
 
@@ -40,7 +39,6 @@ public class CharacterSelectMenu : MonoBehaviour {
 	
 		charMenu = charMenu.GetComponent<CanvasGroup> ();
 		charDescription = charDescription.GetComponent<Text> ();
-		charImage = charImage.GetComponent<Image> ();
 
 		tankIcon = tankIcon.GetComponent<Button> ();
 		tankImage = tankImage.GetComponent<Image> ();
@@ -124,10 +122,10 @@ public class CharacterSelectMenu : MonoBehaviour {
 
 		currentChar = Chars.tank;
 
-		tankDescription = "The Tank is a rough, tough melee brawler. He is capable of taking big hits as well as dishing them out.";
-		medicDescription = "The Medic is";
-		assassinDescription = "The Assassin is";
-		techDescription = "The Tech is";
+		tankDescription = new TankFactory().description;
+		medicDescription = new MedicFactory().description;
+		assassinDescription = new AssassinFactory().description;
+		techDescription = new TechFactory().description;
 	}
 
 
