@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using System;
 
 public partial class GameManager : MonoBehaviour {
@@ -46,10 +47,12 @@ public partial class GameManager : MonoBehaviour {
 
     public TempActionBarUI tempActionBar;
     public TempTurnQueueUI tempTurnQueueBar;
+    public Button PassTurnButton;
 
     // Update is called once per frame
     void Update()
     {
+        
         if (tempTurnQueueBar.buttons.Count == 0)
             tempTurnQueueBar.Initialize(units);
 
@@ -64,8 +67,21 @@ public partial class GameManager : MonoBehaviour {
         }
         else if (activeUnit == null)
         {
+            LossCheck();
             GetNextActiveUnit();
-            tempActionBar.LoadUnit(activeUnit);
+            PassTurnButton.onClick.RemoveAllListeners();
+            PassTurnButton.onClick.AddListener(() => {
+                if(activeUnit != null) 
+                   activeUnit.Passturn();
+            });
+            if (activeUnit.aiControlled)
+                tempActionBar.GetComponent<Animator>().SetBool("Up", false);
+            else
+            {
+                tempActionBar.GetComponent<Animator>().SetBool("Up", true);
+                tempActionBar.LoadUnit(activeUnit);
+            }
+            
             tempTurnQueueBar.NewTurn(units);
             activeUnit.CalculateReachableTiles();
             SelectionParticle.GetComponent<ParticleSystem>().enableEmission = true;
@@ -90,6 +106,14 @@ public partial class GameManager : MonoBehaviour {
                     tile.GetComponent<Renderer>().material = defaultMat;
             }
         }
+    }
+
+    public void LossCheck()
+    {
+        foreach (Unit u in units)
+            if (u.faction == 0)
+                return;
+        Application.LoadLevel(2);
     }
 
     public void ProcessCommand(Action action)

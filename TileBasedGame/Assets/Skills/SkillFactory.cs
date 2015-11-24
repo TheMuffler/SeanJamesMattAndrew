@@ -166,6 +166,7 @@ public class SkillFactory
              {
                  GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
                  GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                 GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/TANK/SLAM/SlamPrefab"), user.transform.position, 4));
                  foreach(Unit target in slam.gatherTargets(user, tile))
                  {
                      GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
@@ -381,7 +382,8 @@ public class SkillFactory
 					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
 					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletSniper"),9));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
-				}
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/TECH/SNIPE/snipe prefab"), target.transform.position+Vector3.up, 1));
+                }
 				snipe.EnqueueExecuteTask(user,tile,args);
 			};
 		}
