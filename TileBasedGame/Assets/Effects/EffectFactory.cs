@@ -119,4 +119,35 @@ public class EffectFactory{
 		}
 		return tauntEffect;
 	}
+
+	// Particles
+	private static Effect wrenchExplosionEffect;
+	public static Effect getWrenchExplosionEffect() {
+		if (wrenchExplosionEffect == null) {
+			wrenchExplosionEffect = new Effect();
+			wrenchExplosionEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchExplosion");
+			//wrenchExplosionEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchOngoing");
+			
+		}
+		return wrenchExplosionEffect;
+	}
+	private static Effect wrenchBuffEffect;
+	public static Effect getWrenchBuffEffect() {
+		if (wrenchBuffEffect == null) {
+			wrenchBuffEffect = new Effect();
+			
+			wrenchBuffEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchOngoing");
+			
+		}
+		return wrenchBuffEffect;
+	}
+	private static Effect smokeEffect;
+	public static Effect getSmokeEffect() {
+		if (smokeEffect == null) {
+			smokeEffect = new Effect();
+			smokeEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/Fade");
+			
+		}
+		return smokeEffect;
+	}
 }
