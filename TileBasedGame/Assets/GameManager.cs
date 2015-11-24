@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using System;
 
 public partial class GameManager : MonoBehaviour {
@@ -46,6 +47,7 @@ public partial class GameManager : MonoBehaviour {
 
     public TempActionBarUI tempActionBar;
     public TempTurnQueueUI tempTurnQueueBar;
+    public Button PassTurnButton;
 
     // Update is called once per frame
     void Update()
@@ -65,7 +67,19 @@ public partial class GameManager : MonoBehaviour {
         else if (activeUnit == null)
         {
             GetNextActiveUnit();
-            tempActionBar.LoadUnit(activeUnit);
+            PassTurnButton.onClick.RemoveAllListeners();
+            PassTurnButton.onClick.AddListener(() => {
+                if(activeUnit != null) 
+                   activeUnit.Passturn();
+            });
+            if (activeUnit.aiControlled)
+                tempActionBar.GetComponent<Animator>().SetBool("Up", false);
+            else
+            {
+                tempActionBar.GetComponent<Animator>().SetBool("Up", true);
+                tempActionBar.LoadUnit(activeUnit);
+            }
+            
             tempTurnQueueBar.NewTurn(units);
             activeUnit.CalculateReachableTiles();
             SelectionParticle.GetComponent<ParticleSystem>().enableEmission = true;

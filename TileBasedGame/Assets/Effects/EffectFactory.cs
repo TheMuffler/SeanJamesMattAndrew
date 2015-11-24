@@ -115,6 +115,7 @@ public class EffectFactory{
 	public static Effect GetTauntEffect() {
 		if (tauntEffect == null) {
 			tauntEffect = new Effect();
+            tauntEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TANK/TAUNT/taunt prefab");
 			//TODO: finish dis shiiiit
 		}
 		return tauntEffect;

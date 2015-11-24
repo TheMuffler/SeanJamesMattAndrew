@@ -308,6 +308,7 @@ public class Unit : MonoBehaviour {
     {
         if (processingCommand)
             return;
+        desirePassturn = false;
         processingCommand = true;
         hasMoved = false;
 
@@ -528,7 +529,7 @@ public class Unit : MonoBehaviour {
         {
             StopAimingSkill();
         }
-        else if(!IsAimingSkill && Input.GetKeyDown(KeyCode.P)) //can pass turn
+        else if(!IsAimingSkill && (desirePassturn || Input.GetKeyDown(KeyCode.P))) //can pass turn
         {
             GameManager.instance.ProcessCommand(() => { });
         }
@@ -542,6 +543,13 @@ public class Unit : MonoBehaviour {
 		}
         */
 	}
+    [HideInInspector]
+    public bool desirePassturn = false;
+    public void Passturn()
+    {
+        if (processingCommand && !aiControlled && !IsAimingSkill)
+            desirePassturn = true;
+    }
 
     void move(Tile t)
     {

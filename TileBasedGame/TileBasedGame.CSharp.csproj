@@ -51,17 +51,11 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
@@ -83,7 +77,9 @@
     <Compile Include="Assets\AnimatorIKProxie.cs" />
     <Compile Include="Assets\BillBoard.cs" />
     <Compile Include="Assets\ButtonMorpher.cs" />
+    <Compile Include="Assets\ChangeImage.cs" />
     <Compile Include="Assets\CreateGrid.cs" />
+    <Compile Include="Assets\DialogueGlobals.cs" />
     <Compile Include="Assets\Effects\Aura.cs" />
     <Compile Include="Assets\Effects\Effect.cs" />
     <Compile Include="Assets\Effects\EffectContainer.cs" />
@@ -100,6 +96,7 @@
     <Compile Include="Assets\StageSelect\Stage assets\LevelBtns.cs" />
     <Compile Include="Assets\StageSelect\Stage assets\LevelMenuScript.cs" />
     <Compile Include="Assets\StageSelect\Stage assets\RotationBehavior.cs" />
+    <Compile Include="Assets\StageSelect\Stage assets\TalkingScript.cs" />
     <Compile Include="Assets\Talent.cs" />
     <Compile Include="Assets\Tasks\BunchOfTasks.cs" />
     <Compile Include="Assets\Tasks\Task.cs" />
