@@ -48,6 +48,7 @@ public partial class GameManager : MonoBehaviour {
     public TempActionBarUI tempActionBar;
     public TempTurnQueueUI tempTurnQueueBar;
     public Button PassTurnButton;
+	public GameSceneCameraLogic cam;
 
     // Update is called once per frame
     void Update()
@@ -69,6 +70,7 @@ public partial class GameManager : MonoBehaviour {
         {
             LossCheck();
             GetNextActiveUnit();
+			cam.focused = activeUnit.transform;
             PassTurnButton.onClick.RemoveAllListeners();
             PassTurnButton.onClick.AddListener(() => {
                 if(activeUnit != null) 

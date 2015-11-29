@@ -149,10 +149,10 @@ public class SkillFactory
             slam.icon = Resources.Load<Sprite>("SpellIcons/slam");
 
             slam.basePower = 4;
-            slam.manaCost = user => 4;
+            slam.manaCost = user => 2;
             slam.aoe = 1;
             slam.range = 0;
-            slam.cooldown = 4;
+            slam.cooldown = 2;
             slam.damageType = Skill.DamageType.DAMAGE;
             slam.targetType = Skill.TargetType.ENEMY;
             slam.OnTarget = (user, target, args) => {
@@ -248,10 +248,10 @@ public class SkillFactory
 			shiv.name = "Shiv";
 			shiv.icon = Resources.Load<Sprite>("SpellIcons/shiv");
 			
-			shiv.basePower = 1;
+			shiv.basePower = 4;
 			shiv.aoe = 0;
 			shiv.range = 1;
-			shiv.manaCost = user => 1;
+			shiv.manaCost = user => 0;
 			shiv.cooldown = 0;
 			shiv.damageType = Skill.DamageType.DAMAGE;
 			shiv.targetType = Skill.TargetType.ENEMY;
@@ -360,10 +360,10 @@ public class SkillFactory
 			snipe.name = "Snipe";
 			snipe.icon = Resources.Load<Sprite>("SpellIcons/snipe");
 			
-			snipe.basePower = 6;
+			snipe.basePower = 3;
 			snipe.aoe = 0;
 			snipe.range = 4;
-			snipe.manaCost = user => 6;
+			snipe.manaCost = user => 1;
 			snipe.cooldown = 0;
 			snipe.damageType = Skill.DamageType.DAMAGE;
 			snipe.targetType = Skill.TargetType.ENEMY;

@@ -49,7 +49,6 @@
      <Compile Include="Assets\AnimatorIKProxie.cs" />
      <Compile Include="Assets\BillBoard.cs" />
      <Compile Include="Assets\ButtonMorpher.cs" />
-     <Compile Include="Assets\ChangeImage.cs" />
      <Compile Include="Assets\CreateGrid.cs" />
      <Compile Include="Assets\DialogueGlobals.cs" />
      <Compile Include="Assets\Effects\Aura.cs" />
@@ -57,6 +56,7 @@
      <Compile Include="Assets\Effects\EffectContainer.cs" />
      <Compile Include="Assets\Effects\EffectFactory.cs" />
      <Compile Include="Assets\GameManager.cs" />
+     <Compile Include="Assets\GameSceneCameraLogic.cs" />
      <Compile Include="Assets\GlobalManager.cs" />
      <Compile Include="Assets\Main Menu Assets\CharacterSelectMenu.cs" />
      <Compile Include="Assets\Main Menu Assets\MainMenuScript.cs" />
@@ -65,6 +65,7 @@
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\SkillContainer.cs" />
      <Compile Include="Assets\Skills\SkillFactory.cs" />
+     <Compile Include="Assets\SpaceIntroScene\ChangeImage.cs" />
      <Compile Include="Assets\StageSelect\Stage assets\LevelBtns.cs" />
      <Compile Include="Assets\StageSelect\Stage assets\LevelMenuScript.cs" />
      <Compile Include="Assets\StageSelect\Stage assets\RotationBehavior.cs" />
