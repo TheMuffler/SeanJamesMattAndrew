@@ -8,6 +8,7 @@ using System.Collections.Generic;
 public class Skill
 {
     public string name = "Nameless Skill";
+    public string description = "No Description";
     public Sprite icon = null;
 
     public enum TargetType { SELF, ALLY, ENEMY, NONE, CONDITIONAL };

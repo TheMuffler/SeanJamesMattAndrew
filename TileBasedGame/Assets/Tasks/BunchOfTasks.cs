@@ -200,3 +200,21 @@ public class Task_ShowParticleAnimation : Task
     }
 
 }
+
+public class Task_PlaySound : Task
+{
+
+    private AudioClip clip;
+    
+    public Task_PlaySound(AudioClip clip)
+    {
+        this.clip = clip;
+    }
+
+    public override bool OnUpdate()
+    {
+        GameManager.instance.GetComponent<AudioSource>().PlayOneShot(clip);
+        return true;
+    }
+
+}

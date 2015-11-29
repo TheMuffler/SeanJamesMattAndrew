@@ -107,6 +107,7 @@
     <Compile Include="Assets\TempActionBarUI.cs" />
     <Compile Include="Assets\TempTurnQueueUI.cs" />
     <Compile Include="Assets\Tile.cs" />
+    <Compile Include="Assets\ToolTipCaller.cs" />
     <Compile Include="Assets\Unit.cs" />
   </ItemGroup>
   <ItemGroup>

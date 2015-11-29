@@ -49,6 +49,7 @@ public partial class GameManager : MonoBehaviour {
     public TempTurnQueueUI tempTurnQueueBar;
     public Button PassTurnButton;
 	public GameSceneCameraLogic cam;
+    //public GameObject tooltip;
 
     // Update is called once per frame
     void Update()
