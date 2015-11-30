@@ -230,4 +230,27 @@ public class EffectFactory{
         }
         return determinationCooldownEffect;
     }
+
+
+    private static Skill frontLineEffectHelper;
+    private static Effect frontLineEffect;
+    public static Effect getFrontLineEffect()
+    {
+        if (frontLineEffect == null)
+        {
+            frontLineEffectHelper = new Skill();
+            frontLineEffectHelper.aoe = 3;
+            frontLineEffectHelper.targetType = Skill.TargetType.ENEMY;
+
+            frontLineEffect = new Effect();
+            frontLineEffect.onTurnBegin = user =>
+            {
+                List<Unit> others = frontLineEffectHelper.gatherTargets(user, user.tile);
+
+                float perOther = user.maxMP * 0.03f;
+                user.TakeDamage(-perOther*others.Count, user);
+            };
+        }
+        return frontLineEffect;
+    }
 }

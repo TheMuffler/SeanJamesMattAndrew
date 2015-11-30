@@ -114,10 +114,11 @@ public class TankFactory : ClassFactory
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 1";
+        t.name = "Front Lines";
+        t.description = "For each enemy within 3 tiles, gain 3% hp per turn";
         t.IfChosen = unit =>
         {
-
+            unit.AddEffect(EffectFactory.getFrontLineEffect(),-1);
         };
         talentOptions.Add(t);
 

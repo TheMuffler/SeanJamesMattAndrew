@@ -316,8 +316,11 @@ public class Unit : MonoBehaviour {
         foreach (EffectContainer e in effectContainers)
             e.effect.onTurnBegin(this);
 
-       // if (aiControlled)
-       //     calculateMove();
+        if(!hasMoved)
+            CalculateReachableTiles();
+
+        // if (aiControlled)
+        //     calculateMove();
 
         //AI controlled units will use a coroutine to decide their moves
 

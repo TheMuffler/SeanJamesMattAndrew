@@ -148,7 +148,7 @@ public class SkillFactory
             slam.name = "Slam";
             slam.icon = Resources.Load<Sprite>("SpellIcons/slam");
 
-            slam.basePower = 4;
+            slam.basePower = 2;
             slam.manaCost = user => 2;
             slam.aoe = 1;
             slam.range = 0;
