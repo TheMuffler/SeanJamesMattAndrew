@@ -556,5 +556,30 @@ public class SkillFactory
         }
         return makeSentry;
     }
+
+    private static Skill anatomy;
+    public static Skill getAnatomy()
+    {
+        if(anatomy == null)
+        {
+            anatomy = new Skill();
+            anatomy.targetType = Skill.TargetType.ALLY;
+            anatomy.range = 3;
+            anatomy.aoe = 0;
+            anatomy.manaCost = user => 3;
+            anatomy.OnTarget = (user, target, args) =>
+            {
+                target.AddEffect(EffectFactory.getAnatomyEffect(), 3);
+            };
+            anatomy.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube"),3));
+                anatomy.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return anatomy;
+    }
 	
 }

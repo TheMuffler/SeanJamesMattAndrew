@@ -230,21 +230,21 @@ public class MedicFactory : ClassFactory
         baseSkills.Add(SkillFactory.GetWeakenOffense());
 
         Talent t = new Talent();
-        t.name = "Add Blood Donor";
-        t.description = "Adds Blood Donor to Class";
-        t.IfChosen = unit => {
-            unit.AddSkill(SkillFactory.GetBloodDonor());
+        t.name = "Anatomy";
+        t.description = "Medic learns the Anatomy Skill. Provides a huge damage buff to a single target.";
+        t.IfChosen = unit =>
+        {
+            unit.AddSkill(SkillFactory.getAnatomy());
         };
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Add Repair";
-        t.description = "Adds Repair to Class";
-        t.IfChosen = unit =>
-        {
-            unit.AddSkill(SkillFactory.GetRepair());
+        t.name = "Blood Donor";
+        t.description = "Medic learns the Blood Donor Skill. The medic siphons the hitpoints of his target.";
+        t.IfChosen = unit => {
+            unit.AddSkill(SkillFactory.GetBloodDonor());
         };
-		talentOptions.Add(t);
+        talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Improve Skill X";

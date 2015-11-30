@@ -254,6 +254,17 @@ public class EffectFactory{
         return frontLineEffect;
     }
 
+    private static Effect anatomyEffect;
+    public static Effect getAnatomyEffect()
+    {
+        if(anatomyEffect == null)
+        {
+            anatomyEffect = new Effect();
+            anatomyEffect.damageBonus = user => 0.4f;
+        }
+        return anatomyEffect;
+    }
+
     private static Effect epidemicEffect;
     public static Effect getEpidemicEffect()
     {
