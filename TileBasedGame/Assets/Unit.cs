@@ -277,15 +277,20 @@ public class Unit : MonoBehaviour {
         curMP = maxMP;
         explosion = (GameObject)Resources.Load("SpellVisuals/Explosion");
 
-        if (faction != 0)
+        if (true || faction != 0)
         {
             //AddSkill (SkillFactory.GetWeakenOffense ());
             //AddSkill (SkillFactory.GetWeakenDefense());
-            AddSkill(SkillFactory.GetBloodDonor());
+            //AddSkill(SkillFactory.GetTaunt());
+            //AddSkill(SkillFactory.GetShiv());
+            //AddSkill(SkillFactory.GetFade());
+            //AddSkill(SkillFactory.GetBloodDonor());
             //AddSkill (SkillFactory.GetAoEHeal ());
             AddSkill(SkillFactory.GetSnipe());
             AddSkill(SkillFactory.GetSlam());
             //AddSkill(SkillFactory.GetRepair());
+            AddSkill(SkillFactory.GetPersistence());
+            AddSkill(SkillFactory.GetEpidemic());
         }
     }
 

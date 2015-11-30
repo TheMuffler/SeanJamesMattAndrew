@@ -112,7 +112,7 @@ public class EffectFactory{
 	}
 
 	private static Effect tauntEffect;
-	public static Effect GetTauntEffect() {
+	public static Effect getTauntEffect() {
 		if (tauntEffect == null) {
 			tauntEffect = new Effect();
             tauntEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TANK/TAUNT/taunt prefab");
@@ -151,4 +151,27 @@ public class EffectFactory{
 		}
 		return smokeEffect;
 	}
+
+    private static Effect epidemicEffect;
+    public static Effect getEpidemicEffect()
+    {
+        if (epidemicEffect == null)
+        {
+            epidemicEffect = new Effect();
+
+        }
+        return epidemicEffect;
+    }
+
+    private static Effect persistenceEffect;
+    public static Effect getPersistenceEffect()
+    {
+        if (persistenceEffect == null)
+        {
+            persistenceEffect = new Effect();
+
+        }
+        return persistenceEffect;
+    }
+
 }
