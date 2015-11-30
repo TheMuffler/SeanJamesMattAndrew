@@ -79,45 +79,46 @@ public class TankFactory : ClassFactory
         baseSkills.Add(SkillFactory.GetTaunt());
 
         Talent t = new Talent();
-        t.name = "Add Blood Donor";
-        t.description = "Adds Blood Donor to Class";
+        t.name = "Enrage";
+        t.description = "While health is below 50%, damage goes up by 20%";
         t.IfChosen = unit => {
-            unit.AddSkill(SkillFactory.GetBloodDonor());
+            unit.AddEffect(EffectFactory.getEnrageEffect(), -1);
         };
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Add Repair";
-        t.description = "Adds Repair to Class";
+        t.name = "Surrounded";
+        t.description = "Whenever the tank is hit, if there are more than two enemies nearby, their attacks will recoil half the damage to eachother. This damage is never fatal.";
         t.IfChosen = unit =>
         {
-            unit.AddSkill(SkillFactory.GetRepair());
+            unit.AddEffect(EffectFactory.getSurroundedEffect(),-1);
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Improve Skill X";
-        t.description = "Makes Skill X better. Skill X is scripted to check if the performing agent has the string 'SkillXImprove' in its talentTags";
+        t.name = "Grand Slam";
+        t.description = "Double's Slam's Damage, but halfs the root effect";
         t.IfChosen = unit =>
         {
-            unit.talentTags.Add("SkillXImprove");
+            unit.talentTags.Add("HardSlam");
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Vampiric Attacks";
-        t.description = "Your attacks restore your health";
+        t.name = "Determination";
+        t.description = "If the tank's health would go below 30% from an attack, the tank is first fully healed. Has a 6 turn cooldown";
         t.IfChosen = unit =>
         {
-            unit.AddEffect(EffectFactory.getVampiricEffect(),-1); //-1 is permanent
+            unit.AddEffect(EffectFactory.getDeterminationEffect(),-1); //-1 is permanent
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 1";
+        t.name = "Front Lines";
+        t.description = "For each enemy within 3 tiles, gain 3% hp per turn";
         t.IfChosen = unit =>
         {
-
+            unit.AddEffect(EffectFactory.getFrontLineEffect(),-1);
         };
         talentOptions.Add(t);
 

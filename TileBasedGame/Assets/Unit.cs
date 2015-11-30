@@ -155,7 +155,7 @@ public class Unit : MonoBehaviour {
             float total = baseDamageMultiplier;
             foreach (EffectContainer e in effectContainers)
             {
-                total += e.effect.damageBonus;
+                total += e.effect.damageBonus(this);
             }
             return total;
         }
@@ -169,7 +169,7 @@ public class Unit : MonoBehaviour {
             float total = baseArmor;
             foreach (EffectContainer e in effectContainers)
             {
-                total += e.effect.armorBonus;
+                total += e.effect.armorBonus(this);
             }
             return Mathf.Min(0.7f,total);
         }
@@ -282,11 +282,16 @@ public class Unit : MonoBehaviour {
         {
             //AddSkill (SkillFactory.GetWeakenOffense ());
             //AddSkill (SkillFactory.GetWeakenDefense());
-            AddSkill(SkillFactory.GetBloodDonor());
+            //AddSkill(SkillFactory.GetTaunt());
+            //AddSkill(SkillFactory.GetShiv());
+            //AddSkill(SkillFactory.GetFade());
+            //AddSkill(SkillFactory.GetBloodDonor());
             //AddSkill (SkillFactory.GetAoEHeal ());
             AddSkill(SkillFactory.GetSnipe());
-            AddSkill(SkillFactory.GetSlam());
+            //AddSkill(SkillFactory.GetSlam());
             //AddSkill(SkillFactory.GetRepair());
+            //AddSkill(SkillFactory.GetPersistence());
+            //AddSkill(SkillFactory.GetEpidemic());
         }
     }
 
@@ -316,8 +321,11 @@ public class Unit : MonoBehaviour {
         foreach (EffectContainer e in effectContainers)
             e.effect.onTurnBegin(this);
 
-       // if (aiControlled)
-       //     calculateMove();
+        if(!hasMoved)
+            CalculateReachableTiles();
+
+        // if (aiControlled)
+        //     calculateMove();
 
         //AI controlled units will use a coroutine to decide their moves
 
