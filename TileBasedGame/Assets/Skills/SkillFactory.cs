@@ -156,9 +156,9 @@ public class SkillFactory
             slam.damageType = Skill.DamageType.DAMAGE;
             slam.targetType = Skill.TargetType.ENEMY;
             slam.OnTarget = (user, target, args) => {
-                bool flag = user.talentTags.Contains("Slam Upgrade");
+                bool flag = user.talentTags.Contains("HardSlam");
 
-                float amt = user.DamageMultiplier * bloodDonor.basePower * (1f - target.Armor);
+                float amt = user.DamageMultiplier * slam.basePower * (1f - target.Armor);
                 target.TakeDamage(amt*(flag?2:1), user);
                 target.AddEffect(EffectFactory.getStunEffect(), flag?1:2);
             };

@@ -155,7 +155,7 @@ public class Unit : MonoBehaviour {
             float total = baseDamageMultiplier;
             foreach (EffectContainer e in effectContainers)
             {
-                total += e.effect.damageBonus;
+                total += e.effect.damageBonus(this);
             }
             return total;
         }
@@ -169,7 +169,7 @@ public class Unit : MonoBehaviour {
             float total = baseArmor;
             foreach (EffectContainer e in effectContainers)
             {
-                total += e.effect.armorBonus;
+                total += e.effect.armorBonus(this);
             }
             return Mathf.Min(0.7f,total);
         }
