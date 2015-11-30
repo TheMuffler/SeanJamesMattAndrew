@@ -282,11 +282,16 @@ public class Unit : MonoBehaviour {
         {
             //AddSkill (SkillFactory.GetWeakenOffense ());
             //AddSkill (SkillFactory.GetWeakenDefense());
-            AddSkill(SkillFactory.GetBloodDonor());
+            //AddSkill(SkillFactory.GetTaunt());
+            //AddSkill(SkillFactory.GetShiv());
+            //AddSkill(SkillFactory.GetFade());
+            //AddSkill(SkillFactory.GetBloodDonor());
             //AddSkill (SkillFactory.GetAoEHeal ());
             AddSkill(SkillFactory.GetSnipe());
-            AddSkill(SkillFactory.GetSlam());
+            //AddSkill(SkillFactory.GetSlam());
             //AddSkill(SkillFactory.GetRepair());
+            //AddSkill(SkillFactory.GetPersistence());
+            //AddSkill(SkillFactory.GetEpidemic());
         }
     }
 
