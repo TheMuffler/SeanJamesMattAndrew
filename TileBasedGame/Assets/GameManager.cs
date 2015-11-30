@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using System;
 
 public partial class GameManager : MonoBehaviour {
@@ -26,7 +27,11 @@ public partial class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
+        foreach (ClassFactory cf in GlobalManager.instance.PartyFactories)
+        {
+            Unit u = cf.Generate();
+            //unitShell.AddComponent<>
+        }
     }
 
     [HideInInspector]
@@ -42,10 +47,14 @@ public partial class GameManager : MonoBehaviour {
 
     public TempActionBarUI tempActionBar;
     public TempTurnQueueUI tempTurnQueueBar;
+    public Button PassTurnButton;
+	public GameSceneCameraLogic cam;
+    //public GameObject tooltip;
 
     // Update is called once per frame
     void Update()
     {
+        
         if (tempTurnQueueBar.buttons.Count == 0)
             tempTurnQueueBar.Initialize(units);
 
@@ -60,12 +69,27 @@ public partial class GameManager : MonoBehaviour {
         }
         else if (activeUnit == null)
         {
+            LossCheck();
             GetNextActiveUnit();
-            tempActionBar.LoadUnit(activeUnit);
+			cam.focused = activeUnit.transform;
+            PassTurnButton.onClick.RemoveAllListeners();
+            PassTurnButton.onClick.AddListener(() => {
+                if(activeUnit != null) 
+                   activeUnit.Passturn();
+            });
+            if (activeUnit.aiControlled)
+                tempActionBar.GetComponent<Animator>().SetBool("Up", false);
+            else
+            {
+                tempActionBar.GetComponent<Animator>().SetBool("Up", true);
+                tempActionBar.LoadUnit(activeUnit);
+            }
+            
             tempTurnQueueBar.NewTurn(units);
             activeUnit.CalculateReachableTiles();
             SelectionParticle.GetComponent<ParticleSystem>().enableEmission = true;
             SelectionParticle.transform.position = activeUnit.transform.position;
+            SelectionParticle.transform.parent = activeUnit.transform;
             activeUnit.RequestCommand();
         }
     }
@@ -85,6 +109,14 @@ public partial class GameManager : MonoBehaviour {
                     tile.GetComponent<Renderer>().material = defaultMat;
             }
         }
+    }
+
+    public void LossCheck()
+    {
+        foreach (Unit u in units)
+            if (u.faction == 0)
+                return;
+        Application.LoadLevel(2);
     }
 
     public void ProcessCommand(Action action)
@@ -198,6 +230,17 @@ public partial class GameManager : MonoBehaviour {
                 list.Add(t);
         }
 
+        return list;
+    }
+
+    public List<Tile.TilePos> getNeighborsNoBarrier(Tile.TilePos pos)
+    {
+        List<Tile.TilePos> list = new List<Tile.TilePos>();
+        bool offset = pos.y % 2 == 1;
+        foreach(Tile.TilePos dir in offset ? offsetDirections : directions)
+        {
+            list.Add(pos + dir);
+        }
         return list;
     }
 
@@ -349,7 +392,8 @@ public partial class GameManager : MonoBehaviour {
     public HashSet<Tile> TilesInRangeSkill(Tile t, int range, Unit agent, Skill skill)
     {
         HashSet<Tile> set = new HashSet<Tile>();
-        DLS(t, set, range, null);
+        if(t!=null)
+            DLS_NoBarrier(t.gridPos, set, range, null);
 
         //this isn't the actual place to put them
         foreach (List<Tile> row in tiles)
@@ -390,6 +434,63 @@ public partial class GameManager : MonoBehaviour {
         }
     }
 
+
+    private void DLS_NoBarrier(Tile.TilePos pos, HashSet<Tile> set, int depth, Unit agent)
+    {
+        if (depth < 0)
+            return;
+        if (inBounds(pos.x,pos.y) && tiles[pos.x][pos.y] != null)
+            set.Add(tiles[pos.x][pos.y]);
+
+        foreach (Tile.TilePos p in getNeighborsNoBarrier(pos))
+            DLS_NoBarrier(p, set, depth-1, agent);
+    }
+
+
+
+
+    public delegate bool GoalTest(Tile tile);
+    public Tile FindTileF(Tile start, GoalTest test)
+    {
+        return BFS(start, test);
+    }
+
+    private Tile BFS(Tile start, GoalTest test)
+    {
+        HashSet<Tile> closedset = new HashSet<Tile>();
+        Queue<Tile> openqueue = new Queue<Tile>();
+
+        openqueue.Enqueue(start);
+        while(openqueue.Count > 0)
+        {
+            Tile current = openqueue.Dequeue();
+            closedset.Add(current);
+            if (test(current))
+                return current;
+            foreach (Tile t in getNeighbors(current))
+                if (!closedset.Contains(t))
+                    openqueue.Enqueue(t);
+        }
+        return null;
+    }
+
+    public Unit GetNearestEnemy(Unit unit)
+    {
+        Tile t = FindTileF(unit.tile, tile =>
+        {
+            return tile.unit != null && unit.IsEnemy(tile.unit);
+        });
+        return t == null ? null : t.unit;
+    }
+
+    public Unit GetNearestAlly(Unit unit)
+    {
+        Tile t = FindTileF(unit.tile, tile =>
+        {
+            return tile.unit != null && tile.unit != unit && unit.IsAlly(tile.unit);
+        });
+        return t == null ? null : t.unit;
+    }
 
     public Tile selected;
 

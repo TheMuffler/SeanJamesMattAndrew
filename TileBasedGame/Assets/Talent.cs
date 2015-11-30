@@ -35,7 +35,7 @@ public abstract class ClassFactory
 
     public ClassFactory()
     {
-
+        baseModel = Resources.Load <GameObject> ("basemodel");
     }
 
     public Unit Generate()
@@ -46,6 +46,7 @@ public abstract class ClassFactory
         u.curMP = u.maxMP = maxMP;
         u.baseDamageMultiplier = attackPower;
         u.baseArmor = armor;
+        u.icon = image;
 
         foreach (Skill s in baseSkills)
             u.AddSkill(s);
@@ -65,6 +66,8 @@ public class TankFactory : ClassFactory
 
     public TankFactory()
     {
+        baseModel = Resources.Load<GameObject>("TankModel");
+
         attackPower = 0.9f;
         armor = 0.4f;
         maxHP = 7;
@@ -72,49 +75,50 @@ public class TankFactory : ClassFactory
 
 
         baseSkills.Add(SkillFactory.GetSlam());
-        baseSkills.Add(SkillFactory.GetCripple());
-        baseSkills.Add(SkillFactory.GetRepair());
+        baseSkills.Add(SkillFactory.GetWeakenDefense());
+        baseSkills.Add(SkillFactory.GetTaunt());
 
         Talent t = new Talent();
-        t.name = "Add Blood Donor";
-        t.description = "Adds Blood Donor to Class";
+        t.name = "Enrage";
+        t.description = "While health is below 50%, damage goes up by 20%";
         t.IfChosen = unit => {
-            unit.AddSkill(SkillFactory.GetBloodDonor());
+            unit.AddEffect(EffectFactory.getEnrageEffect(), -1);
         };
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Add Repair";
-        t.description = "Adds Repair to Class";
+        t.name = "Surrounded";
+        t.description = "Whenever the tank is hit, if there are more than two enemies nearby, their attacks will recoil half the damage to eachother. This damage is never fatal.";
         t.IfChosen = unit =>
         {
-            unit.AddSkill(SkillFactory.GetRepair());
+            unit.AddEffect(EffectFactory.getSurroundedEffect(),-1);
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Improve Skill X";
-        t.description = "Makes Skill X better. Skill X is scripted to check if the performing agent has the string 'SkillXImprove' in its talentTags";
+        t.name = "Grand Slam";
+        t.description = "Double's Slam's Damage, but halfs the root effect";
         t.IfChosen = unit =>
         {
-            unit.talentTags.Add("SkillXImprove");
+            unit.talentTags.Add("HardSlam");
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Vampiric Attacks";
-        t.description = "Your attacks restore your health";
+        t.name = "Determination";
+        t.description = "If the tank's health would go below 30% from an attack, the tank is first fully healed. Has a 6 turn cooldown";
         t.IfChosen = unit =>
         {
-            unit.AddEffect(EffectFactory.getVampiricEffect(),-1); //-1 is permanent
+            unit.AddEffect(EffectFactory.getDeterminationEffect(),-1); //-1 is permanent
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 1";
+        t.name = "Front Lines";
+        t.description = "For each enemy within 3 tiles, gain 3% hp per turn";
         t.IfChosen = unit =>
         {
-
+            unit.AddEffect(EffectFactory.getFrontLineEffect(),-1);
         };
         talentOptions.Add(t);
 
@@ -128,7 +132,7 @@ public class TankFactory : ClassFactory
 
         name = "Tank";
         description = "A tank. Deals and takes little damage. Hinders enemies to protect his team.";
-        image = Resources.Load<Sprite>("SpellIcons/owl");
+        image = Resources.Load<Sprite>("CharacterIcons/TankIcon");
     }
 
 }
@@ -138,15 +142,17 @@ public class AssassinFactory : ClassFactory
 
     public AssassinFactory()
     {
+        baseModel = Resources.Load<GameObject>("AssassinModel");
+
         attackPower = 1.2f;
         armor = 0.1f;
         maxHP = 6;
         maxMP = 6;
 
 
-        baseSkills.Add(SkillFactory.GetSlam());
+        baseSkills.Add(SkillFactory.GetShiv());
+        baseSkills.Add(SkillFactory.GetFade());
         baseSkills.Add(SkillFactory.GetCripple());
-        baseSkills.Add(SkillFactory.GetRepair());
 
         Talent t = new Talent();
         t.name = "Add Blood Donor";
@@ -201,7 +207,7 @@ public class AssassinFactory : ClassFactory
 
         name = "Assassin";
         description = "A spooky dangerous assassin, who deals a lot of damage";
-        image = Resources.Load<Sprite>("SpellIcons/owl");
+        image = Resources.Load<Sprite>("CharacterIcons/AssassinIcon");
     }
 
 }
@@ -211,32 +217,34 @@ public class MedicFactory : ClassFactory
 
     public MedicFactory()
     {
+        baseModel = Resources.Load<GameObject>("MedicModel");
+
         attackPower = 0.9f;
         armor = 0.4f;
         maxHP = 4;
         maxMP = 6;
 
 
-        baseSkills.Add(SkillFactory.GetSlam());
-        baseSkills.Add(SkillFactory.GetCripple());
-        baseSkills.Add(SkillFactory.GetRepair());
+        baseSkills.Add(SkillFactory.GetHeal());
+        baseSkills.Add(SkillFactory.GetAoEHeal());
+        baseSkills.Add(SkillFactory.GetWeakenOffense());
 
         Talent t = new Talent();
-        t.name = "Add Blood Donor";
-        t.description = "Adds Blood Donor to Class";
-        t.IfChosen = unit => {
-            unit.AddSkill(SkillFactory.GetBloodDonor());
+        t.name = "Anatomy";
+        t.description = "Medic learns the Anatomy Skill. Provides a huge damage buff to a single target.";
+        t.IfChosen = unit =>
+        {
+            unit.AddSkill(SkillFactory.getAnatomy());
         };
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Add Repair";
-        t.description = "Adds Repair to Class";
-        t.IfChosen = unit =>
-        {
-            unit.AddSkill(SkillFactory.GetRepair());
+        t.name = "Blood Donor";
+        t.description = "Medic learns the Blood Donor Skill. The medic siphons the hitpoints of his target.";
+        t.IfChosen = unit => {
+            unit.AddSkill(SkillFactory.GetBloodDonor());
         };
-		talentOptions.Add(t);
+        talentOptions.Add(t);
 
         t = new Talent();
         t.name = "Improve Skill X";
@@ -274,7 +282,7 @@ public class MedicFactory : ClassFactory
 
         name = "Medic";
         description = "A doctor who supports his team with his healing powers.";
-        image = Resources.Load<Sprite>("SpellIcons/owl");
+        image = Resources.Load<Sprite>("CharacterIcons/MedicIcon");
     }
 
 }
@@ -284,15 +292,17 @@ public class TechFactory : ClassFactory
 
     public TechFactory()
     {
+        baseModel = Resources.Load<GameObject>("TechModel");
+
         attackPower = 0.9f;
         armor = 0.4f;
         maxHP = 4;
         maxMP = 6;
 
 
-        baseSkills.Add(SkillFactory.GetSlam());
-        baseSkills.Add(SkillFactory.GetCripple());
+        baseSkills.Add(SkillFactory.GetSnipe());
         baseSkills.Add(SkillFactory.GetRepair());
+        baseSkills.Add(SkillFactory.GetMakeSentry());
 
         Talent t = new Talent();
         t.name = "Add Blood Donor";
@@ -347,7 +357,7 @@ public class TechFactory : ClassFactory
 
         name = "Technician";
         description = "A repairman who can build robots";
-        image = Resources.Load<Sprite>("SpellIcons/owl");
+        image = Resources.Load<Sprite>("CharacterIcons/TechIcon");
     }
 
 }
