@@ -2,12 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class EffectFactory{
+public class EffectFactory {
 
     private static Effect rootEffect;
     public static Effect getRootEffect()
     {
-        if(rootEffect == null)
+        if (rootEffect == null)
         {
             rootEffect = new Effect();
             rootEffect.onTurnBegin = user =>
@@ -20,7 +20,7 @@ public class EffectFactory{
     }
 
     private static Effect stunEffect;
-    public static Effect getStunEffect(){
+    public static Effect getStunEffect() {
 
         if (stunEffect == null)
         {
@@ -43,119 +43,119 @@ public class EffectFactory{
             vampiricEffect = new Effect();
             vampiricEffect.OnHitAttacking = (attacker, defender, amt) =>
             {
-                if(attacker != defender && amt>0)
-                    attacker.TakeDamage(-amt,attacker);
+                if (attacker != defender && amt > 0)
+                    attacker.TakeDamage(-amt, attacker);
             };
         }
         return vampiricEffect;
     }
 
-	private static Effect invincibleEffect;
-	public static Effect getInvincibleEffect(){
-		
-		if (invincibleEffect == null)
-		{
-			invincibleEffect = new Effect();
+    private static Effect invincibleEffect;
+    public static Effect getInvincibleEffect() {
 
-		
-			invincibleEffect.armorBonus=user => 999;
-		}
-		return invincibleEffect;
-	}
-
-	private static Effect crippleEffect;
-	public static Effect getCrippleEffect(){
-		
-		if (crippleEffect == null)
-		{
-			crippleEffect = new Effect();
-			crippleEffect.moveRangeBonus= -2;
-			
-			//stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
-			//stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
-		}
-		return crippleEffect;
-	}
+        if (invincibleEffect == null)
+        {
+            invincibleEffect = new Effect();
 
 
+            invincibleEffect.armorBonus = user => 999;
+        }
+        return invincibleEffect;
+    }
 
-	private static Effect damageMultiplierEffect;
-	public static Effect getDamageMultiplierEffect(){
-		
-		if (damageMultiplierEffect == null)
-		{
-			damageMultiplierEffect = new Effect();
-			damageMultiplierEffect.damageBonus= user => 2;
-			
-			//stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
-			//stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
-		}
-		return damageMultiplierEffect;
-	}
+    private static Effect crippleEffect;
+    public static Effect getCrippleEffect() {
 
-	private static Effect weakenOffenseEffect;
-	public static Effect GetWeakenOffenseEffect() {
-		if (weakenOffenseEffect == null) {
-			weakenOffenseEffect = new Effect();
-			weakenOffenseEffect.damageBonus = user => -2;
-		}
-		return weakenOffenseEffect;
-	}
+        if (crippleEffect == null)
+        {
+            crippleEffect = new Effect();
+            crippleEffect.moveRangeBonus = -2;
 
-	private static Effect weakenDefenseEffect;
-	public static Effect GetWeakenDefenseEffect() {
-		if (weakenDefenseEffect == null) {
-			weakenDefenseEffect = new Effect();
-			weakenDefenseEffect.armorBonus = user => -1;
-		}
-		return weakenDefenseEffect;
-	}
+            //stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
+            //stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
+        }
+        return crippleEffect;
+    }
 
-	private static Effect tauntEffect;
-	public static Effect getTauntEffect() {
-		if (tauntEffect == null) {
-			tauntEffect = new Effect();
+
+
+    private static Effect damageMultiplierEffect;
+    public static Effect getDamageMultiplierEffect() {
+
+        if (damageMultiplierEffect == null)
+        {
+            damageMultiplierEffect = new Effect();
+            damageMultiplierEffect.damageBonus = user => 2;
+
+            //stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
+            //stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
+        }
+        return damageMultiplierEffect;
+    }
+
+    private static Effect weakenOffenseEffect;
+    public static Effect GetWeakenOffenseEffect() {
+        if (weakenOffenseEffect == null) {
+            weakenOffenseEffect = new Effect();
+            weakenOffenseEffect.damageBonus = user => -2;
+        }
+        return weakenOffenseEffect;
+    }
+
+    private static Effect weakenDefenseEffect;
+    public static Effect GetWeakenDefenseEffect() {
+        if (weakenDefenseEffect == null) {
+            weakenDefenseEffect = new Effect();
+            weakenDefenseEffect.armorBonus = user => -1;
+        }
+        return weakenDefenseEffect;
+    }
+
+    private static Effect tauntEffect;
+    public static Effect getTauntEffect() {
+        if (tauntEffect == null) {
+            tauntEffect = new Effect();
             tauntEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TANK/TAUNT/taunt prefab");
-			//TODO: finish dis shiiiit
-		}
-		return tauntEffect;
-	}
+            //TODO: finish dis shiiiit
+        }
+        return tauntEffect;
+    }
 
-	// Particles
-	private static Effect wrenchExplosionEffect;
-	public static Effect getWrenchExplosionEffect() {
-		if (wrenchExplosionEffect == null) {
-			wrenchExplosionEffect = new Effect();
-			wrenchExplosionEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchExplosion");
-			//wrenchExplosionEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchOngoing");
-			
-		}
-		return wrenchExplosionEffect;
-	}
-	private static Effect wrenchBuffEffect;
-	public static Effect getWrenchBuffEffect() {
-		if (wrenchBuffEffect == null) {
-			wrenchBuffEffect = new Effect();
-			
-			wrenchBuffEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchOngoing");
-			
-		}
-		return wrenchBuffEffect;
-	}
-	private static Effect smokeEffect;
-	public static Effect getSmokeEffect() {
-		if (smokeEffect == null) {
-			smokeEffect = new Effect();
-			smokeEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/Fade");
-			
-		}
-		return smokeEffect;
-	}
+    // Particles
+    private static Effect wrenchExplosionEffect;
+    public static Effect getWrenchExplosionEffect() {
+        if (wrenchExplosionEffect == null) {
+            wrenchExplosionEffect = new Effect();
+            wrenchExplosionEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchExplosion");
+            //wrenchExplosionEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchOngoing");
+
+        }
+        return wrenchExplosionEffect;
+    }
+    private static Effect wrenchBuffEffect;
+    public static Effect getWrenchBuffEffect() {
+        if (wrenchBuffEffect == null) {
+            wrenchBuffEffect = new Effect();
+
+            wrenchBuffEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/WrenchOngoing");
+
+        }
+        return wrenchBuffEffect;
+    }
+    private static Effect smokeEffect;
+    public static Effect getSmokeEffect() {
+        if (smokeEffect == null) {
+            smokeEffect = new Effect();
+            smokeEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/Fade");
+
+        }
+        return smokeEffect;
+    }
 
     private static Effect enrageEffect;
     public static Effect getEnrageEffect()
     {
-        if(enrageEffect == null)
+        if (enrageEffect == null)
         {
             enrageEffect = new Effect();
             enrageEffect.damageBonus = user => user.curHP / user.maxHP <= 0.5f ? 0.2f : 0f;
@@ -167,7 +167,7 @@ public class EffectFactory{
     private static Effect surroundedEffect;
     public static Effect getSurroundedEffect()
     {
-        if(surroundedEffect == null)
+        if (surroundedEffect == null)
         {
             surroundedEffectHelper = new Skill();
             surroundedEffectHelper.aoe = 2;
@@ -177,12 +177,12 @@ public class EffectFactory{
             surroundedEffect.OnHitDefending = (attacker, defender, amt) =>
             {
                 List<Unit> others = surroundedEffectHelper.gatherTargets(defender, defender.tile);
-                if(others.Count >= 2)
+                if (others.Count >= 2)
                 {
-                    foreach(Unit other in others)
+                    foreach (Unit other in others)
                     {
-                        if (other.curHP > amt/2f)
-                            other.TakeDamage(amt /2f, defender);
+                        if (other.curHP > amt / 2f)
+                            other.TakeDamage(amt / 2f, defender);
                         else if (other.curHP > 0.1f)
                             other.TakeDamage(other.curHP - 0.1f, defender);
                         else
@@ -198,12 +198,12 @@ public class EffectFactory{
     private static Effect determinationEffect;
     public static Effect getDeterminationEffect()
     {
-        if(determinationEffect == null)
+        if (determinationEffect == null)
         {
             determinationEffect = new Effect();
             determinationEffect.OnHitDefending = (attacker, defender, amt) =>
             {
-                if(!defender.talentTags.Contains("DTCoolDown") && (defender.curHP - amt)/defender.maxHP <= 0.3)
+                if (!defender.talentTags.Contains("DTCoolDown") && (defender.curHP - amt) / defender.maxHP <= 0.3)
                 {
                     defender.curHP = defender.maxHP;
                     defender.AddEffect(getDeterminationCooldownEffect(), 6);
@@ -216,7 +216,7 @@ public class EffectFactory{
     private static Effect determinationCooldownEffect;
     public static Effect getDeterminationCooldownEffect()
     {
-        if(determinationCooldownEffect == null)
+        if (determinationCooldownEffect == null)
         {
             determinationCooldownEffect = new Effect();
             determinationCooldownEffect.OnEnter = user =>
@@ -231,6 +231,41 @@ public class EffectFactory{
         return determinationCooldownEffect;
     }
 
+    private static Skill medStationHelper;
+    private static Effect medStationEffect;
+    public static Effect getMedStationEffect()
+    {
+        if(medStationEffect == null)
+        {
+            medStationHelper = new Skill();
+            medStationHelper.targetType = Skill.TargetType.ALLY;
+            medStationHelper.range = 0;
+            medStationHelper.aoe = 4;
+            medStationEffect = new Effect();
+            medStationEffect.onTurnBegin = user =>
+            {
+                foreach(Unit ally in medStationHelper.gatherTargets(user, user.tile))
+                {
+                    ally.TakeDamage(-2, user);
+                }
+            };
+        }
+        return medStationEffect;
+    }
+
+    private static Effect doomEffect;
+    public static Effect getDoomEffect()
+    {
+        if(doomEffect == null)
+        {
+            doomEffect = new Effect();
+            doomEffect.OnExit = user =>
+            {
+                user.TakeDamage(99999, user);
+            };
+        }
+        return doomEffect;
+    }
 
     private static Skill frontLineEffectHelper;
     private static Effect frontLineEffect;
@@ -263,6 +298,40 @@ public class EffectFactory{
             anatomyEffect.damageBonus = user => 0.4f;
         }
         return anatomyEffect;
+    }
+
+    private static Effect balanceBuffEffect;
+    public static Effect getBalanceBuffEffect()
+    {
+        if(balanceBuffEffect == null)
+        {
+            balanceBuffEffect = new Effect();
+            balanceBuffEffect.armorBonus = user => 0.1f;
+        }
+        return balanceBuffEffect;
+    }
+
+    private static Effect balanceDebuffEffect;
+    public static Effect getBalanceDebuffEffect()
+    {
+        if (balanceBuffEffect == null)
+        {
+            balanceBuffEffect = new Effect();
+            balanceBuffEffect.armorBonus = user => -0.1f;
+        }
+        return balanceBuffEffect;
+    }
+
+    private static Effect lethalInjectionEffect;
+    public static Effect getLethalInjectionEffect()
+    {
+        if (lethalInjectionEffect == null)
+        {
+            lethalInjectionEffect = new Effect();
+            lethalInjectionEffect.armorBonus = user => -0.1f;
+            lethalInjectionEffect.damageBonus = user => -0.1f;
+        }
+        return lethalInjectionEffect;
     }
 
     private static Effect epidemicEffect;
