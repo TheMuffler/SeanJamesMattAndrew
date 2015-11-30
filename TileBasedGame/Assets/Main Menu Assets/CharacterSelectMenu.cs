@@ -15,10 +15,11 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public CanvasGroup charMenu, talentMenu; //character selection screen, talent selection screen: grouped for easy enable/disable
 	public Text charDescription;			 //character description shown to player before they choose to add to team/select talents
 	string tankDescription, medicDescription, assassinDescription, techDescription; //individual class descriptions, pull from class factories instead?
-	public Image charImage;					//current character description image
 	public Button tankIcon, medicIcon, assassinIcon, techIcon, selectCharacter, beginGame;
+	public CanvasGroup beginGameCG, team1,team2,team3;
+	List<CanvasGroup> teamIcons;
 	public Image tankImage, medicImage, assassinImage, techImage;
-
+	public Image characterImage;
 	List<Button> talentButtons;				 							//store the below panels for easy access
 	public Button talent1, talent2, talent3, talent4, talent5, talent6;	//the panel buttons containing the talent images and descriptions
 
@@ -40,7 +41,6 @@ public class CharacterSelectMenu : MonoBehaviour {
 	
 		charMenu = charMenu.GetComponent<CanvasGroup> ();
 		charDescription = charDescription.GetComponent<Text> ();
-		charImage = charImage.GetComponent<Image> ();
 
 		tankIcon = tankIcon.GetComponent<Button> ();
 		tankImage = tankImage.GetComponent<Image> ();
@@ -58,9 +58,22 @@ public class CharacterSelectMenu : MonoBehaviour {
 		techImage = techImage.GetComponent<Image> ();
 		techImage.sprite = new TechFactory ().image;
 
+		characterImage = characterImage.GetComponent<Image> ();
+
 		selectCharacter = selectCharacter.GetComponent<Button> ();
 		beginGame = beginGame.GetComponent<Button> ();
+		beginGameCG = beginGameCG.GetComponent<CanvasGroup> ();
 		beginGame.enabled = false;
+
+		team1 = team1.GetComponent<CanvasGroup> ();
+		team2 = team2.GetComponent<CanvasGroup> ();
+		team3 = team3.GetComponent<CanvasGroup> ();
+
+		teamIcons = new List<CanvasGroup> ();
+
+		teamIcons.Add (team1);
+		teamIcons.Add (team2);
+		teamIcons.Add (team3);
 
 		teamMembers = new List<ClassFactory>();
 		teamMemberIcons = new List<Image> ();
@@ -124,10 +137,10 @@ public class CharacterSelectMenu : MonoBehaviour {
 
 		currentChar = Chars.tank;
 
-		tankDescription = "The Tank is a rough, tough melee brawler. He is capable of taking big hits as well as dishing them out.";
-		medicDescription = "The Medic is";
-		assassinDescription = "The Assassin is";
-		techDescription = "The Tech is";
+		tankDescription = "Tank\n\n" + new TankFactory().description;
+		medicDescription = "Medic\n\n" + new MedicFactory().description;
+		assassinDescription = "Assassin\n\n" + new AssassinFactory().description;
+		techDescription = "Tech\n\n" + new TechFactory().description;
 	}
 
 
@@ -191,18 +204,22 @@ public class CharacterSelectMenu : MonoBehaviour {
 
 	public void displayTank(){
 		currentChar = Chars.tank;
+
 	}
 
 	public void displayMedic(){
 		currentChar = Chars.medic;
+
 	}
 
 	public void displayAssassin(){
 		currentChar = Chars.assassin;
+
 	}
 
 	public void displayTech(){
 		currentChar = Chars.tech;
+
 	}
 
 	public void selectChar(){
@@ -245,6 +262,15 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public void confirmSelectChar(){
 		//update the team member image icons here
 		teamMemberIcons [teamMembers.Count - 1].sprite = teamMembers [teamMembers.Count - 1].image;
+
+		int teamCount = teamMembers.Count;
+
+		for (int i = 0; i < 3; ++i)
+			if (i < teamCount)
+				teamIcons [i].alpha = 1;
+			else
+				teamIcons [i].alpha = 0;
+
 		//set their alpha in Update
 	}
 
@@ -263,19 +289,19 @@ public class CharacterSelectMenu : MonoBehaviour {
 		switch (currentChar) {
 			case Chars.tank:
 				charDescription.text = tankDescription;
-				//charImage.mainTexture = tankImage;
+				characterImage.sprite = new TankFactory ().image;
 				break;
 			case Chars.medic:
 				charDescription.text = medicDescription;
-				//charImage.mainTexture = medicImage;
+				characterImage.sprite = new MedicFactory ().image;
 				break;
 			case Chars.assassin:
 				charDescription.text = assassinDescription;
-				//charImage.mainTexture = assassinImage;
+				characterImage.sprite = new AssassinFactory ().image;
 				break;
 			case Chars.tech:
 				charDescription.text = techDescription;
-				//charImage.mainTexture = techImage;
+				characterImage.sprite = new TechFactory ().image;
 				break;
 			default:
 				break;
@@ -284,9 +310,11 @@ public class CharacterSelectMenu : MonoBehaviour {
 		//full team or not enough team members, toggle buttons
 		if (teamMembers.Count == 3) {
 			beginGame.enabled = true;
+			beginGameCG.alpha = 1;
 			selectCharacter.enabled = false;
 		} else {
 			beginGame.enabled = false;
+			beginGameCG.alpha = 0;
 			selectCharacter.enabled = true;
 		}
 

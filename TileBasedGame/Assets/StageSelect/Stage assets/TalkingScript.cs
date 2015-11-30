@@ -76,7 +76,7 @@ public class TalkingScript : MonoBehaviour {
 	public void startLevel()
 	{
 		Debug.Log ("Stage Select!");
-		Application.LoadLevel (1);
+		Application.LoadLevel (3);
 	}
 	
 	// Update is called once per frame

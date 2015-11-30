@@ -8,6 +8,9 @@ public class TempActionBarUI : MonoBehaviour {
     public Unit unit;
     public Button[] buttons;
     public Sprite sprite;
+    public GameObject tooltipbox;
+    public Text tooltiptext;
+
 
 	// Use this for initialization
 	void Start () {
@@ -66,5 +69,22 @@ public class TempActionBarUI : MonoBehaviour {
         buttons[index].transform.GetChild(0).GetComponent<Text>().text = "";
         buttons[index].onClick.RemoveAllListeners();
         buttons[index].transform.GetChild(1).GetComponent<Image>().fillAmount = 0;
+    }
+
+    public void SetTooltip(int index)
+    {
+        if (index < 0 || unit.skillContainers.Count <= index)
+        {
+            closeToolTip();
+            return;
+        }
+        tooltipbox.SetActive(true);
+        tooltipbox.transform.position = buttons[index].transform.position + transform.up * 250;
+        tooltiptext.text = unit.skillContainers[index].skill.name + "\n\nMana Cost: " + unit.skillContainers[index].skill.manaCost(unit) + "\nCooldown: " + unit.skillContainers[index].skill.cooldown + "\n\n" + unit.skillContainers[index].skill.description;
+    }
+
+    public void closeToolTip()
+    {
+        tooltipbox.SetActive(false);
     }
 }

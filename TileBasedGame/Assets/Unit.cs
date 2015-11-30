@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour {
 
@@ -499,7 +500,7 @@ public class Unit : MonoBehaviour {
         else
             ik.StopLooking();
 
-        if (Input.GetMouseButtonDown (0) && GameManager.instance.selected != null) {
+        if (Input.GetMouseButtonDown (0) && GameManager.instance.selected != null && !WasButton()) {
 
             if (IsAimingSkill)
                 CommitSkillTarget();
@@ -571,5 +572,18 @@ public class Unit : MonoBehaviour {
                 GameManager.instance.tasks.Add(new Task_MoveToTile(this, list[list.Count - 2]));
             GameManager.instance.tasks.Add(new Task_ShowAttack(this, t.unit, "Punch"));
         });
+    }
+
+    private bool WasButton()
+    {
+        UnityEngine.EventSystems.EventSystem ct
+              = UnityEngine.EventSystems.EventSystem.current;
+
+        if (!ct.IsPointerOverGameObject()) return false;
+        if (!ct.currentSelectedGameObject) return false;
+        if (ct.currentSelectedGameObject.GetComponent<Button>() == null)
+            return false;
+
+        return true;
     }
 }
