@@ -547,18 +547,19 @@ public class SkillFactory
     public static Skill GetMakeSentry()
     {
 
-        if(makeSentry == null)
+        if (makeSentry == null)
         {
             makeSentry = new Skill();
             makeSentry.name = "Sentry";
-            makeSentry.manaCost = user=>3;
+            makeSentry.icon = Resources.Load<Sprite>("SpellIcons/repair");
+            makeSentry.manaCost = user => 3;
             makeSentry.targetType = Skill.TargetType.NONE;
             makeSentry.tileRestriction = Skill.TargetTileRestriction.EMPTY;
             makeSentry.cooldown = 5;
             makeSentry.range = 2;
             makeSentry.OnTilePostEffects += (user, tile, args) =>
             {
-                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("AssassinModel"), tile.transform.position,user.transform.rotation);
+                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("AssassinModel"), tile.transform.position, user.transform.rotation);
                 Unit u = go.AddComponent<Unit>();
                 u.dontPlace = true;
                 tile.SetUnit(u);
@@ -567,6 +568,8 @@ public class SkillFactory
                 u.baseMoveRange = 0;
                 u.maxMP = 10;
                 u.maxHP = 10;
+                u.AddSkill(SkillFactory.GetSnipe());
+                u.AddEffect(EffectFactory.getDoomEffect(), 5);
             };
             makeSentry.GenerateTasks = (user, tile, args) =>
             {
@@ -578,5 +581,100 @@ public class SkillFactory
         }
         return makeSentry;
     }
-	
+
+    private static float DefaultDamageFormula(Unit user, Unit target, Skill skill)
+    {
+        return user.DamageMultiplier * skill.basePower * (1f - target.Armor);
+    }
+
+    private static Skill lethalInjection;
+    public static Skill getLethalInjection()
+    {
+        if (lethalInjection == null)
+        {
+            lethalInjection = new Skill();
+            lethalInjection.name = "Lethal\nInjection";
+            lethalInjection.icon = Resources.Load<Sprite>("SpellIcons/shiv");
+            lethalInjection.cooldown = 1;
+            lethalInjection.manaCost = user => 1;
+            lethalInjection.basePower = 2.5f;
+            lethalInjection.targetType = Skill.TargetType.ENEMY;
+            lethalInjection.range = 3;
+            lethalInjection.aoe = 0;
+            lethalInjection.OnTarget = (user, target, args) =>
+            {
+                float amt = DefaultDamageFormula(user, target, lethalInjection);
+                target.TakeDamage(amt, user);
+                target.AddEffect(EffectFactory.getLethalInjectionEffect(), 2);
+            };
+        }
+        return lethalInjection;
+    }
+
+    private static Skill makeMedStation = null;
+    public static Skill getMakeMedStation()
+    {
+
+        if (makeMedStation == null)
+        {
+            makeMedStation = new Skill();
+            makeMedStation.name = "Sentry";
+            makeMedStation.icon = Resources.Load<Sprite>("SpellIcons/repair");
+            makeMedStation.manaCost = user => 3;
+            makeMedStation.targetType = Skill.TargetType.NONE;
+            makeMedStation.tileRestriction = Skill.TargetTileRestriction.EMPTY;
+            makeMedStation.cooldown = 5;
+            makeMedStation.range = 2;
+            makeMedStation.OnTilePostEffects += (user, tile, args) =>
+            {
+                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("MedicModel"), tile.transform.position, user.transform.rotation);
+                Unit u = go.AddComponent<Unit>();
+                u.dontPlace = true;
+                tile.SetUnit(u);
+                u.faction = user.faction;
+                u.aiControlled = true;
+                u.baseMoveRange = 0;
+                u.maxMP = 10;
+                u.maxHP = 10;
+                u.AddEffect(EffectFactory.getMedStationEffect(), -1);
+                u.AddEffect(EffectFactory.getDoomEffect(), 5);
+            };
+            makeMedStation.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube")));
+                makeMedStation.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return makeMedStation;
+    }
+
+    private static Skill anatomy;
+    public static Skill getAnatomy()
+    {
+        if (anatomy == null)
+        {
+            anatomy = new Skill();
+            anatomy.name = "Anatomy";
+            anatomy.icon = Resources.Load<Sprite>("SpellIcons/fade");
+            anatomy.targetType = Skill.TargetType.ALLY;
+            anatomy.range = 3;
+            anatomy.aoe = 0;
+            anatomy.manaCost = user => 3;
+            anatomy.OnTarget = (user, target, args) =>
+            {
+                target.AddEffect(EffectFactory.getAnatomyEffect(), 3);
+            };
+            anatomy.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube"), 3));
+                anatomy.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return anatomy;
+    }
+
 }
