@@ -155,10 +155,10 @@ public class AssassinFactory : ClassFactory
         baseSkills.Add(SkillFactory.GetCripple());
 
         Talent t = new Talent();
-        t.name = "Add Blood Donor";
-        t.description = "Adds Blood Donor to Class";
+        t.name = "Shadow Drift";
+        t.description = "The assassin teleports to any tile within a huge distance.";
         t.IfChosen = unit => {
-            unit.AddSkill(SkillFactory.GetBloodDonor());
+            unit.AddSkill(SkillFactory.getShadowDrift());
         };
         talentOptions.Add(t);
 
@@ -172,11 +172,11 @@ public class AssassinFactory : ClassFactory
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Improve Skill X";
-        t.description = "Makes Skill X better. Skill X is scripted to check if the performing agent has the string 'SkillXImprove' in its talentTags";
+        t.name = "Single Out";
+        t.description = "Deal double damage to units with no allies within 3 tiles.";
         t.IfChosen = unit =>
         {
-            unit.talentTags.Add("SkillXImprove");
+            unit.AddEffect(EffectFactory.getSingledOutEffect(), -1);
         };
 		talentOptions.Add(t);
 
@@ -309,10 +309,10 @@ public class TechFactory : ClassFactory
         baseSkills.Add(SkillFactory.GetMakeSentry());
 
         Talent t = new Talent();
-        t.name = "Add Blood Donor";
-        t.description = "Adds Blood Donor to Class";
+        t.name = "Med Station";
+        t.description = "Able to create med stations. Static structures that restore health to nearby allies every turn.";
         t.IfChosen = unit => {
-            unit.AddSkill(SkillFactory.GetBloodDonor());
+            unit.AddSkill(SkillFactory.getMakeMedStation());
         };
         talentOptions.Add(t);
 
@@ -326,28 +326,29 @@ public class TechFactory : ClassFactory
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Improve Skill X";
-        t.description = "Makes Skill X better. Skill X is scripted to check if the performing agent has the string 'SkillXImprove' in its talentTags";
+        t.name = "Battle Bot";
+        t.description = "Creates a mobile robot buddy. Will move to and attack enemies for you.";
         t.IfChosen = unit =>
         {
-            unit.talentTags.Add("SkillXImprove");
+            unit.AddSkill(SkillFactory.getMakeBattlePet());
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Vampiric Attacks";
-        t.description = "Your attacks restore your health";
+        t.name = "Sticky Grenade";
+        t.description = "Attaches a sticky grenade to an enemy, which explodes after 2 turns.";
         t.IfChosen = unit =>
         {
-            unit.AddEffect(EffectFactory.getVampiricEffect(), -1); //-1 is permanent
+            unit.AddSkill(SkillFactory.getStickyGrenade());
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 1";
+        t.name = "Master Sniper";
+        t.description = "Snipe is free.";
         t.IfChosen = unit =>
         {
-
+            unit.talentTags.Add("FreeSnipe");
         };
         talentOptions.Add(t);
 

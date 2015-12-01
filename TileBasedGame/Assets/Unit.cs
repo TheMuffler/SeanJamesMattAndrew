@@ -178,10 +178,13 @@ public class Unit : MonoBehaviour {
     public delegate float FloatCalculation();
 
     //amt is a stub
-    public void TakeDamage(float amt, Unit attacker)
+    public void TakeDamage(float amt, Unit attacker,bool ignoreEffects = false)
     {
-        attacker.OnAttackAnother(this, amt);
-        OnGetHit(attacker, amt);
+        if (!ignoreEffects)
+        {
+            attacker.OnAttackAnother(this, amt);
+            OnGetHit(attacker, amt);
+        }
 
         if (amt > 0)
         {

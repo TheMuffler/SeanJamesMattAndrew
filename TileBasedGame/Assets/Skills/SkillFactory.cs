@@ -471,7 +471,7 @@ public class SkillFactory
             snipe.basePower = 3;
             snipe.aoe = 0;
             snipe.range = 4;
-            snipe.manaCost = user => 1;
+            snipe.manaCost = user => user.talentTags.Contains("FreeSnipe") ? 0 : 2;
             snipe.cooldown = 0;
             snipe.damageType = Skill.DamageType.DAMAGE;
             snipe.targetType = Skill.TargetType.ENEMY;
@@ -615,7 +615,7 @@ public class SkillFactory
         if (makeMedStation == null)
         {
             makeMedStation = new Skill();
-            makeMedStation.name = "Sentry";
+            makeMedStation.name = "Med\nStation";
             makeMedStation.icon = Resources.Load<Sprite>("SpellIcons/repair");
             makeMedStation.manaCost = user => 3;
             makeMedStation.targetType = Skill.TargetType.NONE;
@@ -647,6 +647,47 @@ public class SkillFactory
         return makeMedStation;
     }
 
+    private static Skill makeBattlePet = null;
+    public static Skill getMakeBattlePet()
+    {
+
+        if (makeBattlePet == null)
+        {
+            makeBattlePet = new Skill();
+            makeBattlePet.name = "Battle\nBot";
+            makeBattlePet.icon = Resources.Load<Sprite>("SpellIcons/repair");
+            makeBattlePet.manaCost = user => 3;
+            makeBattlePet.targetType = Skill.TargetType.NONE;
+            makeBattlePet.tileRestriction = Skill.TargetTileRestriction.EMPTY;
+            makeBattlePet.cooldown = 5;
+            makeBattlePet.range = 2;
+            makeBattlePet.OnTilePostEffects += (user, tile, args) =>
+            {
+                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("basemodel"), tile.transform.position, user.transform.rotation);
+                Unit u = go.AddComponent<Unit>();
+                u.dontPlace = true;
+                tile.SetUnit(u);
+                u.faction = user.faction;
+                u.aiControlled = true;
+                u.baseMoveRange = 2;
+                u.maxMP = 10;
+                u.maxHP = 10;
+                u.baseArmor = 0.2f;
+                u.AddSkill(SkillFactory.GetShiv());
+                u.AddSkill(SkillFactory.GetSnipe());
+                u.AddEffect(EffectFactory.getDoomEffect(), 5);
+            };
+            makeBattlePet.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube")));
+                makeBattlePet.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return makeBattlePet;
+    }
+
     private static Skill anatomy;
     public static Skill getAnatomy()
     {
@@ -673,5 +714,58 @@ public class SkillFactory
         }
         return anatomy;
     }
-	
+
+    private static Skill stickyGrenade;
+    public static Skill getStickyGrenade()
+    {
+        if(stickyGrenade == null)
+        {
+            stickyGrenade = new Skill();
+            stickyGrenade.name = "Sticky\nGrenade";
+            stickyGrenade.cooldown = 3;
+            stickyGrenade.manaCost = user => 4;
+            stickyGrenade.range = 3;
+            stickyGrenade.OnTarget = (user, target, args) =>
+            {
+                target.AddEffect(EffectFactory.getStickyGrenadeEffect(), 2);
+            };
+            stickyGrenade.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube"), 3));
+                stickyGrenade.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return stickyGrenade;
+    }
+
+
+    private static Skill shadowDrift;
+    public static Skill getShadowDrift()
+    {
+        if(shadowDrift == null)
+        {
+            shadowDrift = new Skill();
+            shadowDrift.name = "Shadow\nDrift";
+            shadowDrift.range = 5;
+            shadowDrift.targetType = Skill.TargetType.NONE;
+            shadowDrift.tileRestriction = Skill.TargetTileRestriction.EMPTY;
+            shadowDrift.cooldown = 3;
+            shadowDrift.manaCost = user => 3;
+            shadowDrift.OnTilePostEffects += (user, tile, args) =>
+            {
+                user.transform.position = tile.transform.position;
+                tile.SetUnit(user);
+            };
+            shadowDrift.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube"), 3));
+                shadowDrift.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return shadowDrift;
+    }
 }

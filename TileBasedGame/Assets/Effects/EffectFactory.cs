@@ -334,6 +334,58 @@ public class EffectFactory {
         return lethalInjectionEffect;
     }
 
+    private static Skill stickyGrenadeEffectHelper;
+    private static Effect stickyGrenadeEffect;
+    public static Effect getStickyGrenadeEffect()
+    {
+        if(stickyGrenadeEffect == null)
+        {
+            stickyGrenadeEffectHelper = new Skill();
+            stickyGrenadeEffectHelper.targetType = Skill.TargetType.ALLY;
+            stickyGrenadeEffectHelper.range = 0;
+            stickyGrenadeEffectHelper.aoe = 2;
+            stickyGrenadeEffectHelper.basePower = 2;
+            stickyGrenadeEffectHelper.OnTarget = (user, target, args) =>
+            {
+                float amt = stickyGrenadeEffectHelper.basePower * (1f - target.Armor);
+                target.TakeDamage(amt, user);
+            };
+            stickyGrenadeEffectHelper.GenerateTasks = (user, tile, args) =>
+            {
+
+                stickyGrenadeEffectHelper.EnqueueExecuteTask(user, tile, args);
+            };
+
+            stickyGrenadeEffect = new Effect();
+            stickyGrenadeEffect.OnExit = user =>
+            {
+                stickyGrenadeEffectHelper.Perform(user, user.tile);
+            };
+        }
+        return stickyGrenadeEffect;
+    }
+
+    private static Skill singledOutEffectHelper;
+    private static Effect singledOutEffect;
+    public static Effect getSingledOutEffect()
+    {
+        if(singledOutEffect == null)
+        {
+            singledOutEffectHelper = new Skill();
+            singledOutEffectHelper.targetType = Skill.TargetType.ALLY;
+            singledOutEffectHelper.range = 0;
+            singledOutEffectHelper.aoe = 3;
+
+            singledOutEffect = new Effect();
+            singledOutEffect.OnHitAttacking = (attacker, defender, amt) =>
+            {
+                if(singledOutEffectHelper.gatherTargets(defender,defender.tile).Count==0)
+                    defender.TakeDamage(amt, attacker, true);
+            };
+        }
+        return singledOutEffect;
+    }
+
     private static Effect epidemicEffect;
     public static Effect getEpidemicEffect()
     {
