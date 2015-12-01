@@ -2,13 +2,17 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class TalkingScript : MonoBehaviour {
+
 	// Whether the MainCanvas is visible
 	public bool isShowing;
 
+	public CanvasGroup thisGroup;
 	public GameObject menuCanvas;
 	public Animator animator;
+	public Animator initalScene;
 
 	// The Number of the next Scene to load
 	public int nextScene;
@@ -33,25 +37,16 @@ public class TalkingScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//charsToLoad=4; //Amount of chars who can talk
-		/*
-		speech[0]="Give me one good reason why I should wear a dress.";
-		speech[1]="You make me feel like I'm not good enough."; 
-		speech[2]="What a thing to say - and on my birthday!";
-		speech[3]="Wait...There's something in the ship!";
-		speech[4]="It's... A robot?";
-		speech[5]="What's the deal with airline food?";
-		speech[6]=	"Who are you and what are you doing here?!";
-		speech[7]=	"I'm your daughter and this is where I live.";
-		speech[8]=	"I don't want to have a baby.";
-		speech[9]=	"This isn't just about you. We are keeping her; she could be useful against bandits at the cantina";
-		*/
-		//StartCoroutine(Delayed() );
+
+		//menuCanvas.SetActive(false);
 
 		animator = animator.GetComponent<Animator>();
+
 		portrait = portrait.GetComponent<Image>();
 
 		animator.GetBehaviour <TransClass> ().transition=nextScene;
+
+
 
 		for(int i=0; i< charsToLoad; ++i)
 			charImg[i]=charImg[i].GetComponent<Image>();
@@ -64,7 +59,14 @@ public class TalkingScript : MonoBehaviour {
 		portrait.sprite=charImg[person[currPart]].sprite;
 		charName.text=charImg[person[currPart]].tag;
 		convoText.GetComponentInChildren<Text>().text=speech[currPart++];
+		//menuCanvas.SetActive();
 
+
+	}
+	private void delay(int delay)
+	{
+		int t = Environment.TickCount;
+		while ((Environment.TickCount - t) < delay) ;
 	}
 	//This function will run through all of the text and then start the level after it quits
 	public void NextMove(){
@@ -95,13 +97,22 @@ public class TalkingScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if(currPart> person.Length)
-			isShowing=false;
+	void fadeInOut(float i)
+	{
+//		int c=0;
+//		i<=0.0f ? c=1 : c=-1;
 	
-		menuCanvas.SetActive(isShowing);
 
+	}
+	void Update () {
 
+		if(currPart> person.Length || !animator.GetBehaviour <InitalStart> ().passed  )
+			thisGroup.alpha=0;
+		else 
+			thisGroup.alpha=1;
+
+//		menuCanvas.SetActive(isShowing);
+		//menuCanvas.SetActive(initalScene.GetBehaviour <InitalStart> ().passed);
 	}
 	IEnumerator Delayed(int arg=5)
 	{
