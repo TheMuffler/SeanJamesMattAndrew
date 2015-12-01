@@ -4,17 +4,23 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TalkingScript : MonoBehaviour {
+	// Whether the MainCanvas is visible
+	public bool isShowing;
 
+	public GameObject menuCanvas;
+	public Animator animator;
+
+	// The Number of the next Scene to load
+	public int nextScene;
+	public int currPart;
 
 	public Image portrait;
 	public Text charName;
 	public Button continueText;
 	public Button convoText;
-//	public Text levelInfoText;
-	int currPart;
 	public int charsToLoad;
-
 	public List<Image> charImg = new List<Image>();
+
 	//Tank MED Tech ASS
 	// Testing conversations with 10
 	public int[] person = new []{2,3,1,2,3,0,1,0,1,3}; //These are the 
@@ -40,8 +46,12 @@ public class TalkingScript : MonoBehaviour {
 		speech[8]=	"I don't want to have a baby.";
 		speech[9]=	"This isn't just about you. We are keeping her; she could be useful against bandits at the cantina";
 		*/
+		//StartCoroutine(Delayed() );
+
+		animator = animator.GetComponent<Animator>();
 		portrait = portrait.GetComponent<Image>();
 
+		animator.GetBehaviour <TransClass> ().transition=nextScene;
 
 		for(int i=0; i< charsToLoad; ++i)
 			charImg[i]=charImg[i].GetComponent<Image>();
@@ -70,17 +80,32 @@ public class TalkingScript : MonoBehaviour {
 
 		else 
 			startLevel();
+
 		++currPart;
 
 	}
 	public void startLevel()
 	{
-		Debug.Log ("Stage Select!");
-		Application.LoadLevel (3);
+		currPart= person.Length;
+		animator.SetTrigger("EndConversation");
+		menuCanvas.SetActive(false);
+
+		Debug.Log ("Finished Conversation and Starting next Scene");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(currPart> person.Length)
+			isShowing=false;
+	
+		menuCanvas.SetActive(isShowing);
 
+
+	}
+	IEnumerator Delayed(int arg=5)
+	{
+	
+		yield return new WaitForSeconds (arg);
 	}
 }

@@ -7,9 +7,16 @@ public class Effect
 {
 	public HashSet<string> TriggerTags = new HashSet<string> ();
 
-    public float damageBonus = 0;
-    public float armorBonus = 0;
+
+
+    public delegate float BonusDelegate(Unit user);
+
+    //public float damageBonus = 0;
+    //public float armorBonus = 0;
     public int moveRangeBonus = 0;
+
+    public BonusDelegate damageBonus = user => 0;
+    public BonusDelegate armorBonus = user => 0;
 
 	public string animBool = "";
 	//public float dot = 0;
