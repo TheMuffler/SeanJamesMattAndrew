@@ -48,7 +48,7 @@ public class SkillFactory
 		if (heal == null) {
 			heal = new Skill();
 			heal.name = "Heal";
-			heal.icon = Resources.Load<Sprite>("SkillIcons/heal");
+			heal.icon = Resources.Load<Sprite>("SpellIcons/heal");
 
 			heal.basePower = 2;
 			heal.aoe = 0;
@@ -58,16 +58,14 @@ public class SkillFactory
 			heal.damageType = Skill.DamageType.HEAL;
 			heal.targetType = Skill.TargetType.ALLY;
 			heal.OnTarget = (user, target, args) => {
-				target.TakeDamage((-1*aoeHeal.basePower), user);
+				target.TakeDamage((-1*heal.basePower), user);
 			};
 			heal.GenerateTasks = (user, tile, args) => {
 				foreach(Unit target in heal.gatherTargets (user, tile)){
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
-					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
 					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube")));
+					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/MEDIC/medic projectile prefab"), 3));
                     GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/MEDIC/HEAL/heal prefab"), target.transform.position + Vector3.up, 1));
-                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
 				heal.EnqueueExecuteTask(user,tile,args);
 			};
@@ -97,11 +95,8 @@ public class SkillFactory
 
                 foreach (Unit target in aoeHeal.gatherTargets (user, tile)) {
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
-					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
 					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					//GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube")));
                     GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/MEDIC/AOE HEAL/aoe receiver prefab"), target.transform.position + Vector3.up, 1));
-                    //GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
 				aoeHeal.EnqueueExecuteTask(user, tile, args);
 			};
@@ -132,7 +127,7 @@ public class SkillFactory
 					GameManager.instance.tasks.Add (new Task_Face_Eachother (user, target));
 					GameManager.instance.tasks.Add (new Task_Trigger_Animation (user, "Punch"));
 					GameManager.instance.tasks.Add (new Task_Wait (0.3f));
-					GameManager.instance.tasks.Add (new Task_Fire_Projectile (user.transform.position + Vector3.up, target.tile.transform.position + Vector3.up, (GameObject)Resources.Load ("SpellVisuals/BulletCube")));
+					GameManager.instance.tasks.Add (new Task_Fire_Projectile (user.transform.position + Vector3.up, target.tile.transform.position + Vector3.up, (GameObject)Resources.Load ("SpellVisuals/MEDIC/medic projectile prefab"), 3));
                     GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/MEDIC/WEAKEN OFFENSE/WeakenOffense prefab"), target.transform.position + Vector3.up, 1));
                     GameManager.instance.tasks.Add (new Task_Trigger_Animation (target, "Hit"));
 				}
@@ -141,6 +136,43 @@ public class SkillFactory
 		}
 		return weakenOffense;
 	}
+
+    private static Skill incapacitate = null;
+    public static Skill GetIncapacitate()
+    {
+        if (incapacitate == null)
+        {
+            incapacitate = new Skill();
+            incapacitate.name = "Incapacitate";
+            incapacitate.icon = Resources.Load<Sprite>("SpellIcons/incapacitate");
+
+            incapacitate.basePower = 0;
+            incapacitate.manaCost = user => 4;
+            incapacitate.aoe = 0;
+            incapacitate.range = 4;
+            incapacitate.cooldown = 2;
+            incapacitate.damageType = Skill.DamageType.CONDITIONAL;
+            incapacitate.targetType = Skill.TargetType.ENEMY;
+            incapacitate.OnTarget = (user, target, args) =>
+            {
+
+            };
+            incapacitate.GenerateTasks = (user, tile, args) =>
+            {                
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                foreach (Unit target in incapacitate.gatherTargets(user, tile))
+                {
+                    GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
+                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, target.tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/MEDIC/INCAPACITATE/incapacitate projectile prefab"), 3));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/MEDIC/INCAPACITATE/incapacitate prefab"), target.transform.position, 4));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
+                }
+                incapacitate.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return incapacitate;
+    }
 
 
 	//TANK
@@ -163,14 +195,12 @@ public class SkillFactory
             slam.OnTarget = (user, target, args) => {
                 bool flag = user.talentTags.Contains("Slam Upgrade");
 
-                float amt = user.DamageMultiplier * bloodDonor.basePower * (1f - target.Armor);
+                float amt = user.DamageMultiplier * slam.basePower * (1f - target.Armor);
                 target.TakeDamage(amt*(flag?2:1), user);
                 target.AddEffect(EffectFactory.getStunEffect(), flag?1:2);
             };
             slam.GenerateTasks = (user, tile, args) =>
              {
-                 GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
-                 GameManager.instance.tasks.Add(new Task_Wait(0.3f));
                  GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/TANK/SLAM/SlamPrefab"), user.transform.position, 4));
                  foreach(Unit target in slam.gatherTargets(user, tile))
                  {
@@ -187,7 +217,7 @@ public class SkillFactory
 	public static Skill GetWeakenDefense() {
 		if (weakenDefense == null) {
 			weakenDefense = new Skill();
-			weakenDefense.name = "Weakend\nDefense";
+			weakenDefense.name = "Weaken\nDefense";
 			weakenDefense.icon = Resources.Load<Sprite>("SpellIcons/weakenDefense");
 			
 			weakenDefense.basePower = 2;
@@ -206,7 +236,7 @@ public class SkillFactory
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
 					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube")));
+					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/TANK/tank projectile prefab"), 3));
                     GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/TANK/WEAKEN DEFENSE/WeakenDefense prefab"), target.transform.position, 1));
                     GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
@@ -234,7 +264,6 @@ public class SkillFactory
                 //user.AddEffect(EffectFactory.getTauntEffect(), 4);
             };
 			taunt.GenerateTasks = (user, tile, args) => {
-				GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
                 //TODO: MAKE ANIMATION LAST [SET AMOUNT] TURNS!
                 GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/TANK/TAUNT/taunt prefab"), user.transform.position, 1));
                 taunt.EnqueueExecuteTask(user, tile, args);
@@ -338,15 +367,8 @@ public class SkillFactory
 			};
 			fade.GenerateTasks = (user, tile, args) =>
 			{
-                List<Unit> list = shiv.gatherTargets(user, tile);
-                foreach (Unit target in list)
-                {
-                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
-                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, target.tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube")));
-                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/FADE/Fade Prefab"), target.transform.position, 1));
-                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
-                }
+                List<Unit> list = fade.gatherTargets(user, tile);
+                GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/FADE/Fade Prefab"), user.transform.position, 1));
                 fade.EnqueueExecuteTask(user, tile, args);
 			};
 		}
@@ -383,7 +405,7 @@ public class SkillFactory
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
 					GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/BulletCube"),1.2f));
+                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position+Vector3.up,target.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/ASSASSIN/CRIPPLE/cripple projectile prefab"), 3));
                     GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/CRIPPLE/Cripple prefab"), target.transform.position, 1));
                     GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
@@ -406,7 +428,7 @@ public class SkillFactory
             epidemic.basePower = 8;
             epidemic.aoe = 2;
             epidemic.range = 4;
-            epidemic.manaCost = user => 8;
+            epidemic.manaCost = user => 6;
             epidemic.cooldown = 0;
             epidemic.damageType = Skill.DamageType.DAMAGE;
             epidemic.targetType = Skill.TargetType.ENEMY;
@@ -426,8 +448,8 @@ public class SkillFactory
                     GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
                     GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
                     GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, target.tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube"), 1.2f));
-                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/EPIDEMIC/epidemic helper prefab"), target.transform.position, 2));
+                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, target.tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/EPIDEMIC/epidemic projectile prefab"), 3));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/EPIDEMIC/epidemic prefab"), target.transform.position, 2));
                     GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
                 }
                 epidemic.EnqueueExecuteTask(user, tile, args);
