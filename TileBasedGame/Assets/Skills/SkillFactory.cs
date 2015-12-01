@@ -768,4 +768,113 @@ public class SkillFactory
         }
         return shadowDrift;
     }
+
+    private static Skill pierce;
+    public static Skill getPierce()
+    {
+        if (pierce == null)
+        {
+            pierce = new Skill();
+            pierce.name = "Pierce";
+            pierce.icon = Resources.Load<Sprite>("SpellIcons/shiv");
+
+            pierce.basePower = 4;
+            pierce.aoe = 0;
+            pierce.range = 3;
+            pierce.manaCost = user => 0;
+            pierce.cooldown = 0;
+            pierce.damageType = Skill.DamageType.DAMAGE;
+            pierce.targetType = Skill.TargetType.ENEMY;
+            pierce.OnTarget = (user, target, args) =>
+            {
+                float amt = user.DamageMultiplier * pierce.basePower * (1f - target.Armor);
+                target.TakeDamage(amt, user);
+
+            };
+            pierce.GenerateTasks = (user, tile, args) =>
+            {
+                List<Unit> list = pierce.gatherTargets(user, tile);
+                foreach (Unit target in list)
+                {
+                    GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube"), 3));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/shiv/shiv prefab"), target.transform.position, 1));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
+                }
+                pierce.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return pierce;
+    }
+
+    private static Skill efficiency;
+    public static Skill getEfficiency()
+    {
+        if(efficiency == null)
+        {
+            efficiency = new Skill();
+            efficiency.targetType = Skill.TargetType.ANY;
+            efficiency.manaCost = user => 0;
+            efficiency.cooldown = 3;
+            efficiency.range = 2;
+            efficiency.basePower = 2;
+            efficiency.OnTarget = (user, target, args) =>
+            {
+                if (user.IsAlly(target))
+                    target.TakeDamage(-efficiency.basePower * user.DamageMultiplier, user);
+                else
+                    target.TakeDamage(DefaultDamageFormula(user, target, efficiency), user);
+                user.curMP = Mathf.Min(user.maxMP, user.curMP + 3);
+            };
+            efficiency.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/BulletCube"), 3));
+                efficiency.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return efficiency;
+    }
+
+    private static Skill acidBlade;
+    public static Skill getAcidBlade()
+    {
+        if (acidBlade == null)
+        {
+            acidBlade = new Skill();
+            acidBlade.name = "Acid\nBlade";
+            acidBlade.icon = Resources.Load<Sprite>("SpellIcons/shiv");
+
+            acidBlade.basePower = 3;
+            acidBlade.aoe = 0;
+            acidBlade.range = 1;
+            acidBlade.manaCost = user => 0;
+            acidBlade.cooldown = 3;
+            acidBlade.damageType = Skill.DamageType.DAMAGE;
+            acidBlade.targetType = Skill.TargetType.ENEMY;
+            acidBlade.OnTarget = (user, target, args) =>
+            {
+                float amt = user.DamageMultiplier * acidBlade.basePower;
+                target.TakeDamage(amt, user);
+                target.AddEffect(EffectFactory.GetWeakenDefenseEffect(), 3);
+            };
+            acidBlade.GenerateTasks = (user, tile, args) =>
+            {
+                List<Unit> list = acidBlade.gatherTargets(user, tile);
+                foreach (Unit target in list)
+                {
+                    GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/shiv/shiv prefab"), target.transform.position, 1));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
+                }
+                acidBlade.EnqueueExecuteTask(user, tile, args);
+            };
+        }
+        return acidBlade;
+    }
 }

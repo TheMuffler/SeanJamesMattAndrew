@@ -181,27 +181,37 @@ public class AssassinFactory : ClassFactory
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Vampiric Attacks";
-        t.description = "Your attacks restore your health";
+        t.name = "Pierce";
+        t.description = "Shiv is replace by pierce, a ranged attack with similar damage.";
         t.IfChosen = unit =>
         {
-            unit.AddEffect(EffectFactory.getVampiricEffect(), -1); //-1 is permanent
+            for (int i = 0; i < unit.skillContainers.Count; ++i)
+            {
+                if (unit.skillContainers[i].skill == SkillFactory.GetShiv())
+                {
+                    unit.skillContainers.RemoveAt(i);
+                    return;
+                }
+            }
+            unit.AddSkill(SkillFactory.getPierce());
         };
 		talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 1";
+        t.name = "Efficiency";
+        t.description = "Move which slightly heals an ally or slightly damages an enemy. Has no energy cost, and restores energy to the caster.";
         t.IfChosen = unit =>
         {
-
+            unit.AddSkill(SkillFactory.getEfficiency());
         };
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 2";
-        t.IfChosen = Unit =>
+        t.name = "Acid Blade";
+        t.description = "Assassin stabs an enemy. Weaker than shiv, but pierces and corrodes an enemy's armor.";
+        t.IfChosen = unit =>
         {
-
+            unit.AddSkill(SkillFactory.getAcidBlade());
         };
 		talentOptions.Add(t);
 
