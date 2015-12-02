@@ -1,13 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TransClass.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Main Menu Assets\CharacterSelectMenu.cs">
     <Files>
-      <File FileName="Assets/Main Menu Assets/RotateSkybox.cs" Line="8" Column="19" />
-      <File FileName="Assets/Main Menu Assets/RotateSkyboxMoreDirections.cs" Line="1" Column="1" />
-      <File FileName="Assets/StageSelect/Stage assets/TalkingScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/Main Menu Assets/MainMenuScript.cs" Line="1" Column="1" />
-      <File FileName="Assets/TransClass.cs" Line="11" Column="3" />
-      <File FileName="Assets/Skills/SkillFactory.cs" Line="1" Column="1" />
+      <File FileName="Assets\Main Menu Assets\CharacterSelectMenu.cs" Line="241" Column="41" />
+      <File FileName="..\..\ics162\stage\Assets\playSound.cs" Line="29" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
