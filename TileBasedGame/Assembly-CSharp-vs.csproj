@@ -49,6 +49,7 @@
      <Compile Include="Assets\AnimatorIKProxie.cs" />
      <Compile Include="Assets\BillBoard.cs" />
      <Compile Include="Assets\ButtonMorpher.cs" />
+     <Compile Include="Assets\ChangeImage.cs" />
      <Compile Include="Assets\CreateGrid.cs" />
      <Compile Include="Assets\DialogueGlobals.cs" />
      <Compile Include="Assets\Effects\Aura.cs" />
@@ -61,11 +62,11 @@
      <Compile Include="Assets\Main Menu Assets\CharacterSelectMenu.cs" />
      <Compile Include="Assets\Main Menu Assets\MainMenuScript.cs" />
      <Compile Include="Assets\Main Menu Assets\RotateSkybox.cs" />
+     <Compile Include="Assets\Main Menu Assets\RotateSkyboxMoreDirections.cs" />
      <Compile Include="Assets\PersonalStatusBar.cs" />
      <Compile Include="Assets\Skills\Skill.cs" />
      <Compile Include="Assets\Skills\SkillContainer.cs" />
      <Compile Include="Assets\Skills\SkillFactory.cs" />
-     <Compile Include="Assets\SpaceIntroScene\ChangeImage.cs" />
      <Compile Include="Assets\StageSelect\Stage assets\LevelBtns.cs" />
      <Compile Include="Assets\StageSelect\Stage assets\LevelMenuScript.cs" />
      <Compile Include="Assets\StageSelect\Stage assets\RotationBehavior.cs" />
@@ -79,6 +80,8 @@
      <Compile Include="Assets\TempActionBarUI.cs" />
      <Compile Include="Assets\TempTurnQueueUI.cs" />
      <Compile Include="Assets\Tile.cs" />
+     <Compile Include="Assets\ToolTipCaller.cs" />
+     <Compile Include="Assets\TransClass.cs" />
      <Compile Include="Assets\Unit.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />

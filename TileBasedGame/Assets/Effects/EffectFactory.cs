@@ -386,13 +386,21 @@ public class EffectFactory {
         return singledOutEffect;
     }
 
+    private static Skill epidemicEffectHelper;
     private static Effect epidemicEffect;
     public static Effect getEpidemicEffect()
     {
         if (epidemicEffect == null)
         {
-            epidemicEffect = new Effect();
+            /*
+            epidemicEffectHelper = new Skill();
 
+            epidemicEffect = new Effect();
+            epidemicEffect.OnExit = user =>
+            {
+                epidemicEffectHelper.Execute(user,user.tile)
+            };
+            */
         }
         return epidemicEffect;
     }
