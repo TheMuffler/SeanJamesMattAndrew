@@ -113,6 +113,8 @@ public partial class GameManager : MonoBehaviour {
 
     public void LossCheck()
     {
+        if (TurnTime <= 2)
+            return;
         foreach (Unit u in units)
             if (u.faction == 0)
                 return;
