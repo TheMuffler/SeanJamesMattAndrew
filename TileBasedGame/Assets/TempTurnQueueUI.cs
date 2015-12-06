@@ -69,6 +69,8 @@ public class TempTurnQueueUI : MonoBehaviour {
     {
         for(int i = lrSize; i < buttons.Count;)
         {
+            if (buttons[i].gameObject == null)
+                return;
             Destroy(buttons[i].gameObject);
             buttons.RemoveAt(i);
         }
