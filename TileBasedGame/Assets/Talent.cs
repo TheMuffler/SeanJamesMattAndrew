@@ -230,53 +230,57 @@ public class MedicFactory : ClassFactory
         baseSkills.Add(SkillFactory.GetWeakenOffense());
 
         Talent t = new Talent();
-        t.name = "Add Blood Donor";
-        t.description = "Adds Blood Donor to Class";
+        t.name = "Anatomy";
+        t.description = "Medic learns the Anatomy Skill. Provides a huge damage buff to a single target.";
+        t.IfChosen = unit =>
+        {
+            unit.AddSkill(SkillFactory.getAnatomy());
+        };
+        talentOptions.Add(t);
+
+        t = new Talent();
+        t.name = "Med Station";
+        t.description = "Can deploy a med station, which passively heals allies around it";
+        t.IfChosen = unit =>
+        {
+            unit.AddSkill(SkillFactory.getMakeMedStation());
+        };
+        talentOptions.Add(t);
+
+        t = new Talent();
+        t.name = "Blood Donor";
+        t.description = "Medic learns the Blood Donor Skill. The medic siphons the hitpoints of his target.";
         t.IfChosen = unit => {
             unit.AddSkill(SkillFactory.GetBloodDonor());
         };
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Add Repair";
-        t.description = "Adds Repair to Class";
+        t.name = "Balance";
+        t.description = "Heal now damages a nearby enemy in addition to healing the target. It also siphons the enemy's armor.";
         t.IfChosen = unit =>
         {
-            unit.AddSkill(SkillFactory.GetRepair());
+            unit.talentTags.Add("Balance");
         };
 		talentOptions.Add(t);
 
-        t = new Talent();
-        t.name = "Improve Skill X";
-        t.description = "Makes Skill X better. Skill X is scripted to check if the performing agent has the string 'SkillXImprove' in its talentTags";
-        t.IfChosen = unit =>
-        {
-            unit.talentTags.Add("SkillXImprove");
-        };
-		talentOptions.Add(t);
+       
 
         t = new Talent();
-        t.name = "Vampiric Attacks";
-        t.description = "Your attacks restore your health";
+        t.name = "Lethal Injection";
+        t.description = "Medic gains Lethal Injection, a single target attack that slightly lowers the target's armor and damage";
         t.IfChosen = unit =>
         {
-            unit.AddEffect(EffectFactory.getVampiricEffect(), -1); //-1 is permanent
-        };
-		talentOptions.Add(t);
-
-        t = new Talent();
-        t.name = "Useless 1";
-        t.IfChosen = unit =>
-        {
-
+            unit.AddSkill(SkillFactory.getLethalInjection());
         };
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 2";
-        t.IfChosen = Unit =>
+        t.name = "Oath Breaker";
+        t.description = "AOE heal now deals damage instead";
+        t.IfChosen = unit =>
         {
-
+            unit.talentTags.Add("OathBreaker");
         };
 		talentOptions.Add(t);
 
