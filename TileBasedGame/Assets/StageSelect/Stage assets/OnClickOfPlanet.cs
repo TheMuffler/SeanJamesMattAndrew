@@ -97,7 +97,19 @@ public class OnClickOfPlanet : MonoBehaviour {
 
 		start = start.GetComponent<CanvasGroup>();
 		select = select.GetComponent<CanvasGroup>();
-
+		if(planetNum==3)
+			planetDescription="The planet Hearth is known for its warm weather and long summers. " +
+				"Hearth was once a water world, with two-thirds of the planet covered by ocean; " +
+				"now it best known for being one of the first planets to lose all of its job market due to automation. " +
+				"It also has the biggest cantina in the galaxy in which one of your bounties is believed to be located.";
+		else if(planetNum==2)
+			planetDescription="Putier- J is a mostly gaseous world consisting of hydrogen and helium. " +
+				"A big feature is Big Blue, which was created by a giant storm that raged for hundreds of years; " +
+				"inside Big Blue there exists the only spaceport located on Putier-J. Your bounty is likely on a ship that docked here.";
+		else if(planetNum==1)
+			planetDescription="N’Hoth is known for strong winds — sometimes faster than the speed of sound. " +
+				"N’Hoth is a man- made planet made from space debris orbiting its solid iron core effectively making it a trash planet where all waste" +
+				" eventually ends up on. One of your bounties was last seen in one of its many junkyards";
 	}
 	
 	// Update is called once per frame

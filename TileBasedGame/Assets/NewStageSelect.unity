@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb7314f56f7b40caa4090b3aa70a8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetName: Planet 1
+  planetName: N'Hoth
   planetDescription: Planet 1
   planetNameCanvas: {fileID: 836896264}
   planetDescriptionCanvas: {fileID: 836896263}
@@ -516,8 +516,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 2, y: -120.599998}
-  m_SizeDelta: {x: 710, y: 100}
+  m_AnchoredPosition: {x: 2, y: -101}
+  m_SizeDelta: {x: 710, y: 150}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &451898523
 MonoBehaviour:
@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb7314f56f7b40caa4090b3aa70a8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetName: Planet 2
+  planetName: Puiter-J
   planetDescription: Planet 2
   planetNameCanvas: {fileID: 836896264}
   planetDescriptionCanvas: {fileID: 836896263}
@@ -1050,8 +1050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bb7314f56f7b40caa4090b3aa70a8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetName: Planet 3
-  planetDescription: Planet 3
+  planetName: Hearth
+  planetDescription: 
   planetNameCanvas: {fileID: 836896264}
   planetDescriptionCanvas: {fileID: 836896263}
   start: {fileID: 1134876024}

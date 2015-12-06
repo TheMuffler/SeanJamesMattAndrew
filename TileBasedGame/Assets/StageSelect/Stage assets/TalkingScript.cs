@@ -88,6 +88,7 @@ public class TalkingScript : MonoBehaviour {
 	}
 	public void startLevel()
 	{
+		// Start the level
 		currPart= person.Length;
 		animator.SetTrigger("EndConversation");
 		menuCanvas.SetActive(false);
@@ -107,10 +108,15 @@ public class TalkingScript : MonoBehaviour {
 	void Update () {
 
 		if(currPart> person.Length || !animator.GetBehaviour <InitalStart> ().passed  )
+		{	
+			thisGroup.interactable=false;
 			thisGroup.alpha=0;
+		}
 		else 
+		{
 			thisGroup.alpha=1;
-
+			thisGroup.interactable=true;
+		}
 //		menuCanvas.SetActive(isShowing);
 		//menuCanvas.SetActive(initalScene.GetBehaviour <InitalStart> ().passed);
 	}

@@ -2152,11 +2152,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.size
-      value: 11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.size
-      value: 11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 22410502, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2272,26 +2272,24 @@ Prefab:
       objectReference: {fileID: 45199918}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[0]
-      value: "\u201DWhen I was younger, they told me that a PhD from a fancy university
-        would be all I need to make enough to live comfortably.\""
+      value: Cool, Hearth. You know... I was actually born on this planet; it is so
+        strange to be coming back.
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[1]
-      value: "\u201DYou kidding me? If you're a doctor then why are you doing mercenary
-        work like the rest of us?\""
+      value: So where do you think our target is going to be?
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[2]
-      value: "\u201DThe same reason we all are. There are no jobs since they got replaced
-        by the robots. No one was safe; that includes doctors.\""
+      value: '... I actually have no idea.'
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[3]
-      value: "\u201DExactly. We even had to let go of Cheston for this robot.\""
+      value: The Cantina. It is where I would go.
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[4]
-      value: "\u201DShooting. Good.\""
+      value: Then it is settled. To the Cantina.
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[5]
@@ -2348,19 +2346,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[0]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[1]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
-      propertyPath: person.Array.data[3]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+      propertyPath: person.Array.data[3]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[4]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[5]
@@ -2381,6 +2379,10 @@ Prefab:
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[10]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+      propertyPath: person.Array.data[9]
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
