@@ -303,7 +303,7 @@ public class Unit : MonoBehaviour {
     void OnDisable()
     {
         GameManager.instance.units.Remove(this);
-        GameManager.instance.tempTurnQueueBar.ChangeFuture(GameManager.instance.units);
+        //GameManager.instance.tempTurnQueueBar.ChangeFuture(GameManager.instance.units);
         if(GameManager.instance.SelectionParticle.transform.parent == transform)
             GameManager.instance.SelectionParticle.transform.parent = null;
     }
