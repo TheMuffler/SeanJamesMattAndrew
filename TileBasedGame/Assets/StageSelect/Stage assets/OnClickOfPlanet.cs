@@ -30,6 +30,9 @@ public class OnClickOfPlanet : MonoBehaviour {
 	public static bool  zoomedIn=false;
 	private static int currPlanet=0;
 
+	//How the planet progress is kept track of.
+	private bool [] completedPlanet= new bool[4];
+
 	public void startStage()
 	{
 		// Open the cutscene based on what planet is clicked
@@ -91,12 +94,13 @@ public class OnClickOfPlanet : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-
+	
 		planetDescriptionCanvas= planetDescriptionCanvas.GetComponent<Text>();
 		planetNameCanvas= planetNameCanvas.GetComponent<Text>();
 
 		start = start.GetComponent<CanvasGroup>();
 		select = select.GetComponent<CanvasGroup>();
+
 		if(planetNum==3)
 			planetDescription="The planet Hearth is known for its warm weather and long summers. " +
 				"Hearth was once a water world, with two-thirds of the planet covered by ocean; " +
@@ -114,7 +118,10 @@ public class OnClickOfPlanet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		//THE PLANET COMPLETION IS SET HERE
+		for(int i=0; i<completedPlanet.Length;++i)
+			completedPlanet[i]=false;
+		///////////////
 		if(doingZoomIn)
 		{
 			cameras[planetNum].fieldOfView -= zoomSpeed/10;
@@ -146,17 +153,19 @@ public class OnClickOfPlanet : MonoBehaviour {
 	}
 	void OnMouseDown() 
 	{
-
-		ZoomIn(cameras[planetNum]);
+		if(!completedPlanet[planetNum])
+			ZoomIn(cameras[planetNum]);
 
 	}
 	void OnMouseOver()
 	{
-		Hilight.enabled=true;
+		if(!completedPlanet[planetNum])
+			Hilight.enabled=true;
 	}
 	
 	void OnMouseExit()
 	{
-		Hilight.enabled=false;
+		if(!completedPlanet[planetNum])
+			Hilight.enabled=false;
 	}
 }
