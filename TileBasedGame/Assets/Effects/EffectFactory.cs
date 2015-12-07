@@ -30,9 +30,36 @@ public class EffectFactory {
                 GameManager.instance.ProcessCommand(() => { });
             };
             //stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
-            //stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
+            stunEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TANK/SLAM/stun effect prefab");
         }
         return stunEffect;
+    }
+
+    private static Effect pierceEffect;
+    public static Effect getPierceEffect()
+    {
+        if (pierceEffect == null)
+        {
+            pierceEffect = new Effect();
+            pierceEffect.onTurnBegin = user =>
+            {
+                GameManager.instance.ProcessCommand(() => { }); //skips turn
+            };
+            pierceEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/ASSASSIN/PIERCE/pierce effect prefab");
+        }
+        return pierceEffect;
+    }
+
+    private static Effect efficiencyEffect;
+    public static Effect getEfficiencyEffect(bool isAlly)
+    {
+        if (efficiencyEffect == null)
+        {
+            efficiencyEffect = new Effect();
+            string prefab = (isAlly ? "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency ally effect prefab" : "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency enemy effect prefab");
+            efficiencyEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency effect prefab");
+        }
+        return efficiencyEffect;
     }
 
     private static Effect vampiricEffect;
@@ -57,7 +84,7 @@ public class EffectFactory {
         {
             invincibleEffect = new Effect();
 
-
+            invincibleEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/ASSASSIN/FADE/Fade Prefab");
             invincibleEffect.armorBonus = user => 999;
         }
         return invincibleEffect;
@@ -72,7 +99,7 @@ public class EffectFactory {
             crippleEffect.moveRangeBonus = -2;
 
             //stunEffect.animBool = "Dizzy"; character will look whoozy while stunned, if we put in an animation like this.
-            //stunEffect.particlePrefab = Resources.Load<GameObject>("EffectParticles/StunParticle");
+            crippleEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/ASSASSIN/CRIPPLE/cripple effect prefab");
         }
         return crippleEffect;
     }
@@ -98,6 +125,7 @@ public class EffectFactory {
         if (weakenOffenseEffect == null) {
             weakenOffenseEffect = new Effect();
             weakenOffenseEffect.damageBonus = user => -2;
+            weakenOffenseEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/MEDIC/WEAKEN OFFENSE/weaken offense effect prefab");
         }
         return weakenOffenseEffect;
     }
@@ -107,6 +135,7 @@ public class EffectFactory {
         if (weakenDefenseEffect == null) {
             weakenDefenseEffect = new Effect();
             weakenDefenseEffect.armorBonus = user => -1;
+            weakenDefenseEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/MEDIC/WEAKEN DEFENSE/weaken defense effect prefab");
         }
         return weakenDefenseEffect;
     }
@@ -146,7 +175,7 @@ public class EffectFactory {
     public static Effect getSmokeEffect() {
         if (smokeEffect == null) {
             smokeEffect = new Effect();
-            smokeEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/Fade");
+            smokeEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/ASSASSIN/FADE/Fade Prefab");
 
         }
         return smokeEffect;
@@ -206,6 +235,7 @@ public class EffectFactory {
                 if (!defender.talentTags.Contains("DTCoolDown") && (defender.curHP - amt) / defender.maxHP <= 0.3)
                 {
                     defender.curHP = defender.maxHP;
+                    determinationEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TANK/DETERMINATION/determination prefab");
                     defender.AddEffect(getDeterminationCooldownEffect(), 6);
                 }
             };
@@ -247,6 +277,8 @@ public class EffectFactory {
                 foreach(Unit ally in medStationHelper.gatherTargets(user, user.tile))
                 {
                     ally.TakeDamage(-2, user);
+                    medStationEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/MEDIC/AOE HEAL/aoe receiver prefab");
+
                 }
             };
         }
@@ -295,6 +327,7 @@ public class EffectFactory {
         if(anatomyEffect == null)
         {
             anatomyEffect = new Effect();
+            anatomyEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/MEDIC/ANATOMY/anatomy projectile prefab");
             anatomyEffect.damageBonus = user => 0.4f;
         }
         return anatomyEffect;
@@ -328,10 +361,41 @@ public class EffectFactory {
         if (lethalInjectionEffect == null)
         {
             lethalInjectionEffect = new Effect();
+            lethalInjectionEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/MEDIC/LETHAL INJECTION/lethal injection effect prefab");
             lethalInjectionEffect.armorBonus = user => -0.1f;
             lethalInjectionEffect.damageBonus = user => -0.1f;
         }
         return lethalInjectionEffect;
+    }
+
+    private static Skill epidemicEffectHelper;
+    private static Effect epidemicEffect;
+    public static Effect getEpidemicEffect()
+    {
+        if (epidemicEffect == null)
+        {
+            epidemicEffectHelper = new Skill();
+            epidemicEffectHelper.targetType = Skill.TargetType.ALLY;
+            epidemicEffectHelper.range = 0;
+            epidemicEffectHelper.aoe = 3;
+            epidemicEffectHelper.basePower = 8;
+            epidemicEffectHelper.OnTarget = (user, target, args) =>
+            {
+                float amt = epidemicEffectHelper.basePower * (1f - target.Armor);
+                target.TakeDamage(amt, user);
+            };
+            epidemicEffectHelper.GenerateTasks = (user, tile, args) =>
+            {
+                GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/EPIDEMIC/epidemic prefab"), user.transform.position, 2));
+                epidemicEffectHelper.EnqueueExecuteTask(user, tile, args);
+            };
+            epidemicEffect = new Effect();
+            epidemicEffect.OnExit = user =>
+            {
+                epidemicEffectHelper.Perform(user, user.tile);
+            };
+        }
+        return epidemicEffect;
     }
 
     private static Skill stickyGrenadeEffectHelper;
@@ -352,11 +416,12 @@ public class EffectFactory {
             };
             stickyGrenadeEffectHelper.GenerateTasks = (user, tile, args) =>
             {
-
+                GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/TECH/GRENADE/sticky grenade explosion prefab"), user.transform.position, 1));
                 stickyGrenadeEffectHelper.EnqueueExecuteTask(user, tile, args);
             };
 
             stickyGrenadeEffect = new Effect();
+            stickyGrenadeEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TECH/GRENADE/stuck sticky prefab");
             stickyGrenadeEffect.OnExit = user =>
             {
                 stickyGrenadeEffectHelper.Perform(user, user.tile);
@@ -386,24 +451,7 @@ public class EffectFactory {
         return singledOutEffect;
     }
 
-    private static Skill epidemicEffectHelper;
-    private static Effect epidemicEffect;
-    public static Effect getEpidemicEffect()
-    {
-        if (epidemicEffect == null)
-        {
-            /*
-            epidemicEffectHelper = new Skill();
-
-            epidemicEffect = new Effect();
-            epidemicEffect.OnExit = user =>
-            {
-                epidemicEffectHelper.Execute(user,user.tile)
-            };
-            */
-        }
-        return epidemicEffect;
-    }
+    
 
     private static Effect persistenceEffect;
     public static Effect getPersistenceEffect()
