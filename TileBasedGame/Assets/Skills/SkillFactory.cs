@@ -757,6 +757,7 @@ public class SkillFactory
             stickyGrenade.cooldown = 3;
             stickyGrenade.manaCost = user => 4;
             stickyGrenade.range = 3;
+            stickyGrenade.targetType = Skill.TargetType.ENEMY;
             stickyGrenade.OnTarget = (user, target, args) =>
             {
                 target.AddEffect(EffectFactory.getStickyGrenadeEffect(), 2);

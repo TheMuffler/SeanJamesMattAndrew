@@ -33,6 +33,32 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &11432446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52db183934d44f168779d426874fa6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passed: 0
+  menuCanvas: {fileID: 146058, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+--- !u!114 &11471470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52db183934d44f168779d426874fa6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passed: 0
+  menuCanvas: {fileID: 0}
 --- !u!114 &11476748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,7 +227,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MoveOut
-  m_Speed: 1
+  m_Speed: .300000012
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110115218}
@@ -295,11 +321,12 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: InitialMovement
-  m_Speed: 1
+  m_Speed: .150000006
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110167300}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11471470}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -370,7 +397,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110128490}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 11432446}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

@@ -303,6 +303,9 @@ public class Unit : MonoBehaviour {
     void OnDisable()
     {
         GameManager.instance.units.Remove(this);
+        //GameManager.instance.tempTurnQueueBar.ChangeFuture(GameManager.instance.units);
+        if(GameManager.instance.SelectionParticle.transform.parent == transform)
+            GameManager.instance.SelectionParticle.transform.parent = null;
     }
 
     void OnEnable()
@@ -446,8 +449,7 @@ public class Unit : MonoBehaviour {
 
 
     void CommitSkillTarget()
-    {
-        GameManager.instance.cursor.transform.localScale = Vector3.one;
+    {  
         if (!IsAimingSkill)
             return;
         if (GameManager.instance.selected == null ||
@@ -458,8 +460,10 @@ public class Unit : MonoBehaviour {
         }
         if (aimingSkill.skill.aoe <= 0 && !aimingSkill.skill.ValidTile(this, GameManager.instance.selected)) {
             GameManager.instance.TilesInRangeSkill(tile, aimingSkill.skill.range, this, aimingSkill.skill);
+            //GameManager.instance.cursor.transform.localScale = new Vector3((1 + aimingSkill.skill.aoe * 2), 1, (1 + aimingSkill.skill.aoe * 2));
             return;
         }
+        GameManager.instance.cursor.transform.localScale = Vector3.one;
         GameManager.instance.ProcessCommand(() =>
         {
             aimingSkill.skill.Perform(this, GameManager.instance.selected);
@@ -483,7 +487,7 @@ public class Unit : MonoBehaviour {
             return;
         aimingSkill = s;
         GameManager.instance.TilesInRangeSkill(tile, s.skill.range,this, s.skill);
-        GameManager.instance.cursor.transform.localScale = new Vector3((1 + s.skill.aoe), 1, (1 + s.skill.aoe));
+        GameManager.instance.cursor.transform.localScale = new Vector3((1 + s.skill.aoe*2), 1, (1 + s.skill.aoe*2));
     }
 
 

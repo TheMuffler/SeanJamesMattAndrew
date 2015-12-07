@@ -344,6 +344,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShowing: 0
   menuCanvas: {fileID: 0}
+  animator: {fileID: 0}
+  initalScene: {fileID: 0}
+  nextScene: 0
   currPart: 0
   portrait: {fileID: 11409892}
   charName: {fileID: 11439870}
