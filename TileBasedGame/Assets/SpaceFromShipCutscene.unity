@@ -174,7 +174,7 @@ Prefab:
     - target: {fileID: 9500000, guid: d0a5b37274c7d4d1cb4d2e0f27621299, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 499d819ff507847b8b24426524a97574, type: 2}
+      objectReference: {fileID: 9100000, guid: 6a8dcabdacca9491fa2acfe9a12c23df, type: 2}
     - target: {fileID: 400004, guid: d0a5b37274c7d4d1cb4d2e0f27621299, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -221,7 +221,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: d0a5b37274c7d4d1cb4d2e0f27621299, type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100022, guid: d0a5b37274c7d4d1cb4d2e0f27621299, type: 3}
       propertyPath: m_Name
@@ -1372,6 +1372,7 @@ GameObject:
   - 124: {fileID: 739868198}
   - 81: {fileID: 739868197}
   - 114: {fileID: 739868202}
+  - 95: {fileID: 739868203}
   m_Layer: 0
   m_Name: FlyCam
   m_TagString: MainCamera
@@ -1461,6 +1462,23 @@ MonoBehaviour:
   x: -1
   y: 0
   z: 0
+--- !u!95 &739868203
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 739868196}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 499d819ff507847b8b24426524a97574, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &957290307
 Prefab:
   m_ObjectHideFlags: 0
@@ -2152,11 +2170,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.size
-      value: 11
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.size
-      value: 11
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 22410502, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2272,35 +2290,31 @@ Prefab:
       objectReference: {fileID: 45199918}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[0]
-      value: "\u201DWhen I was younger, they told me that a PhD from a fancy university
-        would be all I need to make enough to live comfortably.\""
+      value: It was nice for once that someone shot us first.
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[1]
-      value: "\u201DYou kidding me? If you're a doctor then why are you doing mercenary
-        work like the rest of us?\""
+      value: 'How did this guy have a bounty on his head? '
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[2]
-      value: "\u201DThe same reason we all are. There are no jobs since they got replaced
-        by the robots. No one was safe; that includes doctors.\""
+      value: 'Never question it. Just do it. '
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[3]
-      value: "\u201DExactly. We even had to let go of Cheston for this robot.\""
+      value: Isn't that the logo of a certain company?
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[4]
-      value: "\u201DShooting. Good.\""
+      value: I have no idea what you are talking about. On to our next planet.
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[5]
-      value: "\u201DYou know, I miss Cheston; he was great with our finances.\""
+      value: What bounties do we have left?
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[6]
-      value: "\u201DI bet he wouldn't have let us get cable. There are over 5 million
-        channels but nothing to watch.\""
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[7]
@@ -2348,23 +2362,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
-      propertyPath: person.Array.data[1]
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+      propertyPath: person.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[3]
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[4]
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[5]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[6]
@@ -2381,6 +2395,14 @@ Prefab:
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: person.Array.data[10]
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+      propertyPath: person.Array.data[9]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+      propertyPath: person.Array.data[2]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
@@ -2408,7 +2430,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1835239754}
-  m_LocalRotation: {x: 0, y: .705994546, z: 0, w: .708217382}
+  m_LocalRotation: {x: .708217263, y: -1.15021116e-07, z: -.705994546, w: -1.15383244e-07}
   m_LocalPosition: {x: 2.27999997, y: -.259650469, z: .150000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

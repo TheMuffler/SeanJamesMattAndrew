@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pexpressAnimator
+  m_Name: pexpressAnimatorReverse
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: EndConversation
@@ -227,7 +227,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: MoveOut
-  m_Speed: .300000012
+  m_Speed: -.150000006
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110115218}
@@ -240,7 +240,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 93ee4c9d6606742c287d2a19c1d1e999, type: 2}
+  m_Motion: {fileID: 7400000, guid: 8ef2747d81b0f43c8957f3aa07855385, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -321,7 +321,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: InitialMovement
-  m_Speed: .150000006
+  m_Speed: -1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110167300}
@@ -334,7 +334,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8ef2747d81b0f43c8957f3aa07855385, type: 2}
+  m_Motion: {fileID: 7400000, guid: 93ee4c9d6606742c287d2a19c1d1e999, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
