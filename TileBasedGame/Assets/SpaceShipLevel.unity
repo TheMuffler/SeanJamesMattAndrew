@@ -4657,6 +4657,8 @@ MonoBehaviour:
   tempTurnQueueBar: {fileID: 846065811}
   PassTurnButton: {fileID: 2089062084}
   cam: {fileID: 541250642}
+  levelID: 2
+  victorySceneIndex: 12
   units: []
   SelectionParticle: {fileID: 197399915}
   MapH: 0

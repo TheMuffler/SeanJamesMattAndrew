@@ -51,8 +51,8 @@ public partial class GameManager : MonoBehaviour {
 	public GameSceneCameraLogic cam;
     //public GameObject tooltip;
 
-    int levelID = 0;
-    int victorySceneIndex = 0;
+    public int levelID = 0;
+    public int victorySceneIndex = 0;
 
     // Update is called once per frame
     void Update()
@@ -132,7 +132,13 @@ public partial class GameManager : MonoBehaviour {
             if (u.faction != 0)
                 return;
         GlobalManager.instance.victories[levelID] = true;
-        Application.LoadLevel(victorySceneIndex);
+        int vctr = 0;
+        foreach (bool b in GlobalManager.instance.victories)
+            if (b)
+                ++vctr;
+        if (vctr < 3)
+            Application.LoadLevel(victorySceneIndex);
+        else Application.LoadLevel(13);
     }
 
     public void ProcessCommand(Action action)
