@@ -272,13 +272,12 @@ public class EffectFactory {
             medStationHelper.range = 0;
             medStationHelper.aoe = 4;
             medStationEffect = new Effect();
+            medStationEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/MEDIC/AOE HEAL/aoe receiver prefab");
             medStationEffect.onTurnBegin = user =>
             {
                 foreach(Unit ally in medStationHelper.gatherTargets(user, user.tile))
                 {
                     ally.TakeDamage(-2, user);
-                    medStationEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/MEDIC/AOE HEAL/aoe receiver prefab");
-
                 }
             };
         }
