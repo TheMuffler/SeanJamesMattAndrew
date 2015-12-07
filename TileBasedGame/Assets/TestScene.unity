@@ -2279,6 +2279,10 @@ MonoBehaviour:
   focused: {fileID: 0}
   camSpeed: 4
   camTorque: 180
+  minX: -10
+  maxX: 10
+  minZ: -10
+  maxZ: 10
 --- !u!1 &555550994
 GameObject:
   m_ObjectHideFlags: 0
@@ -4213,6 +4217,10 @@ MonoBehaviour:
   focused: {fileID: 0}
   camSpeed: 4
   camTorque: 180
+  minX: 0
+  maxX: 10
+  minZ: 0
+  maxZ: 10
 --- !u!114 &1144269702
 MonoBehaviour:
   m_ObjectHideFlags: 0

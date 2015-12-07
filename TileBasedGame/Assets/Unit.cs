@@ -201,6 +201,8 @@ public class Unit : MonoBehaviour {
         //assuming you can't die during your turn;
         if (curHP <= 0)
         {
+            if (GameManager.instance.SelectionParticle.transform.parent == transform)
+                GameManager.instance.SelectionParticle.transform.parent = null;
             Instantiate(explosion, transform.position, transform.rotation);
             Destroy(gameObject);
             live = false;
@@ -304,8 +306,8 @@ public class Unit : MonoBehaviour {
     {
         GameManager.instance.units.Remove(this);
         //GameManager.instance.tempTurnQueueBar.ChangeFuture(GameManager.instance.units);
-        if(GameManager.instance.SelectionParticle.transform.parent == transform)
-            GameManager.instance.SelectionParticle.transform.parent = null;
+        //if(GameManager.instance.SelectionParticle.transform.parent == transform)
+        //    GameManager.instance.SelectionParticle.transform.parent = null;
     }
 
     void OnEnable()
