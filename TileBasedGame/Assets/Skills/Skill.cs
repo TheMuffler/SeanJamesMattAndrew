@@ -11,7 +11,7 @@ public class Skill
     public string description = "No Description";
     public Sprite icon = null;
 
-    public enum TargetType { SELF, ALLY, ENEMY, NONE, CONDITIONAL };
+    public enum TargetType { SELF, ALLY, ENEMY, NONE, CONDITIONAL, ANY };
     public TargetType targetType = TargetType.ENEMY;
     public TargetTypeDelegate targetTypeFunction = user => TargetType.ENEMY; //only gets called if targetType is CONDITIONAL
 
@@ -76,6 +76,11 @@ public class Skill
             else if (tt == TargetType.SELF)
             {
                 if (tile.unit != null && user == tile.unit)
+                    list.Add(tile.unit);
+            }
+            else if(tt == TargetType.ANY)
+            {
+                if (tile.unit != null)
                     list.Add(tile.unit);
             }
         }

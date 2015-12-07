@@ -1,10 +1,16 @@
-﻿<Properties>
+<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/StageSelect/Stage assets/OnClickOfPlanet.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameManager.cs">
     <Files>
-      <File FileName="Assets/StageSelect/Stage assets/OnClickOfPlanet.cs" Line="169" Column="4" />
-      <File FileName="Assets/StageSelect/Stage assets/TalkingScript.cs" Line="118" Column="31" />
-      <File FileName="Assets/GameManager.cs" Line="1" Column="1" />
+      <File FileName="TileBasedGame.sln" Line="1" Column="1" />
+      <File FileName="Assets\Effects\EffectFactory.cs" Line="6" Column="2" />
+      <File FileName="Assets\Main Menu Assets\RotateSkybox.cs" Line="13" Column="1" />
+      <File FileName="Assets\Main Menu Assets\RotateSkyboxMoreDirections.cs" Line="19" Column="1" />
+      <File FileName="Assets\StageSelect\Stage assets\TalkingScript.cs" Line="112" Column="1" />
+      <File FileName="Assets\Main Menu Assets\MainMenuScript.cs" Line="178" Column="1" />
+      <File FileName="Assets\TransClass.cs" Line="34" Column="3" />
+      <File FileName="Assets\Skills\SkillFactory.cs" Line="686" Column="69" />
+      <File FileName="Assets\GameManager.cs" Line="113" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
