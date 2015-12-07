@@ -144,7 +144,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &136184707
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &205474029
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,10 +380,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetName: N'Hoth
   planetDescription: Planet 1
+  audio: {fileID: 1993248350}
   planetNameCanvas: {fileID: 836896264}
   planetDescriptionCanvas: {fileID: 836896263}
   start: {fileID: 1134876024}
   select: {fileID: 1446729738}
+  deny: {fileID: 571073690}
   planetNum: 1
   cameras:
   - {fileID: 739868200}
@@ -638,6 +640,179 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
   m_StereoMirrorMode: 0
+--- !u!1 &571073689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 146058, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 571073696}
+  - 223: {fileID: 571073695}
+  - 114: {fileID: 571073694}
+  - 114: {fileID: 571073693}
+  - 114: {fileID: 571073692}
+  - 114: {fileID: 571073691}
+  - 225: {fileID: 571073690}
+  m_Layer: 5
+  m_Name: DenyingPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!225 &571073690
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571073689}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &571073691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571073689}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb7314f56f7b40caa4090b3aa70a8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetName: 
+  planetDescription: 
+  audio: {fileID: 0}
+  planetNameCanvas: {fileID: 0}
+  planetDescriptionCanvas: {fileID: 0}
+  start: {fileID: 0}
+  select: {fileID: 0}
+  deny: {fileID: 0}
+  planetNum: 0
+  cameras: []
+  Hilight: {fileID: 0}
+  zoomSpeed: 20
+  minZoomFOV: 60
+  maxZoomFOV: 175
+  defaultZoomFOV: 101
+  doingZoomIn: 0
+  doingZoomOut: 0
+--- !u!114 &571073692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571073689}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90dc8608bcf794736bff341692fcac36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShowing: 0
+  thisGroup: {fileID: 0}
+  menuCanvas: {fileID: 0}
+  animator: {fileID: 0}
+  initalScene: {fileID: 0}
+  nextScene: 0
+  currPart: 0
+  portrait: {fileID: 0}
+  charName: {fileID: 0}
+  continueText: {fileID: 0}
+  convoText: {fileID: 0}
+  charsToLoad: 0
+  charImg: []
+  person: 02000000030000000100000002000000030000000000000001000000000000000100000003000000
+  speech:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+--- !u!114 &571073693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11485472, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571073689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &571073694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11450924, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571073689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &571073695
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22350464, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571073689}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 1
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!224 &571073696
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22410502, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 571073689}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 600733623}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &585657770
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,10 +902,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetName: Puiter-J
   planetDescription: Planet 2
+  audio: {fileID: 1993248350}
   planetNameCanvas: {fileID: 836896264}
   planetDescriptionCanvas: {fileID: 836896263}
   start: {fileID: 1134876024}
   select: {fileID: 1446729738}
+  deny: {fileID: 571073690}
   planetNum: 2
   cameras:
   - {fileID: 739868200}
@@ -744,6 +921,94 @@ MonoBehaviour:
   defaultZoomFOV: 101
   doingZoomIn: 0
   doingZoomOut: 0
+--- !u!1 &600733622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 180854, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 600733623}
+  - 222: {fileID: 600733626}
+  - 114: {fileID: 600733625}
+  - 114: {fileID: 600733624}
+  m_Layer: 5
+  m_Name: Planet Already Completed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &600733623
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22464884, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600733622}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 571073696}
+  m_RootOrder: 0
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: -29, y: -158}
+  m_SizeDelta: {x: 100, y: 100.169998}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &600733624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11429888, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600733622}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c877c1e0e900b7c47814f8bcc359397b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &600733625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11439870, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600733622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: eb5e452f8206b5a418b77c5eb4349258, type: 3}
+    m_FontSize: 53
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Planet Already Completed
+--- !u!222 &600733626
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22233404, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600733622}
 --- !u!1 &648538189
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +1155,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &739868202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,10 +1317,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetName: Hearth
   planetDescription: 
+  audio: {fileID: 1993248350}
   planetNameCanvas: {fileID: 836896264}
   planetDescriptionCanvas: {fileID: 836896263}
   start: {fileID: 1134876024}
   select: {fileID: 1446729738}
+  deny: {fileID: 571073690}
   planetNum: 3
   cameras:
   - {fileID: 739868200}
@@ -1387,7 +1654,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &858173882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,7 +1689,7 @@ Transform:
   - {fileID: 585657771}
   - {fileID: 770892625}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!114 &858173884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,10 +1758,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetName: 
   planetDescription: 
+  audio: {fileID: 0}
   planetNameCanvas: {fileID: 0}
   planetDescriptionCanvas: {fileID: 0}
   start: {fileID: 0}
   select: {fileID: 0}
+  deny: {fileID: 0}
   planetNum: 0
   cameras: []
   Hilight: {fileID: 0}
@@ -1563,7 +1832,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &1134876017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,7 +1867,7 @@ RectTransform:
   m_Children:
   - {fileID: 451105991}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1617,10 +1886,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetName: 
   planetDescription: 
+  audio: {fileID: 0}
   planetNameCanvas: {fileID: 0}
   planetDescriptionCanvas: {fileID: 0}
   start: {fileID: 0}
   select: {fileID: 0}
+  deny: {fileID: 0}
   planetNum: 0
   cameras: []
   Hilight: {fileID: 0}
@@ -1808,7 +2079,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &1357895773 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 180854, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
@@ -1853,7 +2124,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 454, y: 212.5}
@@ -1930,10 +2201,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetName: 
   planetDescription: 
+  audio: {fileID: 0}
   planetNameCanvas: {fileID: 0}
   planetDescriptionCanvas: {fileID: 0}
   start: {fileID: 0}
   select: {fileID: 0}
+  deny: {fileID: 0}
   planetNum: 0
   cameras: []
   Hilight: {fileID: 0}
@@ -2018,7 +2291,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1926927345
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,6 +2378,11 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
   m_StereoMirrorMode: 0
+--- !u!82 &1993248350 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8289472, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c,
+    type: 2}
+  m_PrefabInternal: {fileID: 836896260}
 --- !u!1 &2050847024
 GameObject:
   m_ObjectHideFlags: 0
