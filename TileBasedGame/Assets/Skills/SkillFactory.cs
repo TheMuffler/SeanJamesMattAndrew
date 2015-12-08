@@ -34,8 +34,7 @@ public class SkillFactory
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
                     GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Absorb1")));
-                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(target.transform.position+Vector3.up, user.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/MEDIC/BLOOD DONOR/blood donor prefab")));
+					GameManager.instance.tasks.Add(new Task_Fire_Projectile(target.transform.position+Vector3.up, user.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/MEDIC/BLOOD DONOR/blood donor prefab"), 2.5f));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
 				bloodDonor.EnqueueExecuteTask(user,tile,args);
@@ -669,7 +668,7 @@ public class SkillFactory
                 GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
                 GameManager.instance.tasks.Add(new Task_Wait(0.3f));
                 GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Heal2")));
-                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/MEDIC/MED STATION/med station projectile prefab")));
+                //GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/MEDIC/MED STATION/med station projectile prefab")));
                 makeMedStation.EnqueueExecuteTask(user, tile, args);
             };
         }
