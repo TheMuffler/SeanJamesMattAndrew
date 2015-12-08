@@ -213,6 +213,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1928641218}
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!95 &494576897 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9537648, guid: aff2ecf31e85e46e897537e33a4d7e2d,
+    type: 2}
+  m_PrefabInternal: {fileID: 235702437}
 --- !u!1 &739868196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1067,7 @@ Prefab:
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 494576897}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: nextScene
       value: 6
@@ -1070,7 +1075,7 @@ Prefab:
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: initalScene
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 494576897}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: thisGroup
       value: 
