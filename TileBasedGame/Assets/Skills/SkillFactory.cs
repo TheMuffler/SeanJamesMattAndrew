@@ -296,7 +296,7 @@ public class SkillFactory
             persistence.targetType = Skill.TargetType.SELF;
             persistence.OnTarget = (user, target, args) =>
             {
-                user.AddEffect(EffectFactory.getPersistenceEffect(), 6);
+                //user.AddEffect(EffectFactory.getPersistenceEffect(), 6);
             };
             persistence.GenerateTasks = (user, tile, args) =>
             {
@@ -622,14 +622,15 @@ public class SkillFactory
             };
             lethalInjection.GenerateTasks = (user, tile, args) =>
             {
-                GameManager.instance.tasks.Add(new Task_Face_Eachother(user, tile.unit));
-                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
-                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/MEDIC/LETHAL INJECTION/lethal injection projectile prefab"), 4));
-                GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/sword2")));
-                GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/MEDIC/LETHAL INJECTION/lethal injection prefab"), tile.unit.transform.position, 1));
-                GameManager.instance.tasks.Add(new Task_Trigger_Animation(tile.unit, "Hit"));
-                GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Poison")));
+                foreach (Unit target in lethalInjection.gatherTargets(user, tile))
+                {
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/MEDIC/LETHAL INJECTION/lethal injection projectile prefab"), 4));
+                    GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Poison")));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/MEDIC/LETHAL INJECTION/lethal injection prefab"), target.transform.position, 1));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(target, "Hit"));
+                }
                 lethalInjection.EnqueueExecuteTask(user, tile, args);
             };
         }
@@ -740,7 +741,6 @@ public class SkillFactory
             };
             anatomy.GenerateTasks = (user, tile, args) =>
             {
-                GameManager.instance.tasks.Add(new Task_Face_Eachother(user, tile.unit));
                 GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
                 GameManager.instance.tasks.Add(new Task_Wait(0.3f));
                 GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Fog1")));
@@ -770,7 +770,6 @@ public class SkillFactory
             };
             stickyGrenade.GenerateTasks = (user, tile, args) =>
             {
-                GameManager.instance.tasks.Add(new Task_Face_Eachother(user, tile.unit));
                 GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
                 GameManager.instance.tasks.Add(new Task_Wait(0.3f));
                 GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Earth6")));
@@ -837,14 +836,14 @@ public class SkillFactory
             };
             pierce.GenerateTasks = (user, tile, args) =>
             {
-                GameManager.instance.tasks.Add(new Task_Face_Eachother(user, tile.unit));
-                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
-                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-                GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Sword5")));
-                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/PIERCE/pierce projectile prefab"), 3));
-                GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/SHIV/Shiv prefab"), tile.transform.position, 4));
-                GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Slash8")));
-                GameManager.instance.tasks.Add(new Task_Trigger_Animation(tile.unit, "Hit"));
+                List<Unit> list = pierce.gatherTargets(user, tile);
+                    GameManager.instance.tasks.Add(new Task_Face_Eachother(user, tile.unit));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                    GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Sword2")));
+                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/PIERCE/pierce projectile prefab"), 3));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/SHIV/Shiv prefab"), tile.transform.position, 1));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(tile.unit, "Hit"));
                 pierce.EnqueueExecuteTask(user, tile, args);
             };
         }
@@ -881,12 +880,11 @@ public class SkillFactory
             };
             efficiency.GenerateTasks = (user, tile, args) =>
             {
-                GameManager.instance.tasks.Add(new Task_Face_Eachother(user, tile.unit));
-                GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
-                GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency projectile prefab"), 3));
-                GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Skill3")));
-                GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency prefab"), tile.transform.position, 1));
+                    GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
+                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
+                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency projectile prefab"), 3));
+                    GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Skill3")));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency prefab"), tile.transform.position, 1));
                 efficiency.EnqueueExecuteTask(user, tile, args);
             };
         }
@@ -917,12 +915,12 @@ public class SkillFactory
             };
             acidBlade.GenerateTasks = (user, tile, args) =>
             {
+                List<Unit> list = acidBlade.gatherTargets(user, tile);
                     GameManager.instance.tasks.Add(new Task_Face_Eachother(user, tile.unit));
                     GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
-                    GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/ACID BLADE/acid blade projectile prefab"), 3));
                     GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-                    GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Sword")));
-                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/ACID BLADE/acid blade prefab"), tile.transform.position, 1));
+                    GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Sward4")));
+                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/shiv/shiv prefab"), tile.transform.position, 1));
                     GameManager.instance.tasks.Add(new Task_Trigger_Animation(tile.unit, "Hit"));
                 acidBlade.EnqueueExecuteTask(user, tile, args);
             };
