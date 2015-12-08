@@ -77,6 +77,18 @@ public class EffectFactory {
         return vampiricEffect;
     }
 
+    private static Effect toughEffect;
+    public static Effect getToughEffect()
+    {
+        if(toughEffect == null)
+        {
+            toughEffect = new Effect();
+            toughEffect.armorBonus = user => 0.1f;
+            toughEffect.damageBonus = user => 0.1f;
+        }
+        return toughEffect;
+    }
+
     private static Effect invincibleEffect;
     public static Effect getInvincibleEffect() {
 
