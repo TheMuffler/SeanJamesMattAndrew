@@ -245,6 +245,8 @@ public class Unit : MonoBehaviour {
         }
         */
 
+        nextTurnTime = GameManager.instance.TurnTime;
+
         if (!dontPlace) {
             int startI = faction == 0 ? 0 : GameManager.instance.height - 1;
             int endI = GameManager.instance.height - 1 - startI;

@@ -162,7 +162,8 @@ public partial class GameManager : MonoBehaviour {
         activeUnit = null;
     }
 
-    float TurnTime = 0f;
+    [HideInInspector]
+    public float TurnTime = 0f;
     Unit activeUnit = null;
     public List<Unit> units;
 
