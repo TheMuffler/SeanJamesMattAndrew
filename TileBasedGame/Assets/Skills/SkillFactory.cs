@@ -570,8 +570,9 @@ public class SkillFactory
             makeSentry.range = 2;
             makeSentry.OnTilePostEffects += (user, tile, args) =>
             {
-                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("AssassinModel"), tile.transform.position, user.transform.rotation);
+                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("SentryModel"), tile.transform.position, user.transform.rotation);
                 Unit u = go.AddComponent<Unit>();
+                u.icon = Resources.Load<Sprite>("CharacterIcons/SentryIcon");
                 u.dontPlace = true;
                 tile.SetUnit(u);
                 u.faction = user.faction;
@@ -654,8 +655,9 @@ public class SkillFactory
             makeMedStation.range = 2;
             makeMedStation.OnTilePostEffects += (user, tile, args) =>
             {
-                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("MedicModel"), tile.transform.position, user.transform.rotation);
+                GameObject go = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("MedStationModel"), tile.transform.position, user.transform.rotation);
                 Unit u = go.AddComponent<Unit>();
+                u.icon = Resources.Load<Sprite>("CharacterIcons/MedStationIcon");
                 u.dontPlace = true;
                 tile.SetUnit(u);
                 u.faction = user.faction;
