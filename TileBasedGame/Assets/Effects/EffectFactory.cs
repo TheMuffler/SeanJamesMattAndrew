@@ -71,7 +71,7 @@ public class EffectFactory {
             vampiricEffect.OnHitAttacking = (attacker, defender, amt) =>
             {
                 if (attacker != defender && amt > 0)
-                    attacker.TakeDamage(-amt, attacker);
+                    attacker.TakeDamage(-amt*0.3f, attacker);
             };
         }
         return vampiricEffect;

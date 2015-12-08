@@ -163,11 +163,11 @@ public class AssassinFactory : ClassFactory
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Add Repair";
-        t.description = "Adds Repair to Class";
+        t.name = "Leach";
+        t.description = "30% of damage dealt is healed.";
         t.IfChosen = unit =>
         {
-            unit.AddSkill(SkillFactory.GetRepair());
+            unit.AddEffect(EffectFactory.getVampiricEffect(), -1);
         };
 		talentOptions.Add(t);
 
