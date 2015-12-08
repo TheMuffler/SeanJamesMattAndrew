@@ -39,16 +39,16 @@ public class OnClickOfPlanet : MonoBehaviour {
 		// Open the cutscene based on what planet is clicked
 		if(currPlanet==1)
 		{
-
+            Application.LoadLevel(7);
 		}
 		if(currPlanet==2)
 		{
-			
-		}
+            Application.LoadLevel(8);
+        }
 		if(currPlanet==3)
 		{
-			
-		}
+            Application.LoadLevel(9);
+        }
 	}
 	public void ZoomIn(Camera cameraFreeWalk)
 	{
