@@ -55,7 +55,8 @@ public class OnClickOfPlanet : MonoBehaviour {
 		if(!zoomedIn && !doingZoomIn && !doingZoomOut)
 		{
 			currPlanet=planetNum;
-			audio.PlayOneShot((AudioClip)Resources.Load("zoom"));
+			audio.PlayOneShot((AudioClip)Resources.Load("Sounds/zoom"));
+
 			planetNameCanvas.text=planetName;
 			planetDescriptionCanvas.text=planetDescription;
 
@@ -196,7 +197,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 			
 		{
 			denyingLevel=true;
-			audio.PlayOneShot((AudioClip)Resources.Load("occur_sound"));
+			audio.PlayOneShot((AudioClip)Resources.Load("Sounds/occur_sound"));
 		}
 
 	}
