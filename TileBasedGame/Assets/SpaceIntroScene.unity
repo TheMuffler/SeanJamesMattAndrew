@@ -1459,8 +1459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404b2bfc23feb46c5bfa1da1daa63e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
-  x: -1
+  speed: 20
+  x: 1
   y: 0
   z: 0
 --- !u!1001 &957290307
@@ -2317,7 +2317,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}
       propertyPath: speech.Array.data[9]
-      value: "\u201DThe buying power of a Speso is crazy. It's hard to imagine an
+      value: "\u201DThe buying power of a Spaceso is crazy. It's hard to imagine an
         age without cryptocurrency.\""
       objectReference: {fileID: 0}
     - target: {fileID: 11413944, guid: b31b1fd3aa4bd478dbcd560d28ff1f4c, type: 2}

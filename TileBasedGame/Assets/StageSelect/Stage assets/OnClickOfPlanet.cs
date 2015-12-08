@@ -8,12 +8,13 @@ public class OnClickOfPlanet : MonoBehaviour {
 	public string planetName;
 	public string planetDescription;
 
-
+	public AudioSource audio ;
 	public  Text planetNameCanvas;
 	public  Text planetDescriptionCanvas;
 
 	public CanvasGroup start;
 	public CanvasGroup select;
+	public CanvasGroup deny;
 
 	public int planetNum=0;
 	public Camera [] cameras;
@@ -29,7 +30,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 
 	public static bool  zoomedIn=false;
 	private static int currPlanet=0;
-
+	private static bool denyingLevel=false;
 	//How the planet progress is kept track of.
 	private bool [] completedPlanet= new bool[4];
 
@@ -54,7 +55,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 		if(!zoomedIn && !doingZoomIn && !doingZoomOut)
 		{
 			currPlanet=planetNum;
-
+			audio.PlayOneShot((AudioClip)Resources.Load("zoom"));
 			planetNameCanvas.text=planetName;
 			planetDescriptionCanvas.text=planetDescription;
 
@@ -95,11 +96,15 @@ public class OnClickOfPlanet : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
+		//audio = audio.GetComponent<AudioClip>();
+		audio = audio.GetComponent<AudioSource >();
+
 		planetDescriptionCanvas= planetDescriptionCanvas.GetComponent<Text>();
 		planetNameCanvas= planetNameCanvas.GetComponent<Text>();
 
 		start = start.GetComponent<CanvasGroup>();
 		select = select.GetComponent<CanvasGroup>();
+		deny = deny.GetComponent<CanvasGroup>();
 
 		if(planetNum==3)
 			planetDescription="The planet Hearth is known for its warm weather and long summers. " +
@@ -119,8 +124,13 @@ public class OnClickOfPlanet : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//THE PLANET COMPLETION IS SET HERE
-		for(int i=0; i<completedPlanet.Length;++i)
-			completedPlanet[i]=false;
+		//0 - Cantina
+		//1 - Junk Yard
+		//2 - Space Ship
+		completedPlanet[1]=GlobalManager.instance.victories[0];
+		completedPlanet[2]=GlobalManager.instance.victories[2];
+		completedPlanet[3]=GlobalManager.instance.victories[1];
+
 		///////////////
 		if(doingZoomIn)
 		{
@@ -148,13 +158,46 @@ public class OnClickOfPlanet : MonoBehaviour {
 			}
 			
 		}
+		if(denyingLevel)
+		{
+			if(deny.alpha<=1)
+				deny.alpha+= zoomSpeed/2000;
+			else 
+			{
+				deny.alpha=1;
+				denyingLevel=false;
+			}
 
+		}
+//		else if(!denyingLevel)
+//		{
+//			if(deny.alpha>=0)
+//				deny.alpha-= zoomSpeed/2000;
+//			else 
+//			{
+//				deny.alpha=0;
+//			
+//			}
+//		}
 
 	}
 	void OnMouseDown() 
 	{
+		deny.alpha=0;
+
 		if(!completedPlanet[planetNum])
+		{	
+		
 			ZoomIn(cameras[planetNum]);
+
+
+		}
+		else 
+			
+		{
+			denyingLevel=true;
+			audio.PlayOneShot((AudioClip)Resources.Load("occur_sound"));
+		}
 
 	}
 	void OnMouseOver()

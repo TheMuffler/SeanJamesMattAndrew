@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404b2bfc23feb46c5bfa1da1daa63e6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 9
+  speed: 20
   x: -1
   y: 0
   z: 0
@@ -1474,7 +1474,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 499d819ff507847b8b24426524a97574, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
