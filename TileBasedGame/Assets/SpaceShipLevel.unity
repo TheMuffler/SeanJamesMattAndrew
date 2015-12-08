@@ -4256,10 +4256,10 @@ MonoBehaviour:
   focused: {fileID: 0}
   camSpeed: 4
   camTorque: 180
-  minX: 0
-  maxX: 10
-  minZ: 0
-  maxZ: 10
+  minX: -5
+  maxX: 15
+  minZ: -5
+  maxZ: 15
 --- !u!4 &545525556 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 8b638183e42c90449992f9fdc5ba33d1, type: 3}
