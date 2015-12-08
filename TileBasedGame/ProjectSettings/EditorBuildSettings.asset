@@ -8,8 +8,32 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MainMenu.unity
   - enabled: 1
-    path: Assets/TestScene.unity
+    path: Assets/SpaceIntroScene.unity
   - enabled: 1
     path: Assets/GameOverScene.unity
+  - enabled: 1
+    path: Assets/NewStageSelect.unity
+  - enabled: 1
+    path: Assets/CantinaLevel.unity
+  - enabled: 1
+    path: Assets/ScrapYardLevel.unity
+  - enabled: 1
+    path: Assets/SpaceShipLevel.unity
+  - enabled: 0
+    path: Assets/TestScene.unity
   - enabled: 0
     path: Assets/SpaceIntroScene.unity
+  - enabled: 1
+    path: Assets/SpaceToCantinaCutscene.unity
+  - enabled: 1
+    path: Assets/SpaceToJunkyardCutscene.unity
+  - enabled: 1
+    path: Assets/SpaceToShipCutscene.unity
+  - enabled: 1
+    path: Assets/SpaceFromCantinaCutscene.unity
+  - enabled: 1
+    path: Assets/SpaceFromJunkyardCutscene.unity
+  - enabled: 1
+    path: Assets/SpaceFromShipCutscene.unity
+  - enabled: 1
+    path: Assets/EndCutscene.unity
