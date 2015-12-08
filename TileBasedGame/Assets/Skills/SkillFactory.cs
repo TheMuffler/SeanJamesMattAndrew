@@ -13,7 +13,7 @@ public class SkillFactory
             bloodDonor = new Skill();
             bloodDonor.name = "Blood\nDonor";
 			bloodDonor.icon = Resources.Load<Sprite>("SpellIcons/bloodDonor");
-
+            bloodDonor.description = "Absorbs the health of your target";
             bloodDonor.basePower = 3;
             bloodDonor.aoe = 0;
             bloodDonor.range = 4;
@@ -34,8 +34,7 @@ public class SkillFactory
 					GameManager.instance.tasks.Add(new Task_Face_Eachother(user, target));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(user,"Punch"));
                     GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Absorb1")));
-                    GameManager.instance.tasks.Add(new Task_Wait(0.3f));
-					GameManager.instance.tasks.Add(new Task_Fire_Projectile(target.transform.position+Vector3.up, user.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/MEDIC/BLOOD DONOR/blood donor prefab")));
+					GameManager.instance.tasks.Add(new Task_Fire_Projectile(target.transform.position+Vector3.up, user.tile.transform.position+Vector3.up,(GameObject)Resources.Load("SpellVisuals/MEDIC/BLOOD DONOR/blood donor prefab"), 2.5f));
 					GameManager.instance.tasks.Add(new Task_Trigger_Animation(target,"Hit"));
 				}
 				bloodDonor.EnqueueExecuteTask(user,tile,args);
@@ -51,7 +50,7 @@ public class SkillFactory
 			heal = new Skill();
 			heal.name = "Heal";
 			heal.icon = Resources.Load<Sprite>("SpellIcons/heal");
-
+            heal.description = "Restores some HP to one target";
 			heal.basePower = 2;
 			heal.aoe = 0;
 			heal.range = 6;
@@ -82,7 +81,7 @@ public class SkillFactory
 			aoeHeal = new Skill();
 			aoeHeal.name = "AoE\nHeal";
 			aoeHeal.icon = Resources.Load<Sprite>("SpellIcons/aoeHeal");
-
+            aoeHeal.description = "Creates a burst of energy that heals nearby allies";
 			aoeHeal.basePower = 3;
 			aoeHeal.aoe = 3;
 			aoeHeal.range = 4;
@@ -113,7 +112,7 @@ public class SkillFactory
 			weakenOffense = new Skill ();
 			weakenOffense.name = "Weaken\nOffense";
 			weakenOffense.icon = Resources.Load<Sprite> ("SpellIcons/weakenOffense");
-
+            weakenOffense.description = "Weakens your enemy's attacking power";
 			weakenOffense.basePower = 1;
 			weakenOffense.aoe = 0;
 			weakenOffense.range = 5;
@@ -148,7 +147,7 @@ public class SkillFactory
             incapacitate = new Skill();
             incapacitate.name = "Incapacitate";
             incapacitate.icon = Resources.Load<Sprite>("SpellIcons/incapacitate");
-
+            incapacitate.description = "Paralyses an enemy for a set amount of turns";
             incapacitate.basePower = 0;
             incapacitate.manaCost = user => 4;
             incapacitate.aoe = 0;
@@ -188,7 +187,7 @@ public class SkillFactory
             slam = new Skill();
             slam.name = "Slam";
             slam.icon = Resources.Load<Sprite>("SpellIcons/slam");
-
+            slam.description = "Creates a shattering quake that damages all nearby enemies";
             slam.basePower = 4;
             slam.manaCost = user => 2;
             slam.aoe = 1;
@@ -224,7 +223,7 @@ public class SkillFactory
 			weakenDefense = new Skill();
 			weakenDefense.name = "Weaken\nDefense";
 			weakenDefense.icon = Resources.Load<Sprite>("SpellIcons/weakenDefense");
-			
+            weakenDefense.description = "Weakens the armor of your target";
 			weakenDefense.basePower = 2;
 			weakenDefense.manaCost = user => 1;
 			weakenDefense.aoe = 3;
@@ -258,7 +257,7 @@ public class SkillFactory
 			taunt = new Skill();
 			taunt.name = "Taunt";
 			taunt.icon = Resources.Load<Sprite>("SpellIcons/taunt");
-
+            taunt.description = "Tell a 'Yo Momma' joke so vulgar, the entire gang puts only you in their sights";
 			taunt.basePower = 0;
 			taunt.aoe = 0;
 			taunt.range = 0;
@@ -287,7 +286,7 @@ public class SkillFactory
             persistence = new Skill();
             persistence.name = "Persistence";
             persistence.icon = Resources.Load<Sprite>("SpellIcons/persistence");
-
+            persistence.description = "For next 6 turns you get a 60% chance of avoiding an attack";
             persistence.basePower = 0;
             persistence.aoe = 0;
             persistence.range = 0;
@@ -321,7 +320,7 @@ public class SkillFactory
 			shiv = new Skill();
 			shiv.name = "Shiv";
 			shiv.icon = Resources.Load<Sprite>("SpellIcons/shiv");
-			
+            shiv.description = "Use handy dandy homemade shiv to deal a bit of damage to your target";
 			shiv.basePower = 4;
 			shiv.aoe = 0;
 			shiv.range = 1;
@@ -361,7 +360,7 @@ public class SkillFactory
 			fade = new Skill();
 			fade.name = "Fade";
 			fade.icon = Resources.Load<Sprite>("SpellVisuals/ASSASSIN/FADE/fade");
-			
+            fade.description = "For next 3 turns, any damage delt to you is avoided";
 			fade.basePower = 0;
 			fade.manaCost = user => 1;
 			fade.aoe = 0;
@@ -394,7 +393,7 @@ public class SkillFactory
 			cripple = new Skill();
 			cripple.name = "Cripple";
 			cripple.icon = Resources.Load<Sprite>("SpellIcons/cripple");
-			
+            cripple.description = "Cause your target to move only one tile for the next 3 turns";
 			cripple.basePower = 1;
 			cripple.aoe = 0;
 			cripple.range = 4;
@@ -435,7 +434,7 @@ public class SkillFactory
             epidemic = new Skill();
             epidemic.name = "Epidemic";
             epidemic.icon = Resources.Load<Sprite>("SpellIcons/epidemic");
-
+            epidemic.description = "Mark a target so that it explodes after 2 more turns and damages all nearby enemies";
             epidemic.basePower = 8;
             epidemic.aoe = 2;
             epidemic.range = 4;
@@ -480,7 +479,7 @@ public class SkillFactory
             snipe = new Skill();
             snipe.name = "Snipe";
             snipe.icon = Resources.Load<Sprite>("SpellIcons/snipe");
-
+            snipe.description = "Explosive attack that deals heavy damage to your target";
             snipe.basePower = 3;
             snipe.aoe = 0;
             snipe.range = 4;
@@ -521,7 +520,7 @@ public class SkillFactory
 			repair = new Skill();
 			repair.name = "Repair";
 			repair.icon = Resources.Load<Sprite>("SpellIcons/repair");
-			
+            repair.description = "restores a bit of health and increases the damage of your ally";
 			repair.basePower = 2;
 			repair.aoe = 0;
 			repair.range = 4;
@@ -563,6 +562,7 @@ public class SkillFactory
             makeSentry = new Skill();
             makeSentry.name = "Sentry";
             makeSentry.icon = Resources.Load<Sprite>("SpellVisuals/TECH/SENTRY/sentry");
+            makeSentry.description = "Creates a sentry that dishes out Snipe attacks with no remores. Lasts 5 turns";
             makeSentry.manaCost = user => 3;
             makeSentry.targetType = Skill.TargetType.NONE;
             makeSentry.tileRestriction = Skill.TargetTileRestriction.EMPTY;
@@ -607,6 +607,7 @@ public class SkillFactory
             lethalInjection = new Skill();
             lethalInjection.name = "Lethal\nInjection";
             lethalInjection.icon = Resources.Load<Sprite>("SpellVisuals/MEDIC/LETHAL INJECTION/poison icon");
+            lethalInjection.description = "The doctor is in! Shoots a syringe that reduces damage and armor of your target";
             lethalInjection.cooldown = 1;
             lethalInjection.manaCost = user => 1;
             lethalInjection.basePower = 2.5f;
@@ -645,6 +646,7 @@ public class SkillFactory
             makeMedStation = new Skill();
             makeMedStation.name = "Med\nStation";
             makeMedStation.icon = Resources.Load<Sprite>("SpellVisuals/MEDIC/MED STATION/med station");
+            makeMedStation.description = "Creates a humanoid med station that heals you and your buds. Great for parties";
             makeMedStation.manaCost = user => 3;
             makeMedStation.targetType = Skill.TargetType.NONE;
             makeMedStation.tileRestriction = Skill.TargetTileRestriction.EMPTY;
@@ -669,7 +671,7 @@ public class SkillFactory
                 GameManager.instance.tasks.Add(new Task_Trigger_Animation(user, "Punch"));
                 GameManager.instance.tasks.Add(new Task_Wait(0.3f));
                 GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Heal2")));
-                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/MEDIC/MED STATION/med station projectile prefab")));
+                //GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/MEDIC/MED STATION/med station projectile prefab")));
                 makeMedStation.EnqueueExecuteTask(user, tile, args);
             };
         }
@@ -685,6 +687,7 @@ public class SkillFactory
             makeBattlePet = new Skill();
             makeBattlePet.name = "Battle\nBot";
             makeBattlePet.icon = Resources.Load<Sprite>("SpellVisuals/TECH/ROBOT PET/robot pet");
+            makeBattlePet.description = "A robot pet that seeks your love by acting as a tank for your party. Lasts 5 turns";
             makeBattlePet.manaCost = user => 3;
             makeBattlePet.targetType = Skill.TargetType.NONE;
             makeBattlePet.tileRestriction = Skill.TargetTileRestriction.EMPTY;
@@ -726,6 +729,7 @@ public class SkillFactory
             anatomy = new Skill();
             anatomy.name = "Anatomy";
             anatomy.icon = Resources.Load<Sprite>("SpellIcons/fade");
+            anatomy.description = "Buffs allies that increases damage and healing for 4 turns";
             anatomy.targetType = Skill.TargetType.ALLY;
             anatomy.range = 3;
             anatomy.aoe = 0;
@@ -754,6 +758,7 @@ public class SkillFactory
             stickyGrenade = new Skill();
             stickyGrenade.name = "Sticky\nGrenade";
             stickyGrenade.icon = Resources.Load<Sprite>("SpellVisuals/TECH/GRENADE/sticky");
+            stickyGrenade.description = "Give your enemy a live retro grenade so he can show his friends!";
             stickyGrenade.cooldown = 3;
             stickyGrenade.manaCost = user => 4;
             stickyGrenade.range = 3;
@@ -783,6 +788,7 @@ public class SkillFactory
             shadowDrift = new Skill();
             shadowDrift.name = "Shadow\nDrift";
             shadowDrift.icon = Resources.Load<Sprite>("SpellVisuals/ASSASSIN/SHADOW DRIFT/shadow drift");
+            shadowDrift.description = "Get out of a sticky situation or sneak behind an enemy! Also restores 15% health!";
             shadowDrift.range = 5;
             shadowDrift.targetType = Skill.TargetType.NONE;
             shadowDrift.tileRestriction = Skill.TargetTileRestriction.EMPTY;
@@ -813,7 +819,7 @@ public class SkillFactory
             pierce = new Skill();
             pierce.name = "Pierce";
             pierce.icon = Resources.Load<Sprite>("SpellVisuals/ASSASSIN/PIERCE/pierce");
-
+            pierce.description = "Throw a daggar at your enemy that locks them on a tile for 3 turns";
             pierce.basePower = 4;
             pierce.aoe = 0;
             pierce.range = 3;
@@ -853,7 +859,8 @@ public class SkillFactory
         {
             efficiency = new Skill();
             efficiency.name = "Efficiency";
-            efficiency.icon = Resources.Load<Sprite>("SpellVisuals/ASSASSIN/SHADOW DRIFT/shadow drift");
+            efficiency.icon = Resources.Load<Sprite>("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency icon");
+            efficiency.description = "Restores a bit of health to your ally or deals damage to your enemy for 5 turns! You choose!";
             efficiency.targetType = Skill.TargetType.ANY;
             efficiency.manaCost = user => 0;
             efficiency.cooldown = 3;
@@ -897,8 +904,8 @@ public class SkillFactory
         {
             acidBlade = new Skill();
             acidBlade.name = "Acid\nBlade";
-            acidBlade.icon = Resources.Load<Sprite>("SpellIcons/shiv");
-
+            acidBlade.icon = Resources.Load<Sprite>("SpellVisuals/ASSASSIN/ACID BLADE/acid blade");
+            acidBlade.description = "Weaker than Shiv but corrodes your enemy's armor!";
             acidBlade.basePower = 3;
             acidBlade.aoe = 0;
             acidBlade.range = 1;
