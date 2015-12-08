@@ -4727,6 +4727,7 @@ MonoBehaviour:
   cam: {fileID: 541250642}
   levelID: 2
   victorySceneIndex: 12
+  TurnTime: 0
   units: []
   SelectionParticle: {fileID: 197399915}
   MapH: 0
@@ -16115,13 +16116,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 0ba39a6d57fd627488a759f2852c6642, type: 3}
-  aiControlled: 0
+  aiControlled: 1
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
   hasMoved: 0
   anim: {fileID: 0}
-  faction: 0
+  faction: 1
   baseMoveRange: 3
   timeForActions: 1
   maxHP: 8

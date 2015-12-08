@@ -497,9 +497,15 @@ public partial class GameManager : MonoBehaviour {
         return null;
     }
 
-    public Unit GetNearestEnemy(Unit unit)
+    public Unit GetNearestEnemy(Unit unit, bool forskill = false)
     {
         Tile t = FindTileF(unit.tile, tile =>
+        {
+            return tile.unit != null && unit.IsEnemy(tile.unit) && tile.unit.taunted;
+        });
+        if (t != null && (!forskill || unit.CanHitWithAnything(t.unit)))
+            return t.unit;
+        t = FindTileF(unit.tile, tile =>
         {
             return tile.unit != null && unit.IsEnemy(tile.unit);
         });

@@ -158,6 +158,14 @@ public class EffectFactory {
             tauntEffect = new Effect();
             tauntEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TANK/TAUNT/taunt prefab");
             //TODO: finish dis shiiiit
+            tauntEffect.OnEnter = user =>
+            {
+                user.taunted = true;
+            };
+            tauntEffect.OnExit = user =>
+            {
+                user.taunted = false;
+            };
         }
         return tauntEffect;
     }
