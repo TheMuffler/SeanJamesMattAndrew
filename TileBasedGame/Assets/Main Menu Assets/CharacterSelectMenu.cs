@@ -155,25 +155,26 @@ public class CharacterSelectMenu : MonoBehaviour {
 		tankDescription = "Tank\n\n" + new TankFactory().description + "\n";
 
 		foreach (Skill s in new TankFactory().baseSkills){
-			tankDescription += "\n" + s.name + " - " + s.description;
+			tankDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
 		}
 
-		medicDescription = "Medic\n\n" + new MedicFactory().description;
+		medicDescription = "Medic\n\n" + new MedicFactory().description  + "\n";
 
 		foreach (Skill s in new MedicFactory().baseSkills){
-			medicDescription += "\n" + s.name + " - " + s.description;
+			medicDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
 		}
 
-		assassinDescription = "Assassin\n\n" + new AssassinFactory().description;
+		assassinDescription = "Assassin\n\n" + new AssassinFactory().description  + "\n";
 
 		foreach (Skill s in new AssassinFactory().baseSkills){
-			assassinDescription += "\n" + s.name + " - " + s.description;
+			assassinDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
 		}
+		assassinDescription += "\n" + "Shiv - " + "Use handy dandy homemade shiv to deal a bit of damage to your target";
 
-		techDescription = "Tech\n\n" + new TechFactory().description;
+		techDescription = "Tech\n\n" + new TechFactory().description  + "\n";
 
 		foreach (Skill s in new TechFactory().baseSkills){
-			techDescription += "\n" + s.name + " - " + s.description;
+			techDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
 		}
 	}
 
