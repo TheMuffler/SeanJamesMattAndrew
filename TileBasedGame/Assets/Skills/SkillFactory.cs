@@ -647,7 +647,7 @@ public class SkillFactory
             makeMedStation = new Skill();
             makeMedStation.name = "Med\nStation";
             makeMedStation.icon = Resources.Load<Sprite>("SpellVisuals/MEDIC/MED STATION/med station");
-            makeMedStation.description = "Creates a humanoid med station that heals you and your buds. Great for parties";
+            makeMedStation.description = "Creates a med station that heals you and your buds. Great for parties";
             makeMedStation.manaCost = user => 3;
             makeMedStation.targetType = Skill.TargetType.NONE;
             makeMedStation.tileRestriction = Skill.TargetTileRestriction.EMPTY;
