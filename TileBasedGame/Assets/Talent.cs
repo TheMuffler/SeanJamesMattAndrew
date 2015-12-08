@@ -70,7 +70,7 @@ public class TankFactory : ClassFactory
 
         attackPower = 0.9f;
         armor = 0.4f;
-        maxHP = 7;
+        maxHP = 7*2;
         maxMP = 6;
 
 
@@ -147,7 +147,7 @@ public class AssassinFactory : ClassFactory
 
         attackPower = 1.2f;
         armor = 0.1f;
-        maxHP = 6;
+        maxHP = 6*2;
         maxMP = 6;
 
 
@@ -224,8 +224,8 @@ public class MedicFactory : ClassFactory
         baseModel = Resources.Load<GameObject>("MedicModel");
 
         attackPower = 0.9f;
-        armor = 0.4f;
-        maxHP = 4;
+        armor = 0.2f;
+        maxHP = 4*2;
         maxMP = 6;
 
 
@@ -304,7 +304,7 @@ public class TechFactory : ClassFactory
 
         attackPower = 0.9f;
         armor = 0.4f;
-        maxHP = 4;
+        maxHP = 10;
         maxMP = 6;
 
 
