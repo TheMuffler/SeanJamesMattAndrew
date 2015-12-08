@@ -150,7 +150,7 @@ public class AssassinFactory : ClassFactory
         maxMP = 6;
 
 
-        baseSkills.Add(SkillFactory.GetShiv());
+        //baseSkills.Add(SkillFactory.GetShiv());
         baseSkills.Add(SkillFactory.GetFade());
         baseSkills.Add(SkillFactory.GetCripple());
 
@@ -176,6 +176,7 @@ public class AssassinFactory : ClassFactory
         t.description = "Deal double damage to units with no allies within 3 tiles.";
         t.IfChosen = unit =>
         {
+            unit.AddSkill(SkillFactory.GetShiv());
             unit.AddEffect(EffectFactory.getSingledOutEffect(), -1);
         };
 		talentOptions.Add(t);
@@ -185,14 +186,6 @@ public class AssassinFactory : ClassFactory
         t.description = "Shiv is replace by pierce, a ranged attack with similar damage.";
         t.IfChosen = unit =>
         {
-            for (int i = 0; i < unit.skillContainers.Count; ++i)
-            {
-                if (unit.skillContainers[i].skill == SkillFactory.GetShiv())
-                {
-                    unit.skillContainers.RemoveAt(i);
-                    return;
-                }
-            }
             unit.AddSkill(SkillFactory.getPierce());
         };
 		talentOptions.Add(t);

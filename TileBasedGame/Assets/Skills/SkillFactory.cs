@@ -791,13 +791,14 @@ public class SkillFactory
             shadowDrift.OnTilePostEffects += (user, tile, args) =>
             {
                 user.transform.position = tile.transform.position;
-                //GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/SHADOW DRIFT/sd arrive prefab")));
+                GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/SHADOW DRIFT/sd arrive prefab"), tile.transform.position + Vector3.up, 2));
+                shadowDrift.EnqueueWait(0.5f);
                 tile.SetUnit(user);
             };
             shadowDrift.GenerateTasks = (user, tile, args) =>
             {
-                GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/SHADOW DRIFT/sd disappear prefab")));
-                GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Jump1")));
+                //GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/SHADOW DRIFT/sd disappear prefab")));
+                GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Wind10")));
                 shadowDrift.EnqueueExecuteTask(user, tile, args);
             };
         }
@@ -851,15 +852,16 @@ public class SkillFactory
         if(efficiency == null)
         {
             efficiency = new Skill();
+            efficiency.name = "Efficiency";
+            efficiency.icon = Resources.Load<Sprite>("SpellVisuals/ASSASSIN/SHADOW DRIFT/shadow drift");
             efficiency.targetType = Skill.TargetType.ANY;
             efficiency.manaCost = user => 0;
             efficiency.cooldown = 3;
             efficiency.range = 2;
             efficiency.basePower = 2;
-            bool isAlly;
             efficiency.OnTarget = (user, target, args) =>
             {
-                isAlly = user.IsAlly(target) ? true : false;
+                bool isAlly = user.IsAlly(target) ? true : false;
                 if (isAlly)
                 {
                     target.TakeDamage(-efficiency.basePower * user.DamageMultiplier, user);
@@ -880,7 +882,7 @@ public class SkillFactory
                     GameManager.instance.tasks.Add(new Task_Wait(0.3f));
                     GameManager.instance.tasks.Add(new Task_Fire_Projectile(user.transform.position + Vector3.up, tile.transform.position + Vector3.up, (GameObject)Resources.Load("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency projectile prefab"), 3));
                     GameManager.instance.tasks.Add(new Task_PlaySound(Resources.Load<AudioClip>("SE/Skill3")));
-                    GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency prefab"), target.transform.position, 1));
+                    //GameManager.instance.tasks.Add(new Task_ShowParticleAnimation((GameObject)Resources.Load("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency prefab"), target.transform.position, 1));
                 }
                 efficiency.EnqueueExecuteTask(user, tile, args);
             };
