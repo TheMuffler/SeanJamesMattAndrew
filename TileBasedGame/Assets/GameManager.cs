@@ -73,6 +73,7 @@ public partial class GameManager : MonoBehaviour {
         else if (activeUnit == null)
         {
             LossCheck();
+            WinCheck();
             GetNextActiveUnit();
 			cam.focused = activeUnit.transform;
             PassTurnButton.onClick.RemoveAllListeners();
