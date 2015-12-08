@@ -47,7 +47,7 @@ public partial class GameManager : MonoBehaviour {
         {
             for(int j = 0; j < width; ++j)
             {
-                if (Random.value <= 0.2f)
+                if (i > 0 && i < height-1 && j != width / 2  && Random.value <= 0.2f)
                     continue;
                 GameObject go = (GameObject)Instantiate(tile, row + Vector3.right * j, Quaternion.identity);
                 if(Random.value <= 0.3f)
@@ -80,7 +80,7 @@ public partial class GameManager : MonoBehaviour {
                 break;
             for (int j = 0; j < width; ++j)
             {
-                if (Random.value <= 0.2f)
+                if (i > 0 && i < height - 1 && j != width/2 && Random.value <= 0.2f)
                     continue;
                 GameObject go = (GameObject)Instantiate(tile, row + Vector3.right * j, Quaternion.identity);
                 if (Random.value <= 0.3f)
