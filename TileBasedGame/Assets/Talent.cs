@@ -123,10 +123,11 @@ public class TankFactory : ClassFactory
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 2";
+        t.name = "Toughness";
+        t.description = "The Tank is just tough. Nothing complicated. Slight increase to armor and damage.";
         t.IfChosen = Unit =>
         {
-
+            Unit.AddEffect(EffectFactory.getToughEffect(), -1);
         };
 		talentOptions.Add(t);
 
@@ -356,12 +357,13 @@ public class TechFactory : ClassFactory
         talentOptions.Add(t);
 
         t = new Talent();
-        t.name = "Useless 2";
+        t.name = "Toughness";
+        t.description = "The Tech is just tough. Nothing complicated. Slight increase to armor and damage.";
         t.IfChosen = Unit =>
         {
-
+            Unit.AddEffect(EffectFactory.getToughEffect(), -1);
         };
-		talentOptions.Add(t);
+        talentOptions.Add(t);
 
         name = "Technician";
         description = "A repairman who can build robots";
