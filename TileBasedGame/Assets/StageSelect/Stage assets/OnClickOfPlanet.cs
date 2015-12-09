@@ -25,36 +25,51 @@ public class OnClickOfPlanet : MonoBehaviour {
 	public float maxZoomFOV = 175f;
 	public float defaultZoomFOV=101f;
 
-	public bool doingZoomIn=false;
+	public  bool doingZoomIn=false;
 	public bool doingZoomOut=false;
 
-	private int currPlanet=0;
+
 
 	public static bool  zoomedIn=false;
 	private static bool denyingLevel=false;
 
 	//How the planet progress is kept track of.
-	private bool [] completedPlanet= new bool[4];
+	private static bool [] completedPlanet= new bool[4];
+	private static int currPlanet=0;
 
 	public void startStage()
 	{
-		ZoomOut();
+		doingZoomIn=false;
+		doingZoomOut=false;
+		
+		
+		
+		zoomedIn=false;
+		denyingLevel=false;
+
+
+
 		// Open the cutscene based on what planet is clicked
 		if(currPlanet==1)
 		{
+			Debug.Log("Starting planet "+currPlanet+"... N'Hoth");
             Application.LoadLevel(8);
 		}
 		if(currPlanet==2)
 		{
+			Debug.Log("Starting planet "+currPlanet+"... Putier-J");
             Application.LoadLevel(9);
         }
 		if(currPlanet==3)
 		{
+			Debug.Log("Starting planet "+currPlanet+"... Hearth");
             Application.LoadLevel(7);
         }
 	}
 	public void ZoomIn(Camera cameraFreeWalk)
 	{
+		Debug.Log ("CURRENT PLANET: "+ currPlanet+ "... "+completedPlanet[1]+", "+completedPlanet[2]+", "+completedPlanet[3]+GlobalManager.instance.victories[0]+GlobalManager.instance.victories[1]+GlobalManager.instance.victories[2]);
+
 		if(!zoomedIn && !doingZoomIn && !doingZoomOut)
 		{
 			currPlanet=	planetNum;
@@ -131,11 +146,9 @@ public class OnClickOfPlanet : MonoBehaviour {
 		//0 - Cantina
 		//1 - Junk Yard
 		//2 - Space Ship
-		completedPlanet[1]=GlobalManager.instance.victories[0];
-		completedPlanet[2]=GlobalManager.instance.victories[2];
-		completedPlanet[3]=GlobalManager.instance.victories[1];
 
-		Debug.Log (completedPlanet[1]+", "+completedPlanet[2]+", "+completedPlanet[3]);
+
+
 		///////////////
 		if(doingZoomIn)
 		{
@@ -188,6 +201,14 @@ public class OnClickOfPlanet : MonoBehaviour {
 	}
 	void OnMouseDown() 
 	{
+		//3- Cantina (Hearth); 2- Spaceship (Putier-J); 1- N'Hoth (Junkyard)
+		completedPlanet[1]=GlobalManager.instance.victories[1];
+		completedPlanet[2]=GlobalManager.instance.victories[2];
+		completedPlanet[3]=GlobalManager.instance.victories[0];
+		//0 - Cantina
+		//1 - Junk Yard
+		//2 - Space Ship
+
 		deny.alpha=0;
 		deny.interactable=false;
 
@@ -209,6 +230,10 @@ public class OnClickOfPlanet : MonoBehaviour {
 	}
 	void OnMouseOver()
 	{
+		completedPlanet[1]=GlobalManager.instance.victories[1];
+		completedPlanet[2]=GlobalManager.instance.victories[2];
+		completedPlanet[3]=GlobalManager.instance.victories[0];
+
 		if(!completedPlanet[planetNum])
 			Hilight.enabled=true;
 	}
