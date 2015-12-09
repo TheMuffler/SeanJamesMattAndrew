@@ -56,8 +56,7 @@ public class EffectFactory {
         if (efficiencyEffect == null)
         {
             efficiencyEffect = new Effect();
-            string prefab = (isAlly ? "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency ally effect prefab" : "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency enemy effect prefab");
-            efficiencyEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency effect prefab");
+            efficiencyEffect.particlePrefab = Resources.Load<GameObject>((isAlly ? "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency ally effect prefab" : "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency enemy effect prefab"));
         }
         return efficiencyEffect;
     }
