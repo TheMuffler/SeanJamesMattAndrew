@@ -2623,7 +2623,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
   m_AnchoredPosition: {x: 2000, y: 800}
@@ -2749,6 +2749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 67c22009c56fac84d99c2bbd8efd1ffb, type: 3}
   aiControlled: 1
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -5226,12 +5227,13 @@ MonoBehaviour:
   cam: {fileID: 541250642}
   levelID: 0
   victorySceneIndex: 10
+  TurnTime: 0
   units: []
   SelectionParticle: {fileID: 197399915}
   MapH: 0
   MapW: 0
   walkSelectMat: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  defaultMat: {fileID: 2100000, guid: da9ae8a78eba62041b1265ca638520b1, type: 2}
+  defaultMat: {fileID: 2100000, guid: 90d38791f0961324a898e1c9a13cfde6, type: 2}
   attackMat: {fileID: 2100000, guid: 1b121914856cda648b513091cf9c77fc, type: 2}
   allySelectMat: {fileID: 2100000, guid: c1bea3fd3d275d649ba3331236e68b0c, type: 2}
   selected: {fileID: 0}
@@ -6787,6 +6789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 0ba39a6d57fd627488a759f2852c6642, type: 3}
   aiControlled: 1
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -6905,6 +6908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   aiControlled: 0
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -8411,6 +8415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   aiControlled: 0
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -8569,6 +8574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
   aiControlled: 0
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -9193,7 +9199,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
 --- !u!1 &1147323566
 GameObject:
   m_ObjectHideFlags: 0
@@ -9391,6 +9397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 0ba39a6d57fd627488a759f2852c6642, type: 3}
   aiControlled: 1
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -9744,6 +9751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 0ba39a6d57fd627488a759f2852c6642, type: 3}
   aiControlled: 1
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0
@@ -14818,6 +14826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 0ba39a6d57fd627488a759f2852c6642, type: 3}
   aiControlled: 1
+  taunted: 0
   nextTurnTime: 0
   turnTieBreaker: 0
   processingCommand: 0

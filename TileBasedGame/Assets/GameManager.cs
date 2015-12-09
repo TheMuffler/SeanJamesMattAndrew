@@ -122,6 +122,8 @@ public partial class GameManager : MonoBehaviour {
         foreach (Unit u in units)
             if (u.faction == 0)
                 return;
+        for (int i = 0; i < 3; ++i)
+            GlobalManager.instance.victories[i] = false;
         Application.LoadLevel(2);
     }
 
@@ -139,7 +141,12 @@ public partial class GameManager : MonoBehaviour {
                 ++vctr;
         if (vctr < 3)
             Application.LoadLevel(victorySceneIndex);
-        else Application.LoadLevel(13);
+        else
+        {
+            for (int i = 0; i < 3; ++i)
+                GlobalManager.instance.victories[i] = false;
+            Application.LoadLevel(13);
+        }
     }
 
     public void ProcessCommand(Action action)
