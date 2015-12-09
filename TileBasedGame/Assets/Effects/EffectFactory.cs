@@ -56,8 +56,7 @@ public class EffectFactory {
         if (efficiencyEffect == null)
         {
             efficiencyEffect = new Effect();
-            string prefab = (isAlly ? "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency ally effect prefab" : "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency enemy effect prefab");
-            efficiencyEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/ASSASSIN/EFFICIENCY/efficiency effect prefab");
+            efficiencyEffect.particlePrefab = Resources.Load<GameObject>((isAlly ? "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency ally effect prefab" : "SpellVisuals/ASSASSIN/EFFICIENCY/efficiency enemy effect prefab"));
         }
         return efficiencyEffect;
     }
@@ -75,6 +74,18 @@ public class EffectFactory {
             };
         }
         return vampiricEffect;
+    }
+
+    private static Effect toughEffect;
+    public static Effect getToughEffect()
+    {
+        if(toughEffect == null)
+        {
+            toughEffect = new Effect();
+            toughEffect.armorBonus = user => 0.1f;
+            toughEffect.damageBonus = user => 0.1f;
+        }
+        return toughEffect;
     }
 
     private static Effect invincibleEffect;
@@ -146,6 +157,14 @@ public class EffectFactory {
             tauntEffect = new Effect();
             tauntEffect.particlePrefab = Resources.Load<GameObject>("SpellVisuals/TANK/TAUNT/taunt prefab");
             //TODO: finish dis shiiiit
+            tauntEffect.OnEnter = user =>
+            {
+                user.taunted = true;
+            };
+            tauntEffect.OnExit = user =>
+            {
+                user.taunted = false;
+            };
         }
         return tauntEffect;
     }

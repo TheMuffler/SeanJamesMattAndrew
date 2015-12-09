@@ -105,6 +105,11 @@ public class Skill
                 if (tile.unit != null && user.IsAlly(tile.unit))
                     return true;
             }
+            else if (targetType == TargetType.ANY)
+            {
+                if (tile.unit != null)
+                    return true;
+            }
             else
             { 
                 if (tile.unit != null && user == tile.unit)

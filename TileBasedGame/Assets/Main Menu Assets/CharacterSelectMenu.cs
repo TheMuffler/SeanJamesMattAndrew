@@ -22,6 +22,7 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public Image characterImage;
 	List<Button> talentButtons;				 							//store the below panels for easy access
 	public Button talent1, talent2, talent3, talent4, talent5, talent6;	//the panel buttons containing the talent images and descriptions
+	public Image talent1Panel, talent2Panel, talent3Panel, talent4Panel, talent5Panel, talent6Panel;
 
 	List<Text> talentDescriptionsList;
 	public Text talentDescription1, talentDescription2, talentDescription3, talentDescription4, talentDescription5, talentDescription6; 
@@ -86,6 +87,20 @@ public class CharacterSelectMenu : MonoBehaviour {
 		teamMemberIcons.Add (teamMember2);
 		teamMemberIcons.Add (teamMember3);
 
+		talent1Panel = talent1.GetComponent<Image> ();
+		talent2Panel = talent2.GetComponent<Image> ();
+		talent3Panel = talent3.GetComponent<Image> ();
+		talent4Panel = talent4.GetComponent<Image> ();
+		talent5Panel = talent5.GetComponent<Image> ();
+		talent6Panel = talent6.GetComponent<Image> ();
+
+		talent1Panel.color = new Color32 (3,133,241,208);
+		talent2Panel.color = new Color32 (186, 41, 210, 255);
+		talent3Panel.color = new Color32 (3,133,241,208);
+		talent4Panel.color = new Color32 (186, 41, 210, 255);
+		talent5Panel.color = new Color32 (3,133,241,208);
+		talent6Panel.color = new Color32 (186, 41, 210, 255);
+
 		talent1 = talent1.GetComponent<Button> ();
 		talent2 = talent2.GetComponent<Button> ();
 		talent3 = talent3.GetComponent<Button> ();
@@ -137,10 +152,30 @@ public class CharacterSelectMenu : MonoBehaviour {
 
 		currentChar = Chars.tank;
 
-		tankDescription = "Tank\n\n" + new TankFactory().description;
-		medicDescription = "Medic\n\n" + new MedicFactory().description;
-		assassinDescription = "Assassin\n\n" + new AssassinFactory().description;
-		techDescription = "Tech\n\n" + new TechFactory().description;
+		tankDescription = "Tank\n\n" + new TankFactory().description + "\n";
+
+		foreach (Skill s in new TankFactory().baseSkills){
+			tankDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
+		}
+
+		medicDescription = "Medic\n\n" + new MedicFactory().description  + "\n";
+
+		foreach (Skill s in new MedicFactory().baseSkills){
+			medicDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
+		}
+
+		assassinDescription = "Assassin\n\n" + new AssassinFactory().description  + "\n";
+
+		foreach (Skill s in new AssassinFactory().baseSkills){
+			assassinDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
+		}
+		assassinDescription += "\n" + "Shiv - " + "Use handy dandy homemade shiv to deal a bit of damage to your target";
+
+		techDescription = "Tech\n\n" + new TechFactory().description  + "\n";
+
+		foreach (Skill s in new TechFactory().baseSkills){
+			techDescription += "\n" + s.name.Replace ("\n"," ") + " - " + s.description;
+		}
 	}
 
 
@@ -150,7 +185,8 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public void selectTalentOne(){
 		teamMembers [teamMembers.Count - 1].talentOptions [0].toggle = true;
 		teamMembers [teamMembers.Count - 1].talentOptions [1].toggle = false;
-
+		talent1Panel.color = new Color32 (3,133,241,208);
+		talent2Panel.color = new Color32 (186, 41, 210, 255);
 		talentButtons [0].enabled = false;
 		talentButtons [1].enabled = true;
 	}
@@ -158,7 +194,8 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public void selectTalentTwo(){
 		teamMembers [teamMembers.Count - 1].talentOptions [1].toggle = true;
 		teamMembers [teamMembers.Count - 1].talentOptions [0].toggle = false;
-
+		talent2Panel.color = new Color32 (3,133,241,208);
+		talent1Panel.color = new Color32 (186, 41, 210, 255);
 		talentButtons [1].enabled = false;
 		talentButtons [0].enabled = true;
 	}
@@ -166,7 +203,8 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public void selectTalentThree(){
 		teamMembers [teamMembers.Count - 1].talentOptions [2].toggle = true;
 		teamMembers [teamMembers.Count - 1].talentOptions [3].toggle = false;
-
+		talent3Panel.color = new Color32 (3,133,241,208);
+		talent4Panel.color = new Color32 (186, 41, 210, 255);
 		talentButtons [2].enabled = false;
 		talentButtons [3].enabled = true;
 	}
@@ -174,7 +212,8 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public void selectTalentFour(){
 		teamMembers [teamMembers.Count - 1].talentOptions [3].toggle = true;
 		teamMembers [teamMembers.Count - 1].talentOptions [2].toggle = false;
-
+		talent4Panel.color = new Color32 (3,133,241,208);
+		talent3Panel.color = new Color32 (186, 41, 210, 255);
 		talentButtons [3].enabled = false;
 		talentButtons [2].enabled = true;
 	}
@@ -182,7 +221,8 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public void selectTalentFive(){
 		teamMembers [teamMembers.Count - 1].talentOptions [4].toggle = true;
 		teamMembers [teamMembers.Count - 1].talentOptions [5].toggle = false;
-
+		talent5Panel.color = new Color32 (3,133,241,208);
+		talent6Panel.color = new Color32 (186, 41, 210, 255);
 		talentButtons [4].enabled = false;
 		talentButtons [5].enabled = true;
 	}
@@ -190,7 +230,8 @@ public class CharacterSelectMenu : MonoBehaviour {
 	public void selectTalentSix(){
 		teamMembers [teamMembers.Count - 1].talentOptions [5].toggle = true;
 		teamMembers [teamMembers.Count - 1].talentOptions [4].toggle = false;
-
+		talent6Panel.color = new Color32 (3,133,241,208);
+		talent5Panel.color = new Color32 (186, 41, 210, 255);
 		talentButtons [5].enabled = false;
 		talentButtons [4].enabled = true;
 	}
@@ -229,15 +270,12 @@ public class CharacterSelectMenu : MonoBehaviour {
 			break;
 		case Chars.medic:
 			teamMembers.Add (new MedicFactory());
-			//charImage.mainTexture = medicImage; ??
 			break;
 		case Chars.assassin:
 			teamMembers.Add (new AssassinFactory());
-			//charImage.mainTexture = assassinImage;
 			break;
 		case Chars.tech:
 			teamMembers.Add (new TechFactory());
-			//charImage.mainTexture = techImage;
 			break;
 		default:
 			break;
@@ -249,13 +287,24 @@ public class CharacterSelectMenu : MonoBehaviour {
 				teamMembers[teamMembers.Count - 1].talentOptions[i].description;
 			talentImages[i].sprite = teamMembers[teamMembers.Count - 1].talentOptions[i].icon;
 			//initialize left column of talents to be selected, right column unselected
-			if( i % 2 == 0)
+			if( i % 2 == 0){
 				teamMembers[teamMembers.Count - 1].talentOptions[i].toggle = true;
-			else
+				talentButtons[i].enabled = false;
+			}
+			else{
 				teamMembers[teamMembers.Count - 1].talentOptions[i].toggle = false;
-
+				talentButtons[i].enabled = true;
+			}
 
 		}
+
+		talent1Panel.color = new Color32 (3,133,241,208);
+		talent2Panel.color = new Color32 (186, 41, 210, 255);
+		talent3Panel.color = new Color32 (3,133,241,208);
+		talent4Panel.color = new Color32 (186, 41, 210, 255);
+		talent5Panel.color = new Color32 (3,133,241,208);
+		talent6Panel.color = new Color32 (186, 41, 210, 255);
+
 
 	}
 
@@ -278,10 +327,49 @@ public class CharacterSelectMenu : MonoBehaviour {
 		teamMembers.RemoveAt(teamMembers.Count - 1);
 	}
 
-	public void removeTeamMember(){
-		//the buttons for this dont exist yet
+	public void removeTeamMember1(){
+		teamMembers.RemoveAt (0);
 
-		//function should remove a character from the team
+		int teamCount = teamMembers.Count;
+
+		for (int i = 0; i < 3; ++i) {
+			if(i < teamCount)
+				teamMemberIcons[i].sprite = teamMembers[i].image;
+			else
+				teamIcons[i].alpha = 0;
+		}
+
+	}
+
+	public void removeTeamMember2(){
+		teamMembers.RemoveAt (1);
+
+		int teamCount = teamMembers.Count;
+		
+		for (int i = 0; i < 3; ++i) {
+			if(i < teamCount){
+				teamMemberIcons[i].sprite = teamMembers[i].image;
+				teamIcons[i].alpha = 1;
+			}
+			else
+				teamIcons[i].alpha = 0;
+		}
+
+	}
+
+	public void removeTeamMember3(){
+		teamMembers.RemoveAt (2);
+
+		int teamCount = teamMembers.Count;
+		
+		for (int i = 0; i < 3; ++i) {
+			if(i < teamCount)
+				teamMemberIcons[i].sprite = teamMembers[i].image;
+			else
+				teamIcons[i].alpha = 0;
+		}
+
+	
 	}
 
 	// Update is called once per frame

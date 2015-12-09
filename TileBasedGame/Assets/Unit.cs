@@ -12,6 +12,9 @@ public class Unit : MonoBehaviour {
     public bool aiControlled = false;
 
     [HideInInspector]
+    public bool taunted = false;
+
+    [HideInInspector]
     public float nextTurnTime = 0;
     [HideInInspector]
     public long turnTieBreaker = 0;
@@ -245,6 +248,8 @@ public class Unit : MonoBehaviour {
         }
         */
 
+        nextTurnTime = GameManager.instance.TurnTime;
+
         if (!dontPlace) {
             int startI = faction == 0 ? 0 : GameManager.instance.height - 1;
             int endI = GameManager.instance.height - 1 - startI;
@@ -288,7 +293,7 @@ public class Unit : MonoBehaviour {
             //AddSkill (SkillFactory.GetWeakenOffense ());
             //AddSkill (SkillFactory.GetWeakenDefense());
             //AddSkill(SkillFactory.GetTaunt());
-            //AddSkill(SkillFactory.GetShiv());
+            AddSkill(SkillFactory.GetShiv());
             //AddSkill(SkillFactory.GetFade());
             //AddSkill(SkillFactory.GetBloodDonor());
             //AddSkill (SkillFactory.GetAoEHeal ());
@@ -364,7 +369,7 @@ public class Unit : MonoBehaviour {
     }
     public void calculateAttack()
     {
-        Unit enemy = GameManager.instance.GetNearestEnemy(this);
+        Unit enemy = GameManager.instance.GetNearestEnemy(this,true);
         if(enemy == null)
         {
             GameManager.instance.ProcessCommand(() => { });
@@ -400,6 +405,13 @@ public class Unit : MonoBehaviour {
         */
     }
 
+    public bool CanHitWithAnything(Unit enemy)
+    {
+        foreach (SkillContainer sc in skillContainers)
+            if (sc.IsCastable && sc.skill.targetType == Skill.TargetType.ENEMY && sc.skill.IsInRange(this, enemy.tile))
+                return true;
+        return false;
+    }
 
 
     [HideInInspector]

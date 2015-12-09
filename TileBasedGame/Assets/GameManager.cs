@@ -73,6 +73,7 @@ public partial class GameManager : MonoBehaviour {
         else if (activeUnit == null)
         {
             LossCheck();
+            WinCheck();
             GetNextActiveUnit();
 			cam.focused = activeUnit.transform;
             PassTurnButton.onClick.RemoveAllListeners();
@@ -162,7 +163,8 @@ public partial class GameManager : MonoBehaviour {
         activeUnit = null;
     }
 
-    float TurnTime = 0f;
+    [HideInInspector]
+    public float TurnTime = 0f;
     Unit activeUnit = null;
     public List<Unit> units;
 
@@ -496,9 +498,15 @@ public partial class GameManager : MonoBehaviour {
         return null;
     }
 
-    public Unit GetNearestEnemy(Unit unit)
+    public Unit GetNearestEnemy(Unit unit, bool forskill = false)
     {
         Tile t = FindTileF(unit.tile, tile =>
+        {
+            return tile.unit != null && unit.IsEnemy(tile.unit) && tile.unit.taunted;
+        });
+        if (t != null && (!forskill || unit.CanHitWithAnything(t.unit)))
+            return t.unit;
+        t = FindTileF(unit.tile, tile =>
         {
             return tile.unit != null && unit.IsEnemy(tile.unit);
         });
