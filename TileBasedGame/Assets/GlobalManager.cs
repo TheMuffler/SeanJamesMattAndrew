@@ -37,5 +37,5 @@ public class GlobalManager
     //0 - Cantina
     //1 - Junk Yard
     //2 - Space Ship
-    public bool[] victories = new bool[] { true, false, true };
+    public bool[] victories = new bool[] {false, false, false };
 }

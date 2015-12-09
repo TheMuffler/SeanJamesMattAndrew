@@ -38,6 +38,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 
 	public void startStage()
 	{
+		ZoomOut();
 		// Open the cutscene based on what planet is clicked
 		if(currPlanet==1)
 		{
@@ -134,6 +135,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 		completedPlanet[2]=GlobalManager.instance.victories[2];
 		completedPlanet[3]=GlobalManager.instance.victories[1];
 
+		Debug.Log (completedPlanet[1]+", "+completedPlanet[2]+", "+completedPlanet[3]);
 		///////////////
 		if(doingZoomIn)
 		{
