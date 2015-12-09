@@ -93,6 +93,7 @@
     <Compile Include="Assets\Main Menu Assets\RotateSkybox.cs" />
     <Compile Include="Assets\Main Menu Assets\RotateSkyboxMoreDirections.cs" />
     <Compile Include="Assets\PersonalStatusBar.cs" />
+    <Compile Include="Assets\Resources\SpellVisuals\TANK\PERSISTENCE\AnimateShield.cs" />
     <Compile Include="Assets\Skills\Skill.cs" />
     <Compile Include="Assets\Skills\SkillContainer.cs" />
     <Compile Include="Assets\Skills\SkillFactory.cs" />
