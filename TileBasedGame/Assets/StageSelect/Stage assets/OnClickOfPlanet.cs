@@ -8,6 +8,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 	public string planetName;
 	public string planetDescription;
 
+
 	public AudioSource audio ;
 	public  Text planetNameCanvas;
 	public  Text planetDescriptionCanvas;
@@ -142,10 +143,6 @@ public class OnClickOfPlanet : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//THE PLANET COMPLETION IS SET HERE
-		//0 - Cantina
-		//1 - Junk Yard
-		//2 - Space Ship
 
 
 
