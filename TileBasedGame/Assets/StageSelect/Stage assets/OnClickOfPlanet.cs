@@ -28,14 +28,17 @@ public class OnClickOfPlanet : MonoBehaviour {
 	public bool doingZoomIn=false;
 	public bool doingZoomOut=false;
 
+	private int currPlanet=0;
+
 	public static bool  zoomedIn=false;
-	private static int currPlanet=0;
 	private static bool denyingLevel=false;
+
 	//How the planet progress is kept track of.
 	private bool [] completedPlanet= new bool[4];
 
 	public void startStage()
 	{
+		ZoomOut();
 		// Open the cutscene based on what planet is clicked
 		if(currPlanet==1)
 		{
@@ -54,7 +57,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 	{
 		if(!zoomedIn && !doingZoomIn && !doingZoomOut)
 		{
-			currPlanet=planetNum;
+			currPlanet=	planetNum;
 			audio.PlayOneShot((AudioClip)Resources.Load("Sounds/zoom"));
 
 			planetNameCanvas.text=planetName;
@@ -132,6 +135,7 @@ public class OnClickOfPlanet : MonoBehaviour {
 		completedPlanet[2]=GlobalManager.instance.victories[2];
 		completedPlanet[3]=GlobalManager.instance.victories[1];
 
+		Debug.Log (completedPlanet[1]+", "+completedPlanet[2]+", "+completedPlanet[3]);
 		///////////////
 		if(doingZoomIn)
 		{
@@ -185,17 +189,19 @@ public class OnClickOfPlanet : MonoBehaviour {
 	void OnMouseDown() 
 	{
 		deny.alpha=0;
+		deny.interactable=false;
 
 		if(!completedPlanet[planetNum])
 		{	
-		
+			denyingLevel=false;
 			ZoomIn(cameras[planetNum]);
-
+			deny.alpha=0;
 
 		}
 		else 
 			
 		{
+			deny.interactable=true;
 			denyingLevel=true;
 			audio.PlayOneShot((AudioClip)Resources.Load("Sounds/occur_sound"));
 		}
